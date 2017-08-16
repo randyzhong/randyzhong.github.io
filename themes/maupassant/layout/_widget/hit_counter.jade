@@ -1,0 +1,17 @@
+if theme.busuanzi == true
+ .widget
+   .widget-title
+     i(class='fa fa-eye')= ' ' + __('hit_counter')
+    ul(class='hit_counter')
+      li
+       span#busuanzi_container_site_pv= ' 总热力值 ' 
+        span#busuanzi_value_site_pv= ' '
+         i(class='fa fa-spinner fa-spin')
+        span= ' ' 
+        | 次
+      li 
+       span#busuanzi_container_site_uv= ' 总热度数 ' 
+        span#busuanzi_value_site_uv= ' '
+         i(class='fa fa-spinner fa-spin')
+        span= ' ' 
+        | 人次

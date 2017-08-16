@@ -3,6 +3,7 @@ title: 如何在 Win10 中安装 SQL Server 2005
 tags:
   - MSSQL
 categories:
+  - Microsoft
   - SQL数据库
 date: 2015-11-20 22:50:50
 ---

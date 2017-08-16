@@ -4,9 +4,8 @@ tags:
   - BITS
   - Microsoft
   - WSUS
-id: 247
 categories:
-  - 操作系统
+  - Microsoft
 date: 2014-06-10 14:40:11
 ---
 
@@ -18,16 +17,15 @@ date: 2014-06-10 14:40:11
 
 解决方案：
 
-1\.  如果你的 <span style="color: #000000">WSUS 用的是WID（Windows Internal Database）默认数据库：</span>
+1.  如果你的 WSUS 用的是WID（Windows Internal Database）默认数据库：
+```cmd
+%programfiles%\Update Services\Setup\ExecuteSQL.exe -S %Computername%\MICROSOFT##SSEE -d "SUSDB" -Q "update tbConfigurationC set BitsDownloadPriorityForeground=1"
+```
 
-<span style="font-weight: bold">%programfiles%\Update Services\Setup\ExecuteSQL.exe -S %Computername%\MICROSOFT##SSEE -d "SUSDB" -Q "update tbConfigurationC set BitsDownloadPriorityForeground=1"</span>
-
-&nbsp;
-
-2\. 如果你使用SQL 数据库可以使用：
-
-<span style="font-weight: bold">%programfiles%\Update Services\Setup\ExecuteSQL.exe -S %Computername% -d "SUSDB" -Q "update tbConfigurationC set BitsDownloadPriorityForeground=1"</span>
-
+2. 如果你使用 SQL 数据库：
+```cmd
+%programfiles%\Update Services\Setup\ExecuteSQL.exe -S %Computername% -d "SUSDB" -Q "update tbConfigurationC set BitsDownloadPriorityForeground=1"
+```
 最后重启WSUS服务生效。
 
-注：<span style="color: #000000">BITS (后台智能传送服务 <span style="color: #111111">Background Intelligent Transfer Service</span>) 是一个 Windows 组件，它可以在前台或后台异步传输文件，为保证其他网络应用程序获得响应而调整传输速度，并在重新启动计算机或重新建立网络连接之后自动恢复文件传输。</span>
+注：**BITS** (后台智能传送服务 Background Intelligent Transfer Service) 是一个 Windows 组件，它可以在前台或后台异步传输文件，为保证其他网络应用程序获得响应而调整传输速度，并在重新启动计算机或重新建立网络连接之后自动恢复文件传输。

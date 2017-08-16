@@ -1,18 +1,17 @@
 ---
 title: HMC 4.5 Update Rollup 6 has been released
-id: 131
-categories:
-  - HMC
-  - Hosting
-date: 2010-03-02 19:10:50
 tags:
+  - HMC
+categories:
+  - Microsoft
+  - HMC
+date: 2010-03-02 19:10:50
 ---
 
 Description of Update Rollup 6 for Hosted Messaging and Collaboration 4.5
 
-[http://support.microsoft.com/kb/979704](http://support.microsoft.com/kb/979704 "http://support.microsoft.com/kb/979704")
+[http://support.microsoft.com/kb/979704](http://support.microsoft.com/kb/979704)
 
-<!--more-->
 Microsoft has released an update that is dated December 2009\. This update fixes issues in the following components in Microsoft Solution for Hosted Messaging and Collaboration 4.5.
 
 *   Exchange 2007 Resource Manager Namespace
@@ -28,7 +27,8 @@ Additionally, this update also includes native 64-bit versions of the following 
 
 *   Exchange 2007 Mobility Provider
 **In order to get Exchange 2007 SP2 supported, do install this UR.**
-<div id="more">This update rollup fixes the following issues that were not previously documented in a Microsoft Knowledge Base article:
+
+This update rollup fixes the following issues that were not previously documented in a Microsoft Knowledge Base article:
 
 *   When a folder is created, the value of folder allocation is not consistent with StorageQuota calculation result.
 *   When a public folder is created by using the "-StorageQuota" and "-postStorageQuota", the operation fail.This is because the two parameters was replaced by the parameters "-IssueWarningQuota" and "-ProhibitPostQuota" in the Exchange SP2.
@@ -43,5 +43,3 @@ Additionally, this update also includes native 64-bit versions of the following 
 *   **Microsoft Exchange Server 2007 Service Pack 2 must be installed before you apply this update.**
 Hotfix replacement information
 This rollup replaces the previously released RU1, RU2, RU3, RU4 and RU5.
-
-</div>

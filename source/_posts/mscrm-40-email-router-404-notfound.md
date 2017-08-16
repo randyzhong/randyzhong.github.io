@@ -1,11 +1,9 @@
 ---
 title: MSCRM 4.0 Email Router - 404 not Found
 tags:
-  - Email
   - MSCRM
-  - Router
-id: 81
 categories:
+  - Microsoft
   - MSCRM
 date: 2009-08-20 15:19:02
 ---
@@ -20,8 +18,6 @@ But what I encounterd is not listed.
 
 The E-mail Router Configuration Manager was unable to retrieve user and queue information from the Dyamics CRM server. Verify the url 'http://servername:5555/orgname'  is correct. The request failed with HTTP status 404:**Not Found**."
 
-<!--more-->
-
 Workaround:
 
 Check your CRM deployment properties, make sure these 2 record are not "LocalHost", better use its netbios servername, ip address or FQDN.
@@ -29,12 +25,12 @@ Check your CRM deployment properties, make sure these 2 record are not "LocalHos
 **AD App Root Domain, ****AD SDK Root Domain**
 
 How to check:
-
+```sql
 SELECT Id, ColumnName, NvarCharColumn From DeploymentProperties
 WHERE ColumnName IN ('ADSdkRootDomain','ADWebApplicationRootDomain')
-
+```
 Post tasks:
 
-1\. Restart IIS.
+1. Restart IIS.
 
-2\. Restart Microsoft Dynamics CRM Asynchronous Processing Services.
+2. Restart Microsoft Dynamics CRM Asynchronous Processing Services.

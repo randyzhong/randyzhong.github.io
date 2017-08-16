@@ -3,10 +3,9 @@ title: HMC 4.5 Rollup 1
 tags:
   - HMC
   - Rollup
-id: 74
 categories:
+  - Microsoft
   - HMC
-  - Hosting
 date: 2008-11-20 21:31:10
 ---
 
@@ -22,13 +21,11 @@ Microsoft has released an update that is dated October 8, 2008\. This update fix
 *   RPCHttpConfigTool.msi
 *   pwdb40ssis.msi
 *   DNSClient.msi
-<!--more-->
 
 Additionally, this update also includes native 64-bit versions of the following components:
 
 *   CategorizerOverrideAgent-x64.msi
 *   SmtpDomainCacheTask-x64.msi
-&nbsp;
 
 ### Issues that the update rollup fixes
 

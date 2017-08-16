@@ -1,16 +1,15 @@
 ---
-title: 'HMC 4.5 and Exchange 2007 SP1 - Part #3 - Offline Address Book Generations'
-id: 136
-categories:
-  - HMC
-  - Hosting
-date: 2009-05-07 17:38:47
+title: HMC 4.5 and Exchange 2007 SP1 - Part 3 - Offline Address Book Generations
 tags:
+  - HMC
+  - Exchange
+categories:
+  - Microsoft
+  - HMC
+date: 2009-05-07 17:38:47
 ---
 
 转自 http://blogs.technet.com/provtest/archive/2008/12/18/hmc-4-5-and-exchange-2007-sp1-part-3-offline-address-book-generations.aspx 很好的文章,贴过来收藏,hehe.
-
-** **
 
 **Introduction**
 
@@ -22,9 +21,6 @@ Overview of the OABgen process
 [http://blogs.msdn.com/dgoldman/archive/2005/03/31/Overview-of-the-OABgen-process.aspx](http://blogs.msdn.com/dgoldman/archive/2005/03/31/Overview-of-the-OABgen-process.aspx)
 
 My primary objective in this blog is to discuss about the customization of OAB components in Exchange 2007 SP1 done by HMC.
-
-<!--more-->
-<div>
 
 **What has been introduced by HMC?**
 
@@ -64,7 +60,7 @@ If you have only Outlook 2007 Clients, you may be using primarily just the web d
 *   **Other behaviour that you should take note**, OAB generation process actually has some interesting implication that is not generally encountered by a corporate environment.
 
     *   OAB public folder expiration. This actually trace back to Exchange Server 2003, Update to modify the OAB public folder expiration in Exchange Server 2003 ([http://support.microsoft.com/kb/832761](http://support.microsoft.com/kb/832761)).
-> > Because HMC moved the generation process out to an application and only touches the changed OAB, you may potentially have an OAB that may not have any change for a while. OABgen sets the default expiration time of 30 days. So what's going to happen is that, when it expires, it will remove the content in those folders and the user will not be able to download the OAB. The trick is to assign a value of 0 (zero) to the "OAL Folder Lifetime" registry entry, messages in the public folder do not expire. If you set this registry entry to a value other than zero, messages in the public folder expire in the number of days that correspond to the value that you assign. After you create this registry value, every time that OABgen runs, OABgen reads the registry entry and stamps it on the public folders that it uses.
+> Because HMC moved the generation process out to an application and only touches the changed OAB, you may potentially have an OAB that may not have any change for a while. OABgen sets the default expiration time of 30 days. So what's going to happen is that, when it expires, it will remove the content in those folders and the user will not be able to download the OAB. The trick is to assign a value of 0 (zero) to the "OAL Folder Lifetime" registry entry, messages in the public folder do not expire. If you set this registry entry to a value other than zero, messages in the public folder expire in the number of days that correspond to the value that you assign. After you create this registry value, every time that OABgen runs, OABgen reads the registry entry and stamps it on the public folders that it uses.
 > > 
 > > HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MSExchangeSA\Parameters
 > > 
@@ -73,7 +69,6 @@ If you have only Outlook 2007 Clients, you may be using primarily just the web d
 > > Value data: 0
 
 *   OABScan task is not required. This article should explain it. CPU usage by the Exchange System Attendant service on offline address list servers in a hosting environment increases to 50 percent, [http://support.microsoft.com/?id=834315](http://support.microsoft.com/?id=834315). While the article is written specifically for Exchange 2003, it is also applicable to Exchange 2007 if Public Folder OAB distribution is heavily used.
-&nbsp;
 
 <span style="text-decoration: underline;">(3) OAB Creation and Maintenance</span>
 
@@ -93,53 +88,28 @@ This attribute is populated when the mailbox user is created in HMC.
 
 <span style="text-decoration: underline;">(5) A Web-based Offline Address Book (OAB) Server</span>
 
-&nbsp;
-
 By far, the discussions have been mostly around the Public Folder distribution for OAB. In HMC 4.0, the only method of distribution of OAB is through Public Folder even though Exchange 2007 has the capacity to do both Public Folder and Web Distribution.
-
-&nbsp;
 
 HMC 4.5 has lifted that limitation, allowing service providers to deploy web distribution for OAB. Of course, introduction of this new feature requires some additional configurations.
 
-&nbsp;
-
 In order to enable a specific Offline Address List to be distributed through web, each OAB has to be enabled for Web-based distribution and that it must have at least one OAB distribution virtual directory specified. Hence, it means from the MPS perspective, when MPS needs to create a new OAB, there must be some logic to assign the appropriate CAS server as the OAB distribution point. To do that, HMC introduces the concept of CAS Pool.
-
-&nbsp;
 
 The concept is quite straightforward. What we really need to do is to create a pool of CAS servers that will be used as distribution server. The steps are documented in the Deployment Walkthrough. We must first create the pool by using CreateOABCASPool.xml. Next, we have to add each OAB Web Distribution server into the pool using AddOABCAS.xml.
 
-&nbsp;
-
 Then when create the mailbox, we have to specify the CAS Pool that will be used by the company or tenant. I like to note that this is during the process of create mailbox rather than create organization or email plan subscription. The reason is that the creation of the OAB really happens on the first MAPI user creation. That's why the specification of the CAS pool is on creating mailbox.
-
-&nbsp;
 
 Everything sounds simple enough so far, now what will happen when we decided to add a new OAB web distribution server to the CAS pool? You may realize that only the new company may get all the web distribution servers listed in the OAL whereas the OAL created in the past may not have that updated. This is where HMC 4.5 also introduces a new tool called**UpdateOABProvision.exe**.
 
-&nbsp;
-
 The **UpdateOABProvision.exe** tool is used to update all existing Offline Address Books (OAB's) when the list of Web-based OAB CAS servers that exist in an OAB CAS Pool has changed.
-
-&nbsp;
 
 For example, if a new server is added to the OAB CAS Pool, the orchestration logic will need to update all OAB's associated with that pool so that they have an accurate list of distribution points, including the new server. Similarly, if an OAB CAS server is removed from the pool, all OAB's associated with that pool should be updated so that the removed server is no longer set as a distribution point.
 
-&nbsp;
-
 The command-line syntax for running the UpdateOABProvision.exe tool is:
 
-&nbsp;
 
-_UpdateOABProvision.EXE -OABCASPool -Errorlog -MaxError_
-
-&nbsp;
+`UpdateOABProvision.EXE -OABCASPool -Errorlog -MaxError`
 
 I also like to highlight one thing here which is in HMC 4.5, it really uses just the default CAS Pool. Each CAS Pool can cater for up to 128 servers, which is quite a big number, consider the fact that there is no 1,000 OAB limit like what we have when we are using Public Folder OAB distribution.
-
-&nbsp;
-
-&nbsp;
 
 **Troubleshooting OAB download Issues in HMC**
 
@@ -168,5 +138,3 @@ I will start with this, Outlook 2003 and 2007 clients receive error 0x8004010f w
 In addition to this, I also like to take note that Outlook 2007 uses Autodiscover to find out where the OAB is. If the Autodiscover isn't working well, Outlook 2007 may get the same common 0x8004010f error as well. So, if you can't download OAB using Outlook 2007 but you can do it through Outlook 2003, I would start looking at Autodiscover.
 
 I will also cover how Autodiscover work in the HMC environment in part #5.
-
-</div>

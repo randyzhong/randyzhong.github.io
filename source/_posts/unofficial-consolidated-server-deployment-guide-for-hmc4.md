@@ -2,16 +2,15 @@
 title: Unofficial Consolidated Server Deployment Guide For HMC4.0
 tags:
   - HMC
-  - Microsoft
-id: 44
 categories:
+  - Microsoft
   - HMC
 date: 2007-06-05 12:26:06
 ---
 
 这是多年前写的 HMC4.0 的部署文档，权且放在这里做个纪念。
 
-PDF文档下载 [HMC4.0_CDG_Draft](http://winotes.net/wp-content/uploads/HMC4.0_CDG_Draft.pdf)
+PDF文档下载 {% asset_link HMC4.0_CDG_Draft.pdf Unofficial Consolidated Server Deployment Guide %}
 
 Server Names:
 

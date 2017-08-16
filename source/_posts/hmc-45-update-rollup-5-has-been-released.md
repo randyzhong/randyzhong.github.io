@@ -4,16 +4,15 @@ tags:
   - Exchange
   - HMC
   - Rollup
-id: 130
 categories:
+  - Microsoft
   - HMC
-  - Hosting
 date: 2010-03-02 19:06:18
 ---
 
 Description of Update Rollup 5 for Hosted Messaging and Collaboration 4.5
 
-[http://support.microsoft.com/kb/977174/en-us](http://support.microsoft.com/kb/977174/en-us "http://support.microsoft.com/kb/977174/en-us")
+[http://support.microsoft.com/kb/977174/en-us](http://support.microsoft.com/kb/977174/en-us)
 
 Microsoft has released an update that is dated October 30, 2009\. This update fixes issues in the following components in Microsoft Solution for Hosted Messaging and Collaboration (HMC) 4.5 and includes all fixes released in previous rollup packages RU1, RU2, RU3 andRU4.
 
@@ -22,8 +21,8 @@ Microsoft has released an update that is dated October 30, 2009\. This update fi
 *   HostedSharePoint2007WS.msi
 *   Exchange2007ResourceManagerNS.msi
 *   HostedSharePoint2007NS.msi
-<!--more-->
-<div id="more">This update rollup fixes the following issues that were not previously documented in a Microsoft Knowledge Base article:
+
+This update rollup fixes the following issues that were not previously documented in a Microsoft Knowledge Base article:
 
 *   The SetUMServer procedure in the Unified Messaging 2007 Provider may fail if you specify more than one value in the dialPlans property (it only fails if at least one of the dialPlan values contains a space character.
 *   The DeleteResourceRecord procedure in the DNS Provider may run for a long time or time out if there arelots of records in the zone.
@@ -36,4 +35,3 @@ Microsoft has released an update that is dated October 30, 2009\. This update fi
 *   Exchange2007ResourceManager:Allocate cannot use level algorithm for the first mailbox as specified in the organization Plan.
 *   Exchange2007ResourceManager:ReallocateOrganizationMailNoMove cannot reallocate organization correctly when you use the 'level' algorithm for 'not shared' mail stores.
 *   Exchange2007ResourceManager:AllocateOrganization fail when you use optional parameter 'shared.'
-</div>

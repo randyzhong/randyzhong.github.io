@@ -1,10 +1,7 @@
 ---
 title: 修改idx/sub字幕的字幕显示顺序
 tags:
-  - IDX
-  - SUB
-  - 字幕
-id: 40
+  - Vobsub
 categories:
   - 数码影音
 date: 2005-04-02 22:50:50

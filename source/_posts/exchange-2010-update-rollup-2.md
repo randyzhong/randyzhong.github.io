@@ -3,10 +3,9 @@ title: Exchange 2010 Update Rollup 2
 tags:
   - Exchange
   - Rollup
-id: 129
 categories:
+  - Microsoft
   - Exchange
-  - 沟通协作
 date: 2010-03-06 08:42:16
 ---
 

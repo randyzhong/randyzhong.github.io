@@ -1,21 +1,19 @@
 ---
-title: >-
-  Fixed: Please wait while Windows configures Microsoft Office Professional Plus
-  2010
+title: 'Fixed: Please wait while Windows configures Microsoft Office Professional Plus 2010'
 tags:
   - Microsoft
   - MSI
   - Office
   - Windows
-id: 238
 categories:
+  - Microsoft
   - Office
 date: 2014-04-28 12:02:35
 ---
 
 上周五通过 .msi 安装包部署了一个软件，今天发现每次启动 Office 2010 的组件—不管是 Word, Excel, PowerPoint 还是 Outlook，都会出现这个提示：
 
-[![Windows configures microsoft office ](http://winotes.net/wp-content/uploads/Windows-configures-microsoft-office.jpg)](http://winotes.net/wp-content/uploads/Windows-configures-microsoft-office.jpg)
+![Windows configures microsoft office ](fixed-please-wait-windows-configures-microsoft-office-professional-plus-2010/Windows-configures-microsoft-office.jpg)
 
 Please wait while windows configures Microsoft Office Professional Plus 2010.
 
@@ -25,12 +23,11 @@ Please wait while windows configures Microsoft Office Professional Plus 2010.
 
 运气好的话，说不定问题就能解决，但如果你和我这个倒霉蛋一样，这个方案根本没用的时候，不妨再检查你的日志：
 
-<!--more-->
 
-[![EventID-1004](http://winotes.net/wp-content/uploads/EventID-1004.jpg)](http://winotes.net/wp-content/uploads/EventID-1004.jpg)
+![EventID-1004](fixed-please-wait-windows-configures-microsoft-office-professional-plus-2010/EventID-1004.jpg)
 
 The resource 'HKEY_CLASSES_ROOT\.aw\' does not exist. 其实 .aw 这个键值不是不存在，而是由于某种原因，权限丢失了，只要将其所有者改为 SYSTEM 账号，然后赋予如下权限即可。
 
-[![Permissions-aw](http://winotes.net/wp-content/uploads/Permissions-aw.jpg)](http://winotes.net/wp-content/uploads/Permissions-aw.jpg)
+![Permissions-aw](fixed-please-wait-windows-configures-microsoft-office-professional-plus-2010/Permissions-aw.jpg)
 
 By the way, 这个方法适用于所有 Office 系列。

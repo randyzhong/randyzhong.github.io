@@ -1,16 +1,13 @@
 ---
-title: >-
-  HMC 4.5 and Exchange 2007 SP1 - Part #5 - Autodiscover in the Multi-tenancy
-  environment
+title: HMC 4.5 and Exchange 2007 SP1 - Part 5 - Autodiscover in the Multi-tenancy environment
 tags:
   - Autodiscover
   - Exchange
   - HMC
   - MultiTenancy
-id: 138
 categories:
+  - Microsoft
   - HMC
-  - Hosting
 date: 2009-05-07 18:52:04
 ---
 
@@ -21,11 +18,8 @@ date: 2009-05-07 18:52:04
 So, we have covered quite a fair bit by now. In part #1, we talked about how we can properly partition the Active Directory so that each company or tenant can coexist in the same environment but yet remain isolated and segregated. In part #2, we talked about how we have tweaked the address list so that each tenant will only see what they are supposed to see. In part #3, we further explore how Offline Address Book needs to be tweaked in to work in a multi-tenant environment and in part #4, we discussed about how Out-of-Office doesn't work completely out of the box in a hosted Exchange environment and what HMC has introduced to make it work better.
 
 So, what's next?
-<div id="more">
 
 **Shared Infrastructure in HMC?**
-
-<!--more-->
 
 Now that we have most of the things well setup at the service provider side, the HMC environment is ready to serve clients. For Outlook Web Access (OWA), it is easy; the users only need a web browser, the OWA URL, username and password. Most people can manage that without a problem.
 
@@ -95,4 +89,3 @@ I find that most of the Autodiscover problems in HMC can be categorized into the
 *   Certificates problem - it is important to understand the usage of SSL certificate in Autodiscover and also other Exchange web services. Currently, the best reference is this, [White Paper: Exchange 2007 Autodiscover Service](http://technet.microsoft.com/en-us/library/bb332063.aspx)
 *   DNS configuration issue - because Outlook depends on DNS to locate the Autodiscover service, DNS needs to be configured correctly.
 *   Firewall or Network Connectivity Issues - Publishing the SSL, the Autodiscover service and etc. can be a challenge too sometimes.
-</div>

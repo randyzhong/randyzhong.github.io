@@ -4,16 +4,15 @@ tags:
   - Exchange
   - HMC
   - Rollup
-id: 132
 categories:
+  - Microsoft
   - HMC
-  - Hosting
 date: 2010-03-02 19:46:14
 ---
 
 Description of Update Rollup 3 for Hosted Messaging and Collaboration 4.0
 
-[http://support.microsoft.com/kb/979702/en-us](http://support.microsoft.com/kb/979702/en-us "http://support.microsoft.com/kb/979702/en-us")
+[http://support.microsoft.com/kb/979702/en-us](http://support.microsoft.com/kb/979702/en-us)
 
 Microsoft released an update rollup that is dated December 2009\. This update fixes issues that may occur in the following components of Microsoft Solution for Hosted Messaging and Collaboration 4.0:
 
@@ -31,4 +30,5 @@ Microsoft released an update rollup that is dated December 2009\. This update fi
 *   Hosted SharePoint Web Service
 *   Managed SharePoint Web Service
 *   DNS Provider
+
 **This will enable HMC 4.0 to support Exchange 2007 SP2!**

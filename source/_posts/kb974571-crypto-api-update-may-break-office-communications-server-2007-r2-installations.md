@@ -1,14 +1,8 @@
 ---
-title: >-
-  KB974571 Crypto-API Update may break Office Communications Server 2007 R2
-  installations
+title: KB974571 Crypto-API Update may break Office Communications Server 2007 R2 installations
 tags:
   - Communicator
-  - KB
-  - OCS
-id: 83
 categories:
-  - OCS/Lync
   - 沟通协作
 date: 2009-10-15 12:15:20
 ---
@@ -19,6 +13,6 @@ Below are error message from event log:
 > Event source: OCS Server
 > Event id: 12290
 > Event text: The evaluation period for Microsoft Office Communications Server 2007 R2 has expired. Please upgrade from the evaluation version to the full released version of the product.
-> 
-> check this [article](http://blogs.technet.com/dodeitte/archive/2009/10/13/do-not-apply-kb974571-to-lcs-ocs-servers.aspx)
-> Uninstall KB [974571 ](http://support.microsoft.com/kb/974571/ "http://support.microsoft.com/kb/974571/")and OCS works again.
+
+check this [article](http://blogs.technet.com/dodeitte/archive/2009/10/13/do-not-apply-kb974571-to-lcs-ocs-servers.aspx)
+Uninstall KB [974571 ](http://support.microsoft.com/kb/974571/ "http://support.microsoft.com/kb/974571/")and OCS works again.

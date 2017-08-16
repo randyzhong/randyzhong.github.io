@@ -1,12 +1,11 @@
 ---
-title: 'HMC 4.5 and Exchange 2007 SP1 - Part #2 - Address Lists Segregation'
+title: HMC 4.5 and Exchange 2007 SP1 - Part 2 - Address Lists Segregation
 tags:
   - Exchange
   - HMC
-id: 135
 categories:
+  - Microsoft
   - HMC
-  - Hosting
 date: 2009-05-07 17:32:58
 ---
 
@@ -14,27 +13,22 @@ date: 2009-05-07 17:32:58
 
 **Introduction**
 
-In part #1, I spent a fair bit of time explaining how HMC was introduced into Exchange as part of the multi-tenant enablement process for service provider. I also spent some time discussing about how the Active Directory was partitioned and what the primary attributes that are essential to the Exchange 2007 SP1 multi-tenant enablement.
+In part [#1](https://blogs.technet.microsoft.com/provtest/2008/12/04/hmc-4-5-and-exchange-2007-sp1-part-1-overview-and-active-directory/), I spent a fair bit of time explaining how HMC was introduced into Exchange as part of the multi-tenant enablement process for service provider. I also spent some time discussing about how the Active Directory was partitioned and what the primary attributes that are essential to the Exchange 2007 SP1 multi-tenant enablement.
 
 So far, there wasn't anything complicated about it. Now, I am going to move on to the 2nd part of the customizations, which is probably one of the more important ones, that is the Address List Segregation.
 
 Let's look at what address lists we need to segregate and why. Address list is about contact information which is very important because it makes managing and finding your contacts (internal as well as external) easier and hence makes communication easier. There are a few places where you will use Outlook to locate the contact information,
 
-<!--more-->
-<div id="more">
-
 *   **Contacts folder** - this folder is created within the mailbox itself if you have an Exchange account. Think of this folder like a normal Inbox or Calendar folder in your mailbox. This is a private folder. If you don't use a Microsoft Exchange Server e-mail account, Outlook stores your Contacts with the rest of your Outlook data in a Personal Folders file that has a PST file extension.
-&nbsp;
 
 *   **Personal Address Book (PAB)** - Outlook also supports Personal Address Books (PAB). Like Contacts, a Personal Address Book can store a contact's name, address, e-mail address, phone, and other information. Outlook stores the Personal Address Book in a file with a PAB file extension. The PAB is completely separate from your other Outlook data stored in your PST file (or in an Exchange Server store). You can add more than one PAB to an Outlook profile.
-&nbsp;
 
 *   **Server-side Address Lists **- in Exchange 2007 environment, you have 2 types of address lists,
 
     *   _Global Address List (GAL)_ - The GAL contains information for <span style="text-decoration: underline;">all</span> email users, distribution groups, and Exchange resources. Outlook needs this to work and Outlook can only see one GAL at a time.
-&nbsp;
 
 *   _Other Address Lists _- Sometimes, Exchange Server administrator might create other address lists to organize Exchange users by department, surname, or other criteria. These additional address lists show up under the **All Address Lists** group in the **Show Names from the** drop-down list in the Outlook Address Book.
+
 From the above, I think it is pretty obvious that Contacts folder is a private folder, like the Inbox folder in a mailbox, is only accessible to the mailbox owner. PAB is really an offline file that store contact information. There is really nothing required to be done on these contact stores for a multi-tenant environment because those are 'not shared' and are private by default.
 
 Server-side address lists however are slightly different. The address lists are shared and because of how we designed Exchange and Outlook, the address lists in Exchange, out of the box is accessible by everyone in the environment. That obviously is a problem for multi-tenancy because it means users in company A will be able to see the users in company B. So, let's take a closer look at what HMC will change in order to segregate the address lists so that every company will only see what they are supposed to see.
@@ -45,7 +39,7 @@ Before that, I think it is important to highlight that address list in Exchange
 
 So, let's look at what HMC intends to achieve here,
 
-*   **Global Address List** - By default when you install Exchange 2007, it assumes that it is only meant for one company; hence it comes with a Default Global Address List which lists of <span style="text-decoration: underline;">all</span> email users, distribution groups, and Exchange resources in the whole environment. That is not something a multi-tenant environment would like to have. Therefore, the primary objective here is NOT to have one GAL that will display everyone in the environment but different GALs for different companies.
+*   **Global Address List** - By default when you install Exchange 2007, it assumes that it is only meant for one company; hence it comes with a Default Global Address List which lists of <span style="text-decoration: underline;">all</span> email users, distribution groups, and Exchange resources in the whole environment. That is not &nbsp;something a multi-tenant environment would like to have. Therefore, the primary objective here is NOT to have one GAL that will display everyone in the environment but different GALs for different companies.
 &nbsp;
 
 *   **Other Address List** - If there is any other address list being used by a company in the environment, those address lists have to be only accessible and visible to users in that company only.
@@ -135,24 +129,22 @@ When an account lost the GAL or AL membership, you may notice that you may not b
 To resolve that, you can either use ADSIEdit to manually slot those membership back or you can use the hosted Email 2007::ModifyMailbox to reset this attribute to its correct values without having to know the address list DNs. This procedure resets the showInAddressBook attribute on each call.
 
 Here is a sample, assuming that you supply the original values for &lt;emailAddresses&gt;  and &lt;alias&gt; the procedure will only reset the showInAddressBook value without modifying any other attributes.
-
-&lt;request&gt;
-&lt;data&gt;
-&lt;preferredDomainController&gt;AD02.Fabrikam.Com&lt;/preferredDomainController&gt;
-&lt;user&gt;LDAP://CN=User1,OU=AlpineSkiHouse,OU=ConsolidatedMessenger,OU=Hosting,DC=fabrikam,DC=com &lt;/user&gt;
-&lt;alias&gt;User1&lt;/alias&gt;
-&lt;emailAddresses&gt;
-&lt;value&gt;User1@alpineskihouse.com &lt;/value&gt;
-&lt;/emailAddresses&gt;
-&lt;/data&gt;
-&lt;procedure&gt;
-&lt;execute namespace="Hosted Email 2007" procedure="ModifyMailbox" impersonate="1" &gt;
-&lt;before source="data" destination="executeData" mode="merge" /&gt;
-&lt;after source="executeData" destination="data" mode="merge" /&gt;
-&lt;/execute&gt;
-&lt;/procedure&gt;
-&lt;/request&gt;
-
+```xml
+<request>
+<data>
+<preferredDomainController>AD02.Fabrikam.Com</preferredDomainController>
+<user>LDAP://CN=User1,OU=AlpineSkiHouse,OU=ConsolidatedMessenger,OU=Hosting,DC=fabrikam,DC=com </user>
+<alias>User1</alias>
+<emailAddresses>
+<value>User1@alpineskihouse.com </value>
+</emailAddresses>
+</data>
+<procedure>
+<execute namespace="Hosted Email 2007" procedure="ModifyMailbox" impersonate="1" >
+<before source="data" destination="executeData" mode="merge" />
+<after source="executeData" destination="data" mode="merge" />
+</execute>
+</procedure>
+</request>
+```
 This functionality was added to account for the fact that the Exchange Cmdlets like to reset showInAddressBook value during most mailbox operations.
-
-</div>

@@ -1,14 +1,10 @@
 ---
-title: >-
-  Solved: The Security Database on the Server Does Not Have a Computer Account
-  for This Workstation Trust Relationship - Part2
+title: 'Solved: The Security Database on the Server Does Not Have a Computer Account for This Workstation Trust Relationship - Part2'
 tags:
-  - Domain
-  - netdom
-  - Secure Channel
-id: 206
+  - Active Directory
 categories:
-  - 操作系统
+  - Microsoft
+  - 活动目录
 date: 2013-10-21 10:12:38
 ---
 
@@ -18,11 +14,11 @@ date: 2013-10-21 10:12:38
 
 Error: The security database on the server does not have a computer account for this workstation trust relationship
 
-[![Domain relationship error](http://winotes.net/wp-content/uploads/Domain-relationship-error.jpg)](http://winotes.net/wp-content/uploads/Domain-relationship-error.jpg)
+![Domain relationship error](http://winotes.net/wp-content/uploads/Domain-relationship-error.jpg)](http://winotes.net/wp-content/uploads/Domain-relationship-error.jpg)
 
 退出域重新加域，问题解决，可是第二天早上又在出现。
 
-检查 AD 的日志，发现有  Event 5722 NETLOGON 错误：
+检查 AD 的日志，发现有  Event 5722 NETLOGON 错误：
 
 **Event 5722**: The session setup from the computer ComputerName failed to authenticate. The name(s) of the account(s) referenced in the security database is ComputerName$. The following error occurred:
 <span style="color: #ff0000">Access is denied.</span>
@@ -30,8 +26,6 @@ Error: The security database on the server does not have a computer account for 
 在用户端的电脑上，也有Event 3210 NETLOGON 报错:
 
 **Event 3210:** This computer could not authenticate with \\DC01.contoso.com, a Windows domain controller for domain Contoso, and therefore this computer might deny logon requests. This inability to authenticate might be caused by <span style="color: #ff0000">**another computer on the same network using the same name** or the password for this computer account is not recognized</span>. If this message appears again, contact your system administrator.
-
-<!--more-->
 
 注意红色加粗标注部分，实际上，计算机账户的密码，也就是所说的 Secure Channel 安全通道，这个密码是由客户端发起的，一般不存在无法识别的问题，所以很有可能是在网络中有同名的计算机存在。
 

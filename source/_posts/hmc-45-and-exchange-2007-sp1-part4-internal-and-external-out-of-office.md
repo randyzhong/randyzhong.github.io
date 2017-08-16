@@ -1,29 +1,25 @@
 ---
-title: 'HMC 4.5 and Exchange 2007 SP1 - Part #4 Internal and External Out of Office'
+title: HMC 4.5 and Exchange 2007 SP1 - Part 4 Internal and External Out of Office
 tags:
   - Exchange
   - HMC
-id: 137
 categories:
+  - Microsoft
   - HMC
-  - Hosting
 date: 2009-05-07 18:50:18
 ---
 
-转自 http://blogs.technet.com/provtest/archive/2008/12/26/hmc-4-5-and-exchange-2007-sp1-part-3-internal-and-external-out-of-office.aspx 很好的文章,贴过来收藏,hehe.
+转自 https://blogs.technet.microsoft.com/provtest/2008/12/26/hmc-4-5-and-exchange-2007-sp1-part-4-internal-and-external-out-of-office/ 很好的文章,贴过来收藏,hehe.
 
-** **
+***
 
 **Internal and External OOF in HMC Environment**
 
 So, the 4th main customization that HMC introduces to Exchange 2007 is the OOF Transport Agent. What is OOF? Here is the text book definition, "The Out-of-Office (OOF) feature is commonly used by end-users to let other people know when they are not available to respond to e-mail." Now, I don't intend to go into the working of OOF in Exchange 2007 because I think there are better articles out there that talk about it.
 
 Here, I want to briefly explain how Exchange 2007 OOF, out of the box isn't really working complete in a HMC environment and how we make it work.
-<div id="more">
 
 **What's not working, really?**
-
-<!--more-->
 
 Exchange 2007 introduces the concept of Internal and External OOF. This is something that a lot of our customers have been waiting for. Now, we all know Exchange 2007 wasn't packaged with multi-tenancy enabled out of the box. The problem is this, the identification of what is considered internal and what is external.
 
@@ -39,7 +35,6 @@ For example,
 To support Out of Office (OOF) feature for tenants among different organizations within the same Windows domain, HMC introduces a customized OOF transport agent on all Exchange Hub Transport servers. As highlighted over here ([http://technet.microsoft.com/en-us/library/cc545931.aspx](http://technet.microsoft.com/en-us/library/cc545931.aspx)), the OOF agent includes two utilities:
 
 *   **Categorizer Override Agent**: A transport agent to override the categorizer behavior on Hub Transport servers. This agent sits in Submission Queue and to be more specific, OnSubmittedMessage in the Exchange 2007 Transport pipeline.
-&nbsp;
 
 *   **SMTP Domain Cache Task**: A scheduled task to generate cache files for categorizer override agent to filter the OOF messages. Based on the deployment document, the interval recommended is 60 minutes.
 So, how do these utilities work? It is quite simple as a matter of fact. Let's talk about the Categorizer Override Agent first. When a mail comes into the Hub Transport server, it hits the OnSubmittedMessage; it fires up the Categorizer Override Agent. The agent checks to see if the mail is sent using an external OOF template, if yes, then it expands the recipients to check and <span style="text-decoration: underline;">bypass</span> suppression of the external OOF message for external and inter-company recipients.
@@ -74,5 +69,3 @@ Exchange Server 2007 Out of Office (OOF)
 
 Legacy client and Out of Office (OOF) interoperability
 [http://msexchangeteam.com/archive/2007/04/04/437544.aspx](http://msexchangeteam.com/archive/2007/04/04/437544.aspx)
-
-</div>

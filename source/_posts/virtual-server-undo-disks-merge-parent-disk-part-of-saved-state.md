@@ -1,12 +1,11 @@
 ---
-title: >-
-  Virtual Server Undo Disks - I am never going to use you again (Can't Merge
-  Disks - Parent Disk is a part of a Saved State)
-id: 79
+title: Virtual Server Undo Disks - I am never going to use you again (Can't Merge Disks - Parent Disk is a part of a Saved State)
+tags:
+  - Virtual Server
+  - Microsoft
 categories:
   - 虚拟化
 date: 2009-05-07 17:10:48
-tags:
 ---
 
 在把 Virtual Server 2005 的虚拟机迁过去 Windows Server 2008 Hyper-V 以后,原来有些虚拟机开了 undo disk 的,发现在 Hyper-V 中没有合并选项,于是又重新安装了 Virtual Server 2005 SP1, 但是合并的时候失败,出错提示如下:

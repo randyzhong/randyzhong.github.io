@@ -1,12 +1,11 @@
 ---
-title: 'HMC 4.5 and Exchange 2007 SP1 - Part #1 - Overview and Active Directory'
+title: HMC 4.5 and Exchange 2007 SP1 - Part 1 - Overview and Active Directory
 tags:
   - Exchange
   - HMC
-id: 134
 categories:
+  - Microsoft
   - HMC
-  - Hosting
 date: 2009-05-06 17:06:36
 ---
 
@@ -26,8 +25,6 @@ There are quite a few customizations that we set in Exchange 2007 for HMC and it
 *   Part #4: Internal and External Out of Office
 *   Part #5: Autodiscover in the Multi-tenancy environment
 *   Part #6: Conclusion
-<!--more-->
-<div id="more">
 
 **What does HMC mean to Exchange 2007?**
 
@@ -44,15 +41,13 @@ Let me continue with the condominium analogy. Now that we know we need to build
 So what do we need to multi-tenant enable Exchange 2007? Here is what needed to be done,
 
 1.  **Active Directory Partitioning and Permission** - think of it like partitioning each floor to different unit. Every company will have their own separate 'space' and the users in that company should only have access to what they are allowed to. I will discuss more on this later on how we can achieve that.
-&nbsp;
 
-1.  **Address List Segregation** - access to the contact information in each company should only be limited to users in that company. Other tenants shouldn't know have access to that information.
-&nbsp;
+2.  **Address List Segregation** - access to the contact information in each company should only be limited to users in that company. Other tenants shouldn't know have access to that information.
 
-1.  **Outlook Experience **- Outlook experience should not be compromised. The users in each company should enjoy all the features available in Outlook, such as Outlook Anywhere with cached mode and Offline Address Book, Calendaring and resource management, using Free/busy feature, Internal and External Out of Office feature in Exchange 2007, Autodiscover, Outlook rules, mailbox delegation, mailbox quota and etc. Some of the above mentioned features will required to be tweaked for multi-tenancy and some do not. I will walk through them as we go.
-&nbsp;
+3.  **Outlook Experience **- Outlook experience should not be compromised. The users in each company should enjoy all the features available in Outlook, such as Outlook Anywhere with cached mode and Offline Address Book, Calendaring and resource management, using Free/busy feature, Internal and External Out of Office feature in Exchange 2007, Autodiscover, Outlook rules, mailbox delegation, mailbox quota and etc. Some of the above mentioned features will required to be tweaked for multi-tenancy and some do not. I will walk through them as we go.
 
-1.  **Shared Components** - as much as we try to make sure everything is segregated, there will be some information and shared components here. Just like living in a condominium, everyone will share the same garage and elevator.
+4.  **Shared Components** - as much as we try to make sure everything is segregated, there will be some information and shared components here. Just like living in a condominium, everyone will share the same garage and elevator.
+
 Now that we have listed them down, it doesn't look that bad, does it? In fact, once we walk through how we do this in HMC, you may realize that we aren't doing that much customization to Exchange at all. HMC, however, is more than just doing these customizations, of course. It is also a tool that allows you to better manage your resource and also allow you to automate a number of things, but that discussion will be for a separate blog. I will briefly touch on this at the end of this series.
 
 Those who has been dealing with Exchange 2007 probably realize that we have a white paper that talks about the similar thing, which is [White Paper: Configuring Virtual Organizations and Address List Segregation in Exchange 2007 ](http://technet.microsoft.com/en-us/exchange/bb936719.aspx "White Paper: Configuring Virtual Organizations and Address List Segregation in Exchange 2007 "). I strongly recommend anyone who wants to know more about the Exchange 2007 HMC customization to also read this white paper and try setting it up in your test environment for your own learning.
@@ -63,44 +58,39 @@ The above white paper explained how you can come up with your homebrew version o
 
 Firstly, let me start with how we do the Active Directory partitioning and permission in HMC for Exchange. The process of deploying a HMC is quite straightforward. Everything is done through the Provisioning Deployment Tool that comes with the HMC Solution ISO file.
 
-<span style="text-decoration: underline;">(1) List Object Mode (</span>**<span style="text-decoration: underline;">dsHeuristics</span>**<span style="text-decoration: underline;">)</span>
+(1) List Object Mode (**dsHeuristics**)
 
 This is the first thing that the Deployment Tool will do. This is about controlling the object visibility. By default in Active Directory, we control an object using List Contents permissions on the parent object. The concept is quite simple; it means an object that will only be visible to a user if the user has been granted List Contents permissions on the parent object. When a user has List Contents permission on a parent node, he or she can see and browse all objects that are children of that node without any further selectivity.
 
 Obviously this can be a problem in a Hosted Environment, for example, if in my Active Directory, I have the following structure,
 
-*   Fabrikam.com (Windows Domain)
+* Fabrikam.com (Windows Domain)
+    * Hosting (Hosting Container)
+        * ConsolidatedMessenger (Reseller)
+             * Company1
+                  * [User1@Company1]
+                  * [User2@Company1
+                  * [User3@Company1]
+             * Company2
+			   * [User1@Company2]
+			   * [User2@Company2]
+			   * [User3@Company2]
+             * [User1@ConsolidatedMessenger]
+             * [User2@ConsolidatedMessenger]
 
-    *   Hosting (Hosting Container)
-
-            *   ConsolidatedMessenger (Reseller)
-
-                    *   Company1
-
-                            *   [User1@Company1](mailto:User1@Company1)
-                *   [User2@Company1](mailto:User2@Company1)
-                *   [User3@Company1](mailto:User3@Company1)
-
-                        *   Company2
-
-                            *   [User1@Company2](mailto:User1@Company2)
-                *   [User2@Company2](mailto:User2@Company2)
-                *   [User3@Company2](mailto:User3@Company2)
-
-                        *   [User1@ConsolidatedMessenger](mailto:User1@ConsolidatedMessenger)
-            *   [User2@ConsolidatedMessenger](mailto:User2@ConsolidatedMessenger)
 If I grant [User1@Company1](mailto:User1@Company1) List Contents permission say on Compmany1 OU, I will also have to do it on all the parent OUs above it. Without that, it stops someone looking at what lives under the object or container. However, granting it lets whoever has the permission the ability to go through the content, including Company2 OU, which is obviously a bad thing. This is where "List Object" mode comes in.
 
 In this special mode, even if the user has not explicitly been granted or explicitly been denied List Contents permission on the parent object, the object will still be visible to the user if the user is granted List Object permission on both the parent object and the object itself.
 
 The availability and setting of this mode is very important to multi-tenant enablement and this is deployed as part of Core Platform in the Deployment Tool. Essentially, this form the basis of security control and Active Directory partitioning in HMC.
 
-<span style="text-decoration: underline;">(2) Active Directory Partitioning - Hosting Container</span>
+(2) Active Directory Partitioning - Hosting Container
 
 Now, I want to briefly walk through the structure that HMC will be creating in Active Directory. Here are a few things that you should know,
 
 *   HMC does not support deployment in a child domain. While it is technically possible, it hasn't be well tested and hence it is not a supported model.
 *   By default in HMC, it will create an OU called Hosting right under the Domain. This can be changed by setting the procedure parameter in _Hosting Platform - Initialize Default Services - Initialize Active Directory_ for Hosting in the Deployment Tool.
+
 That is only the creation of the master hosting container. You will then need to follow the Deployment Walkthrough in the Help File to create the Reseller container and also the Tenant container. From the Exchange perspective, you only need to know the following,
 
 *   **HMC Resellers** - Each Reseller is fully contained within its own Organizational Unit (OU) in Active Directory. The administrator from this OU will have permission to manage the HMC Tenants in it. Example in the Deployment Walkthrough is_ConsolidatedMessenger.com_. The Reseller OU will usually contain the following objects
@@ -142,7 +132,7 @@ Permission Inheritance is not blocked specifically. For example,[admins@Consolid
 
 For the purpose of this blog, I think that's all you need to know about the Active Directory partitioning in HMC for Exchange. If not, this blog may end up to be a novel. :)
 
-<span style="text-decoration: underline;">(3) User Logon</span>
+(3) User Logon
 
 I want to touch a little bit about User Logon here. Most of you who are familiar with Active Directory will know what a _samAccountName _is. This is the logon name we carried forward from the old NT world. It has to be unique in a Windows domain. Even though we have revolved to allow longer logon name in later version of Windows, we still need to specify a samAccountName, a mandatory attribute. It usually follow the logon name. If my logon name is John, then my samAccountName is also John.
 
@@ -156,7 +146,7 @@ With that, it solves the user logon uniqueness problem. However, it does not res
 *   Logon Name: [bob@alpineskihouse.com](mailto:bob@alpineskihouse.com) will have the samAccountName of bob_AlpineSkiHouse.c
 So, hopefully that will help to explain the naming convention of the user object.
 
-<span style="text-decoration: underline;">(4) Active Directory Attributes</span>
+(4) Active Directory Attributes
 
 HMC did not introduce any schema change to Active Directory. Sometimes, I wish it does because it would have made things little bit easier but it didn't. Instead, it uses what I would call the poor man's schema extension, the **otherWellknownObjects** attribute.
 
@@ -187,5 +177,3 @@ Let's briefly talk about the e-mail address stamping here too. In Exchange 2003
 
 *   HMC will use its own mechanism to stamp the SMTP addresses.
 So, that's it. It is straightforward so far, eh? We will talk more about other customizations introduced by HMC for Exchange in the new few parts.
-
-</div>

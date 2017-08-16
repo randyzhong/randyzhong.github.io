@@ -1,3 +1,4 @@
+
 ---
 title: Exchange Activesync returned an HTTP 500 response
 tags:
@@ -6,10 +7,9 @@ tags:
   - Exchange
   - Google
   - Nexus
-id: 198
 categories:
+  - Microsoft
   - Exchange
-  - 沟通协作
 date: 2013-07-19 13:40:52
 ---
 
@@ -23,13 +23,11 @@ The test of the FolderSync command failed.
 Additional Details
 Exchange Activesync returned an HTTP 500 response. (Internal Server Error)
 
-[![500 error](http://winotes.net/wp-content/uploads/FolderSync-Failed.jpg)](http://winotes.net/wp-content/uploads/FolderSync-Failed.jpg)
+{% asset_img FolderSync-Failed.jpg 500 error %}
 
 换个用户测试，发现可以通过，确定问题在用户设置上面。继而查看 Exchange 服务器的日志，发现有 ID:1053 的错误纪录：
 
-[![EventID-1053](http://winotes.net/wp-content/uploads/EventID-1053.jpg)](http://winotes.net/wp-content/uploads/EventID-1053.jpg)
-
-<!--more-->
+{% asset_img EventID-1053.jpg EventID-1053 %}
 
 Exchange ActiveSync doesn't have sufficient permissions to create the "CN=Randy Zhong,OU=IT,DC=company,DC=com" container under Active Directory user "Active Directory operation failed on DC01.company.com. This error is not retriable. Additional information: <span style="color: #ff0000">Access is denied.</span>
 
@@ -39,17 +37,17 @@ Active directory response: 00000005: SecErr: DSID-031521D0, problem 4003 (INSUFF
 
 Details:%3
 
-&nbsp;
 
 从上面可以看到，出错原因是 Exchange Servers 没有足够的权限，导致 Access is denied.
 
-解决方法：
+**解决方法：**
 
-1.  在DC上打开Active Directory Users and Computers
-2.  在菜单上点击 View, 勾选 Advanced Features
-3.  找到该问题用户，鼠标右键点击选中用户，在弹出菜单中选择 properties ，然后去到 Security 标签卡
-4.  点击 Advanced，选中 Include inheritable permissions from this object's parent.
-[![AdvancedSecurity-Setting](http://winotes.net/wp-content/uploads/AdvancedSecurity-Setting.jpg)](http://winotes.net/wp-content/uploads/AdvancedSecurity-Setting.jpg)
+1. 在DC上打开Active Directory Users and Computers
+2. 在菜单上点击 View, 勾选 Advanced Features
+3. 找到该问题用户，鼠标右键点击选中用户，在弹出菜单中选择 properties ，然后去到 Security 标签卡
+4. 点击 Advanced，选中 Include inheritable permissions from this object's parent.
+5. 
+{% asset_img AdvancedSecurity-Setting.jpg AdvancedSecurity-Setting %}
 
 等待 AD 复制完成后，再尝试配置手机，问题解决。
 

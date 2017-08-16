@@ -14,8 +14,6 @@ date: 2013-10-21 10:12:38
 
 Error: The security database on the server does not have a computer account for this workstation trust relationship
 
-![Domain relationship error](http://winotes.net/wp-content/uploads/Domain-relationship-error.jpg)](http://winotes.net/wp-content/uploads/Domain-relationship-error.jpg)
-
 退出域重新加域，问题解决，可是第二天早上又在出现。
 
 检查 AD 的日志，发现有  Event 5722 NETLOGON 错误：

@@ -13,7 +13,7 @@ date: 2013-07-09 12:54:20
 
 Error: The security database on the server does not have a computer account for this workstation trust relationship
 
-![Domain relationship error](solved-the-security-database-on-the-server-does-not-have-a-computer-account-for-this-workstation-trust-relationship/Domain-relationship-error.jpg)
+![Domain relationship error](solved-the-security-database-on-the-server-does-not-have-a-computer-account-for-this-workstation-trust-relationship-part1/Domain-relationship-error.jpg)
 
 退出域重新加域，问题依旧。
 

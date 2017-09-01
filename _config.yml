@@ -14,7 +14,8 @@ timezone: Asia/Shanghai
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://winotes.net
 root: /
-permalink: :year/:month/:day/:title/
+#permalink: :year/:month/:day/:title/
+permalink: :title/
 permalink_defaults:
 
 # Directory
@@ -71,6 +72,10 @@ feed:
   path: atom.xml
   limit: 20
   hub:
+
+sitemap:
+    path: sitemap.xml
+#    template: ./sitemap_template.xml
 
 ## Themes: https://hexo.io/themes/
 theme: maupassant

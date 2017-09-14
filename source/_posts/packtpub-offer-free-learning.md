@@ -6,6 +6,8 @@ tags:
 categories:
   - eBook
 date: 2017-09-01 16:10:23
+keywords: Packtpub, eBook
+description: Packt是一家创立于2004年，总部位于英国伯明翰的技术书籍出版商，对电子书支持非常友好，除了主流的 PDF 格式以外，还支持 ePub, Mobi格式，还有源码提供，甚至可以直接将电子书发送至你的 Kindle 设备。目前每天都提供一本免费的电子书
 ---
 
 

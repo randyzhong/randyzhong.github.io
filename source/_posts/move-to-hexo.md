@@ -7,6 +7,8 @@ tags:
 categories:
   - 网站相关
 date: 2017-06-10 14:40:11
+keywords:
+description:
 ---
 
 在 BlueHost 的服务到期之后，由于其夸张的续费价格，我并没有继续将其托管在 BlueHost，在折腾折腾来去之后，发现可以利用 GitHub Pages 来做静态博客，于是乎捣鼓了三天，将本博客从 WordPress 迁移到了 Hexo，目前是发布在了 **GitHub Pages**，继续使用 http://winotes.net 来提供服务。

@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Win Notes</title>
+  
+  <subtitle>闻道录</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://winotes.net/"/>
+  <updated>2017-11-17T09:05:43.155Z</updated>
+  <id>http://winotes.net/</id>
+  
+  <author>
+    <name>Randy Zhong</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Ubuntu 的 Vi 编辑器方向键变 ABCD 以及退格键无法使用的解决办法</title>
+    <link href="http://winotes.net/how-to-fix-arrow-key-that-display-abcd-in-vi-on-ubuntu/"/>
+    <id>http://winotes.net/how-to-fix-arrow-key-that-display-abcd-in-vi-on-ubuntu/</id>
+    <published>2017-11-14T07:14:23.000Z</published>
+    <updated>2017-11-17T09:05:43.155Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>Ubuntu 中的 Vi 编辑器在编辑模式下，使用上下左右方向键会变成 A B C D 字符并换行，而且退格键也无法删除前面的字符，非常不方便。<br>这个问题时不时都有人会提，困扰人类十几年了（笑），我好多年前也碰到过，这里再重新记录下。<br>解决方案有很多种，这里介绍两种常用的：</p><h4 id="1-安装-vim"><a href="#1-安装-vim" class="headerlink" title="1. 安装 vim"></a>1. 安装 vim</h4><p><code>$ sudo apt-get install vim</code></p><h4 id="2-编辑-Vi-配置文件-etc-vim-vimrc-tiny"><a href="#2-编辑-Vi-配置文件-etc-vim-vimrc-tiny" class="headerlink" title="2. 编辑 Vi 配置文件 /etc/vim/vimrc.tiny"></a>2. 编辑 Vi 配置文件 /etc/vim/vimrc.tiny</h4><p>由于这个文件的所有者是 root 用户，所以要在 root 的权限下对这个文件进行修改：</p><p><code>$sudo vi /etc/vim/vimrc.tiny</code></p><p><img src="/how-to-fix-arrow-key-that-display-abcd-in-vi-on-ubuntu/vim_conf.jpg" alt="vimrc.tiny"></p><p>找到 set compatible，将 “compatible” 改成 “nocompatible” 非兼容模式就可以解决方向键变 ABCD 以及退格键的问题了。<br>这个修改适用于所有用户，如果只想对当前用户生效，需要在用户 Home 目录下面新建 .vimrc 文件，然后加入 set nocompatible 一行再保存修改即可。</p><p>在某些系统下面，可能会出现退格键还是无法使用的现象，那这个时候得在 set nocompatible 后面再加一行：</p><p><code>set backspace=2</code> 或者<br><code>set backspace=indent,eol,start</code></p><p>以上两行二选一，效果一样。</p><h3 id="结论"><a href="#结论" class="headerlink" title="结论:"></a>结论:</h3><h4 id="方向键："><a href="#方向键：" class="headerlink" title="方向键："></a>方向键：</h4><p>产生这个问题的原因是由于 Ubuntu 预安装的是 <strong>vim-tiny</strong> 版本，缺省设置是 vim.tiny 以兼容 Vi 模式运行，意味着更接近纯 Vi，不能使用小键盘和方向键，在编辑模式下，只能使用 h j k l 来移动光标。所以要么安装 vim 完整版，要么禁用兼容模式。在终端窗口输入 vi 回车，如果 vim 跑在兼容模式，你可以看到如下图所示</p><p><img src="/how-to-fix-arrow-key-that-display-abcd-in-vi-on-ubuntu/vim_help.jpg" alt="Vim Help"></p><h4 id="退格键："><a href="#退格键：" class="headerlink" title="退格键："></a>退格键：</h4><p>退格键在编辑模式无法使用其实是 Vi 的一个保护性行为，防止误删除或者一次性删除大量内容，并不是 bug，设置 backspace (bs) 可以让退格键重新“工作”起来，默认设置为空 set backspace=””，意即使用 Vi 兼容的退格方式，也就是向左移动一个字符 (等同于 h)<br>| 值 | 效果<br>| indent | 允许在自动缩进上退格 |<br>| eol | 允许在换行符上退格 (连接行) |<br>| start | 允许在插入开始的位置上退格；CTRL-W 和 CTRL-U 到达插入开始的位置时停留一次。|</p><p>set backspace=2 或者 set backspace=indent,eol,start 就可以啦。</p><h3 id="引申"><a href="#引申" class="headerlink" title="引申:"></a>引申:</h3><p>那么为什么 Vi 默认不使用方向键来移动光标？</p><ol><li>可以装 X</li><li>兼容性问题<br>一般键的 ascii 码直接发就行，而方向键之类的特殊键就要转义成 ESC 序列 (<a href="https://en.wikipedia.org/wiki/Escape_sequence" target="_blank" rel="external">escape sequence</a>) 发送，比如上键会被转义成 ESC [ A 编码，某些终端类型不支持，再有就是早期的终端连接速度都很慢，如果在终端接收到 ESC 和 A 之间的时间太长，你可能会听到警告声或者导致指令无法送达，而普通的 hjkl 键就没有这个问题</li><li>键盘没有方向键<br><img src="/how-to-fix-arrow-key-that-display-abcd-in-vi-on-ubuntu/adm-3a.jpg" alt="ADM-3a Keyboard"></li><li>习惯问题</li></ol><p>你如果很习惯用 Vi 了，你完全可以弃用方向键的，不过 Vi 的学习曲线还是挺抖的，所以，挑个你习惯的编辑器就好，不必要强求用 Vi。</p><p>最后附上一张 Vi/Vim 的键盘快捷方式图压轴吧。<br><img src="/how-to-fix-arrow-key-that-display-abcd-in-vi-on-ubuntu/vi-vim-cheat-sheet.gif" alt="Vi/Vim Cheat Sheet"></p>]]></content>
+    
+    <summary type="html">
+    
+      Ubuntu 中的 Vi 编辑器在编辑模式下，使用上下左右方向键会变成 A B C D 字符并换行，而且退格键也无法删除前面的字符，非常不方便。
+    
+    </summary>
+    
+      <category term="Ubuntu" scheme="http://winotes.net/categories/Ubuntu/"/>
+    
+    
+      <category term="Ubuntu" scheme="http://winotes.net/tags/Ubuntu/"/>
+    
+      <category term="Linux" scheme="http://winotes.net/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>解除 Win10 LTSB 简体中文版 IE11 首页保护锁定方法</title>
+    <link href="http://winotes.net/how-to-remove-official-ie11-baidu-homepage-locking-on-simplified-chinese-win10-ltsb/"/>
+    <id>http://winotes.net/how-to-remove-official-ie11-baidu-homepage-locking-on-simplified-chinese-win10-ltsb/</id>
+    <published>2017-09-11T03:14:23.000Z</published>
+    <updated>2017-09-29T03:25:52.071Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>北京时间2015年9月24日，美国华盛顿州雷德蒙德，百度与微软正式宣布战略合作，百度将成为中国市场上Windows 10 Microsoft Edge浏览器的默认主页和搜索引擎，带给用户更加便捷的搜索服务。同时，百度也将通过“Windows 10直通车”提供Windows 10下载升级服务。</p></blockquote><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>以上是来自微软官方消息，不过最近有部分使用 IE11 的用户发现，启动浏览器会发现默认主页被重定向到了百度带尾巴的首页 <a href="https://www.baidu.com/?tn=80035161_1_dg" target="_blank" rel="external">https://www.baidu.com/?tn=80035161_1_dg，</a> 而默认的搜索引擎也被改成了百度，而且更过分的是，你还无法修改默认主页，一旦修改就会出现“由于主页设置已损坏， Internet Explorer 重置了你的主页。你是否要将主页改为……”，每次打开 IE 都会出现这样的提示，甚至重装系统依然如此。</p><p><img src="/how-to-remove-official-ie11-baidu-homepage-locking-on-simplified-chinese-win10-ltsb/ie-change-notice.jpg" alt="主页设置已损坏"></p><p>这既不是 DNS 劫持，也不是啥恶意软件，这个微软官方推行的浏览器保护机制，只不过落地在国内，默认主页和搜索引擎提供者变成了百度，谁让 Bing 不争气啊。</p><a id="more"></a><h4 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h4><p>这些受影响的 IE11 在启动的时候，会通过 ieonline.microsoft.com 上的 webservice 更新部分设置，如下图：<br><img src="/how-to-remove-official-ie11-baidu-homepage-locking-on-simplified-chinese-win10-ltsb/fidder-ie-startup.jpg" alt="Fiddler抓包-IE启动"></p><p>在更改默认主页的时候，也同样有去访问 ieonline.microsoft.com<br><img src="/how-to-remove-official-ie11-baidu-homepage-locking-on-simplified-chinese-win10-ltsb/fidder-ie-set-homepage.jpg" alt="Fiddler抓包-更改IE主页"></p><h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><p>通过 Fiddler 抓包和 ProcMon 分析，找到以下解决方法：</p><ol><li>首先编辑本机hosts文件，在其中添加<strong>127.0.0.1 ieonline.microsoft.com</strong></li><li>打开注册表编辑器，找到 <strong>[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Internet Explorer]</strong>，删除<strong>EUPP</strong>项</li><li><p>打开注册表编辑器，找到 <strong>[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl]</strong>，在下面新建项<strong>FEATURE_EUPP_GLOBAL_FORCE_DISABLE</strong>，然后在这个项下面新建一个 <strong>DWORD32</strong> 值，键值名称为 <strong>iexplorer.exe</strong> ，键值改成1<br>注册表文件如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Windows Registry Editor Version 5.00</div><div class="line"></div><div class="line">[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_EUPP_GLOBAL_FORCE_DISABLE]</div><div class="line">&quot;iexplorer.exe&quot;=dword:00000001</div></pre></td></tr></table></figure></li><li><p>之后再去修改 IE 默认主页就可以了</p></li><li>这样修改之后，实际上在注册表中 HKEY_CURRENT_USER\SOFTWARE\Microsoft\Internet Explorer 下面还是会创建 EUPP 项，不过会少了一些东西，只剩下一个 叫 RId 的字符串值，暂时不知道有没有别的啥影响，强迫症患者可以用这个注册表文件还原成原始值<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Windows Registry Editor Version 5.00</div><div class="line"></div><div class="line">[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Internet Explorer\EUPP]</div><div class="line">&quot;RId&quot;=&quot;&#123;0E742E0E-7B2B-4372-84A0-507D6539A665&#125;&quot;</div><div class="line">&quot;ChangeNotice&quot;=dword:00000002</div><div class="line"></div><div class="line">[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Internet Explorer\EUPP\DSP]</div><div class="line">&quot;ChangeNotice&quot;=dword:00000002</div></pre></td></tr></table></figure></li></ol><h4 id="结论"><a href="#结论" class="headerlink" title="结论:"></a>结论:</h4><p>产生这个问题的原因是 IE 启动的时候，会通过 ieonline.microsoft.com 上的 webservice 更新 EUPP 键值内容，其中最关键的是 BackupHomePage 和子项 DSP 下面的 BackupDefaultSearchScope 的这两个二进制值锁定主页和搜索提供程序的 URL，新安装的系统里面，BackupHomePage和 BackupDefaultSearchScope 键值还没有被创建。之后一旦可以联网，IE 会更新注册表，从而锁定主页和搜索提供程序，而且这些二进制值是加密的，有兴趣的可以参考这篇文章：<a href="http://bbs.pediy.com/thread-196517.htm" target="_blank" rel="external">http://bbs.pediy.com/thread-196517.htm</a></p><p>所以和 Windows 10 的版本或者 IE 补丁程序无关，此方法在 Win10 LTSB 中文 64 位 1607 版本上测试通过。</p><h4 id="2017年9月14日更新："><a href="#2017年9月14日更新：" class="headerlink" title="2017年9月14日更新："></a>2017年9月14日更新：</h4><p><strong>貌似这两天微软已经把 EUPP 的 webservice 做了更新，不再强制修改成百度了，所以即使你不应用上面的注册表和 hosts 文件修改，也可以像以前一样任意修改默认主页了。</strong><br>另1：如果是单单通过 hosts 文件屏蔽 ieonline.microsoft.com 的，要取消这个屏蔽，否则你的IE默认主页会锁定在屏蔽ieonline.microsoft.com之前的设定，无法修改成新的。<br><img src="/how-to-remove-official-ie11-baidu-homepage-locking-on-simplified-chinese-win10-ltsb/ie-unable-to-set-homepage.jpg" alt="修改hosts文件后更改IE主页"><br>另2：从 ieonline.microsoft.com 拿到的 ChangeNotice 的值在9月14日之后也有了变化，以前会被重置成2，现在是0,从名字猜测来看应该是提示主页设置被更改的旗标 (flag) 设置。</p><p>最后放上各个阶段的注册表 EUPP 项导出文件供参考 <a href="/how-to-remove-official-ie11-baidu-homepage-locking-on-simplified-chinese-win10-ltsb/ie11-eupp-registry.zip" title="IE11 EUPP Registry Settings Export">IE11 EUPP Registry Settings Export</a></p>]]></content>
+    
+    <summary type="html">
+    
+      不过最近有部分使用 IE11 的用户发现，启动浏览器会发现默认主页被重定向到了百度带尾巴的首页 https://www.baidu.com/?tn=80035161_1_dg，而默认的搜索引擎也被改成了百度，而且更过分的是，你还无法修改默认主页，一旦修改就会出现“由于主页设置已损坏， Internet Explorer 重置了你的主页。你是否要将主页改为……”
+    
+    </summary>
+    
+      <category term="Microsoft" scheme="http://winotes.net/categories/Microsoft/"/>
+    
+    
+      <category term="Microsoft" scheme="http://winotes.net/tags/Microsoft/"/>
+    
+      <category term="Internet Explorer" scheme="http://winotes.net/tags/Internet-Explorer/"/>
+    
+      <category term="Fiddler" scheme="http://winotes.net/tags/Fiddler/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>packtpub.com 提供每日一本免费电子书</title>
+    <link href="http://winotes.net/packtpub-offer-free-learning/"/>
+    <id>http://winotes.net/packtpub-offer-free-learning/</id>
+    <published>2017-09-01T08:10:23.000Z</published>
+    <updated>2017-09-29T03:25:52.119Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://www.packtpub.com/" target="_blank" rel="external">Packt</a>是一家创立于2004年，总部位于英国伯明翰的技术书籍出版商，对电子书支持非常友好，除了主流的 PDF 格式以外，还支持 ePub, Mobi格式，还有源码提供，甚至可以直接将电子书发送至你的 Kindle 设备。</p><p><img src="/packtpub-offer-free-learning/packtpub-eBook-2.jpg" alt="eBook Formats"></p><p>目前每天都提供一本免费的电子书，需要注册登录，然后到下面这个链接领取：</p><p><strong><a href="https://www.packtpub.com/packt/offers/free-learning" target="_blank" rel="external">https://www.packtpub.com/packt/offers/free-learning</a></strong></p><p>比如今天送的是这本 TypeScript Design Patterns</p><p><img src="/packtpub-offer-free-learning/packtpub-eBook-1.jpg" alt="Free Offer"></p><blockquote><p>注意：由于 PacktPub 网站已经启用了 Google 的 reCAPTCHA 验证码，所以你需要科学上网才能领取。</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      Packt是一家创立于2004年，总部位于英国伯明翰的技术书籍出版商，对电子书支持非常友好，除了主流的 PDF 格式以外，还支持 ePub, Mobi格式，还有源码提供，甚至可以直接将电子书发送至你的 Kindle 设备。目前每天都提供一本免费的电子书
+    
+    </summary>
+    
+      <category term="eBook" scheme="http://winotes.net/categories/eBook/"/>
+    
+    
+      <category term="Packt" scheme="http://winotes.net/tags/Packt/"/>
+    
+      <category term="eBook" scheme="http://winotes.net/tags/eBook/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python练手小程序-中科大网络课堂视频下载</title>
+    <link href="http://winotes.net/python-practice-1-ustc-online-course-downloader/"/>
+    <id>http://winotes.net/python-practice-1-ustc-online-course-downloader/</id>
+    <published>2017-08-28T03:46:31.000Z</published>
+    <updated>2017-09-29T03:25:52.119Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="所谓人生苦短，我用-Python"><a href="#所谓人生苦短，我用-Python" class="headerlink" title="所谓人生苦短，我用 Python"></a>所谓人生苦短，我用 Python</h4><p>作为一个编程小白，我也开始了学习 Python 的过程。之前在知乎上爬贴，看到个有意思的回答，<a href="https://www.zhihu.com/question/20799742/answer/99491808#" target="_blank" rel="external">大家都用 Python 来做什么啊？ - Tsing 的回答</a>，答主用了一小段代码拿到了学校研究生网络课堂在线视频的真实地址，答案里面的代码段关键部分被处理过，我看到评论里面好多人在求，我就想自己试试看能不能摸索出来，折腾了几天，终于从白板写出了第一个 Python 小程序。</p><a id="more"></a><p>以下是<a href="https://github.com/randyzhong/my-python-learning/blob/master/ustc-wlkt-downloader/ustc-wlkt-downloader.py" target="_blank" rel="external">源代码</a>:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="comment"># http://wlkt.ustc.edu.cn/ (USTC CERNET IP Only)</span></div><div class="line"><span class="comment"># Public course only</span></div><div class="line"><span class="comment"># If online course is set to private or restricted for Xiaonei only, you have to run this downloader from USTC CERNET IP, or you'll not get the real video source URL.</span></div><div class="line"><span class="comment"># Reference: https://www.zhihu.com/question/20799742/answer/99491808</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="keyword">import</span> urllib</div><div class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</div><div class="line"></div><div class="line">s = requests.Session() </div><div class="line">link = <span class="string">"http://wlkt.ustc.edu.cn/video/detail_3752_0.htm"</span> <span class="comment"># This is a public video</span></div><div class="line">req = s.get(link)</div><div class="line">html = req.content</div><div class="line">soup = BeautifulSoup(html, <span class="string">"html.parser"</span>)</div><div class="line">videourl1 = soup.find(id=<span class="string">"videourl1"</span>)[<span class="string">'value'</span>]</div><div class="line">htopicid = soup.find(id=<span class="string">"htopicid"</span>)[<span class="string">'value'</span>]</div><div class="line">header = &#123;<span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36'</span>,</div><div class="line">           <span class="string">'Content-Type'</span>: <span class="string">'application/x-www-form-urlencoded;charset=UTF-8'</span>,</div><div class="line">           <span class="string">'X-Requested-With'</span>: <span class="string">'XMLHttpRequest'</span>,</div><div class="line">           <span class="string">'Host'</span>: <span class="string">'wlkt.ustc.edu.cn'</span>,</div><div class="line">           <span class="string">'Origin'</span>: <span class="string">'http://wlkt.ustc.edu.cn'</span>,</div><div class="line">           <span class="string">'Referer'</span>: <span class="string">'http://wlkt.ustc.edu.cn/video/detail_3752_0.htm'</span>&#125;</div><div class="line">payload = urllib.urlencode(&#123;<span class="string">'videourl1'</span>: videourl1,<span class="string">'hid_topicid'</span>: htopicid&#125;)</div><div class="line">url = requests.post(<span class="string">"http://wlkt.ustc.edu.cn/ajaxprocess.php?menu=getvideourl"</span>,data=payload, headers=header)</div><div class="line"><span class="keyword">print</span> (<span class="string">"The real video URL is： http://wlkt.ustc.edu.cn/mp4.php?file="</span> + url.content[<span class="number">14</span>:])</div></pre></td></tr></table></figure></p><p>这里面最大的坑其实还是校内外IP限制的问题，在中科大的网络课堂视频里面，只有一小部分可以在外网访问，大部分都限制只允许校内教育网IP访问, 如果你在校外，因为后台服务器限制，返回来的只有 xiaowai 几个字，除非你有中科大校内代理，否则这个没法破。我找的这个例子是对公网开放的，权当拿来自己练手。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;所谓人生苦短，我用-Python&quot;&gt;&lt;a href=&quot;#所谓人生苦短，我用-Python&quot; class=&quot;headerlink&quot; title=&quot;所谓人生苦短，我用 Python&quot;&gt;&lt;/a&gt;所谓人生苦短，我用 Python&lt;/h4&gt;&lt;p&gt;作为一个编程小白，我也开始了学习 Python 的过程。之前在知乎上爬贴，看到个有意思的回答，&lt;a href=&quot;https://www.zhihu.com/question/20799742/answer/99491808#&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;大家都用 Python 来做什么啊？ - Tsing 的回答&lt;/a&gt;，答主用了一小段代码拿到了学校研究生网络课堂在线视频的真实地址，答案里面的代码段关键部分被处理过，我看到评论里面好多人在求，我就想自己试试看能不能摸索出来，折腾了几天，终于从白板写出了第一个 Python 小程序。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Python" scheme="http://winotes.net/categories/Python/"/>
+    
+    
+      <category term="Python" scheme="http://winotes.net/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在 GitHub Pages 上面搭建 Hexo 静态博客</title>
+    <link href="http://winotes.net/deploying-hexo-on-github/"/>
+    <id>http://winotes.net/deploying-hexo-on-github/</id>
+    <published>2017-07-08T03:46:31.000Z</published>
+    <updated>2017-09-29T03:25:52.023Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>本站迁移至 GitHub Pages 已经月余，毕竟是静态页面，访问速度令人满意，不过其搭建和发布还是不同于传统的博客程序，在此记录下搭建过程。</p><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>GitHub Pages 本用于介绍托管在 GitHub 的项目，也可以用来搭建博客，有1GB 的免费空间。官方推荐使用 <a href="http://jekyllrb.com/" target="_blank" rel="external">Jekyll</a> 来搭建，不过我看上了 Hexo 的主题，所以选了它。</p><p>Hexo 是一个基于 Node.js 的快速、简洁且高效的博客框架，使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页并托管在 Github Pages 和 Heroku 等平台上。Hexo 作者是来自台湾的 <a href="https://github.com/tommy351" target="_blank" rel="external">tommy351</a>。</p><a id="more"></a><h3 id="GitHub-Pages-设置"><a href="#GitHub-Pages-设置" class="headerlink" title="GitHub Pages 设置"></a>GitHub Pages 设置</h3><ol><li>首先你需要注册一个 GitHub 帐号；</li><li>新建一个与你用户名对应的仓库，仓库名必须为 <strong>username.github.io</strong>；</li><li>在仓库中新建一个分支，比如 hexo；</li><li>将该分支设置成缺省分支；</li></ol><blockquote><p>上面最后两个操作的用意是将 hexo 分支用作 Hexo 博客源码的备份分支，将原来的默认缺省分支 master 作为发布静态内容的目标分支，这样你可以很方便的切换你的写作环境到另外一台电脑。</p></blockquote><h3 id="Hexo-安装"><a href="#Hexo-安装" class="headerlink" title="Hexo 安装"></a>Hexo 安装</h3><p>因为 GitHub Pages 是纯静态托管平台，不能像传统博客程序那样，找个浏览器就可以写，所以需要搭建能发布静态内容的环境，我们这里用 Hexo 来生成静态内容并发布到 GitHub Pages。</p><h4 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a>安装 Git</h4><p>我使用的发行版是 Ubuntu 16.04 LTS （Xenial Xerus），所以安装 Git 的命令就很简单 <code>$ sudo apt-get install git-core</code></p><h4 id="安装-Node-js"><a href="#安装-Node-js" class="headerlink" title="安装 Node.js"></a>安装 Node.js</h4><p>最好的方法是使用 <a href="https://github.com/creationix/nvm" target="_blank" rel="external"> Node Version Manager</a>。</p><h5 id="cURL"><a href="#cURL" class="headerlink" title="cURL:"></a>cURL:</h5><p><code>$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash</code></p><h5 id="Wget"><a href="#Wget" class="headerlink" title="Wget:"></a>Wget:</h5><p><code>$ wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash</code></p><p>当 nvm 装好以后，关掉 terminal 终端窗口再重新打开，运行以下命令安装 Node.js：</p><p><code>$ nvm install stable</code></p><h4 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h4><p><code>$ npm install -g hexo-cli</code></p><p>如果你的网络访问 npm 源比较慢，你可以使用淘宝的 NPM 镜像（每10分钟与官方源同步一次）来安装：</p><p><code>npm install -g hexo-cli --registry=https://registry.npm.taobao.org</code></p><h4 id="Hexo-初始化"><a href="#Hexo-初始化" class="headerlink" title="Hexo 初始化"></a>Hexo 初始化</h4><p>当 Hexo 安装好以后，运行 hexo init <code>&lt;folder&gt;</code> 来初始化。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ hexo init &lt;folder&gt;</div><div class="line">$ <span class="built_in">cd</span> &lt;folder&gt;</div><div class="line">$ npm install</div></pre></td></tr></table></figure><p>初始化之后，目录结构看起来应该像下面的样子:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── _config.yml</div><div class="line">├── package.json</div><div class="line">├── scaffolds</div><div class="line">├── source</div><div class="line">|   ├── _drafts</div><div class="line">|   └── _posts</div><div class="line">└── themes</div></pre></td></tr></table></figure><h5 id="config-yml"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</h5><p>网站的<strong>配置</strong>信息，您可以在此配置大部分的参数。</p><h5 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h5><p>应用程序的信息。<a href="http://embeddedjs.com/" target="_blank" rel="external">EJS</a>, <a href="http://learnboost.github.io/stylus/" target="_blank" rel="external">Stylus</a> 和 <a href="http://daringfireball.net/projects/markdown/" target="_blank" rel="external">Markdown</a> renderer 已默认安装，您可以自由移除。</p><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"name"</span>: <span class="string">"hexo-site"</span>,</div><div class="line">  <span class="attr">"version"</span>: <span class="string">"0.0.0"</span>,</div><div class="line">  <span class="attr">"private"</span>: <span class="literal">true</span>,</div><div class="line">  <span class="attr">"hexo"</span>: &#123;</div><div class="line">    <span class="attr">"version"</span>: <span class="string">""</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"dependencies"</span>: &#123;</div><div class="line">    <span class="attr">"hexo"</span>: <span class="string">"^3.0.0"</span>,</div><div class="line">    <span class="attr">"hexo-generator-archive"</span>: <span class="string">"^0.1.0"</span>,</div><div class="line">    <span class="attr">"hexo-generator-category"</span>: <span class="string">"^0.1.0"</span>,</div><div class="line">    <span class="attr">"hexo-generator-index"</span>: <span class="string">"^0.1.0"</span>,</div><div class="line">    <span class="attr">"hexo-generator-tag"</span>: <span class="string">"^0.1.0"</span>,</div><div class="line">    <span class="attr">"hexo-renderer-ejs"</span>: <span class="string">"^0.1.0"</span>,</div><div class="line">    <span class="attr">"hexo-renderer-stylus"</span>: <span class="string">"^0.2.0"</span>,</div><div class="line">    <span class="attr">"hexo-renderer-marked"</span>: <span class="string">"^0.2.4"</span>,</div><div class="line">    <span class="attr">"hexo-server"</span>: <span class="string">"^0.1.2"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure><h5 id="scaffolds"><a href="#scaffolds" class="headerlink" title="scaffolds"></a>scaffolds</h5><p><strong>模版</strong>文件夹。当您新建文章时，Hexo 会根据 scaffold 来建立文件。</p><p>Hexo的模板是指在新建的markdown文件中默认填充的内容。例如，如果您修改scaffold/post.md中的Front-matter内容，那么每次新建一篇文章时都会包含这个修改。</p><h5 id="source"><a href="#source" class="headerlink" title="source"></a>source</h5><p>资源文件夹是存放用户资源的地方。除 <code>_posts</code> 文件夹之外，开头命名为 <code>_</code> (下划线)的文件 / 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 <code>public</code> 文件夹，而其他文件会被拷贝过去。</p><h5 id="themes"><a href="#themes" class="headerlink" title="themes"></a>themes</h5><p><strong>主题</strong>文件夹。Hexo 会根据主题来生成静态页面。</p><p>更多关于 Hexo 建站和配置的详细信息，可以参考<a href="https://hexo.io/zh-cn/docs/setup.html" target="_blank" rel="external">官方文档</a></p><h4 id="发布-amp-部署"><a href="#发布-amp-部署" class="headerlink" title="发布 &amp; 部署"></a>发布 &amp; 部署</h4><h5 id="新建文章"><a href="#新建文章" class="headerlink" title="新建文章"></a>新建文章</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new [layout] &lt;title&gt;</div></pre></td></tr></table></figure><p>新建一篇文章。如果没有设置 <code>layout</code> 的话，默认使用 <a href="configuration.html">_config.yml</a> 中的 <code>default_layout</code> 参数代替。如果标题包含空格的话，请使用引号括起来。</p><h5 id="生成静态内容"><a href="#生成静态内容" class="headerlink" title="生成静态内容"></a>生成静态内容</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure><p>生成静态文件。</p><table><thead><tr><th>选项</th><th>描述</th></tr></thead><tbody><tr><td><code>-d</code>, <code>--deploy</code></td><td>文件生成后立即部署网站</td></tr><tr><td><code>-w</code>, <code>--watch</code></td><td>监视文件变动</td></tr></tbody></table><p>该命令可以简写为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo g</div></pre></td></tr></table></figure></p><h5 id="本地调试"><a href="#本地调试" class="headerlink" title="本地调试"></a>本地调试</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure><p>启动服务器。默认情况下，访问网址为： <code>http://localhost:4000/</code>。</p><table><thead><tr><th>选项</th><th>描述</th></tr></thead><tbody><tr><td><code>-p</code>, <code>--port</code></td><td>重设端口</td></tr><tr><td><code>-s</code>, <code>--static</code></td><td>只使用静态文件</td></tr><tr><td><code>-l</code>, <code>--log</code></td><td>启动日记记录，使用覆盖记录格式</td></tr></tbody></table><h5 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h5><p>部署到 Github 前需要配置 <strong>_config.yml</strong> 文件，首先找到下面的内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># Deployment</div><div class="line">## Docs: http://hexo.io/docs/deployment.html</div><div class="line">deploy:</div><div class="line">  type:</div></pre></td></tr></table></figure></p><p>然后将它们修改为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># Deployment</div><div class="line">## Docs: http://hexo.io/docs/deployment.html</div><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo:https://github.com/randyzhong/randyzhong.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p><p>另外，还需要安装 git 部署插件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-deployer-git --save</div></pre></td></tr></table></figure></p><p><strong>部署网站：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure></p><table><thead><tr><th>参数</th><th>描述</th></tr></thead><tbody><tr><td><code>-g</code>, <code>--generate</code></td><td>部署之前预先生成静态文件</td></tr></tbody></table><p>生成静态文件并发布的命令可以简写为：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo -d g</div></pre></td></tr></table></figure></p><h3 id="附加配置"><a href="#附加配置" class="headerlink" title="附加配置"></a>附加配置</h3><p>本站使用了 maupassant 主题，并且安装了几个插件，所以 package.json 文件内容相比默认的有变化</p><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"name"</span>: <span class="string">"hexo-site"</span>,</div><div class="line">  <span class="attr">"version"</span>: <span class="string">"0.0.0"</span>,</div><div class="line">  <span class="attr">"private"</span>: <span class="literal">true</span>,</div><div class="line">  <span class="attr">"hexo"</span>: &#123;</div><div class="line">    <span class="attr">"version"</span>: <span class="string">"3.3.8"</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"dependencies"</span>: &#123;</div><div class="line">    <span class="attr">"hexo"</span>: <span class="string">"^3.2.0"</span>,</div><div class="line">    <span class="attr">"hexo-asset-image"</span>: <span class="string">"0.0.3"</span>,</div><div class="line">    <span class="attr">"hexo-deployer-git"</span>: <span class="string">"^0.3.1"</span>,</div><div class="line">    <span class="attr">"hexo-generator-archive"</span>: <span class="string">"^0.1.4"</span>,</div><div class="line">    <span class="attr">"hexo-generator-category"</span>: <span class="string">"^0.1.3"</span>,</div><div class="line">    <span class="attr">"hexo-generator-feed"</span>: <span class="string">"^1.2.0"</span>,</div><div class="line">    <span class="attr">"hexo-generator-index"</span>: <span class="string">"^0.2.0"</span>,</div><div class="line">    <span class="attr">"hexo-generator-sitemap"</span>: <span class="string">"^1.2.0"</span>,</div><div class="line">    <span class="attr">"hexo-generator-tag"</span>: <span class="string">"^0.2.0"</span>,</div><div class="line">    <span class="attr">"hexo-renderer-ejs"</span>: <span class="string">"^0.3.1"</span>,</div><div class="line">    <span class="attr">"hexo-renderer-jade"</span>: <span class="string">"^0.3.0"</span>,</div><div class="line">    <span class="attr">"hexo-renderer-marked"</span>: <span class="string">"^0.3.0"</span>,</div><div class="line">    <span class="attr">"hexo-renderer-sass"</span>: <span class="string">"^0.3.2"</span>,</div><div class="line">    <span class="attr">"hexo-renderer-stylus"</span>: <span class="string">"^0.3.1"</span>,</div><div class="line">    <span class="attr">"hexo-server"</span>: <span class="string">"^0.2.0"</span>,</div><div class="line">    <span class="attr">"hexo-wordcount"</span>: <span class="string">"^3.0.2"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure><p>所以在安装了 Hexo 之后，可以运行如下命令添加这些插件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-asset-image --save</div><div class="line">$ npm install hexo-deployer-git --save</div><div class="line">$ npm install hexo-generator-feed --save</div><div class="line">$ npm install hexo-generator-sitemap --save</div><div class="line">$ npm install hexo-renderer-jade --save</div><div class="line">$ npm install hexo-renderer-stylus --save</div><div class="line">$ npm install hexo-wordcount --save</div></pre></td></tr></table></figure></p><h4 id="CNAME-设置"><a href="#CNAME-设置" class="headerlink" title="CNAME 设置"></a>CNAME 设置</h4><p>在发布完成以后，就可以使用 <a href="https://yourname.github.io" target="_blank" rel="external">https://yourname.github.io</a> 来访问你的主页了。<br>如果你不想用 github.io 的二级域名，你可以使用自己的域名。</p><ol><li>在Hexo 的 source 目录下创建 CNAME 文件。</li><li>填写自己的域名如 winotes.net 或者 www.winotes.net，保存退出。</li><li>登录你的域名解析商，比如 DNSPod，先添加域名，然后添加记录，设置如下：</li></ol><table><thead><tr><th>主机记录</th><th>记录类型</th><th>线路类型</th><th>记录值</th><th>MX优先级</th><th>TTL</th></tr></thead><tbody><tr><td>@</td><td>CNAME</td><td>默认</td><td>yourname.github.io.</td><td>-</td><td>10</td></tr><tr><td>www</td><td>CNAME</td><td>默认</td><td>yourname.github.io.</td><td>-</td><td>10</td></tr></tbody></table><p>当然，你也可以通过创建DNS A 记录直接指定 GitHub Pages 的 IP 来解析：</p><ul><li>192.30.252.153</li><li>192.30.252.154</li></ul><h3 id="博客源码备份"><a href="#博客源码备份" class="headerlink" title="博客源码备份"></a>博客源码备份</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git add .</div><div class="line">$ git commit -m <span class="string">"comments"</span></div><div class="line">$ git push original hexo</div></pre></td></tr></table></figure><p>以下目录不用上传，所以在 .gitignore 里面排除掉即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.git/</div><div class="line">public/</div><div class="line">.deploy_git/</div></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;本站迁移至 GitHub Pages 已经月余，毕竟是静态页面，访问速度令人满意，不过其搭建和发布还是不同于传统的博客程序，在此记录下搭建过程。&lt;/p&gt;
+&lt;h3 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h3&gt;&lt;p&gt;GitHub Pages 本用于介绍托管在 GitHub 的项目，也可以用来搭建博客，有1GB 的免费空间。官方推荐使用 &lt;a href=&quot;http://jekyllrb.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Jekyll&lt;/a&gt; 来搭建，不过我看上了 Hexo 的主题，所以选了它。&lt;/p&gt;
+&lt;p&gt;Hexo 是一个基于 Node.js 的快速、简洁且高效的博客框架，使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页并托管在 Github Pages 和 Heroku 等平台上。Hexo 作者是来自台湾的 &lt;a href=&quot;https://github.com/tommy351&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;tommy351&lt;/a&gt;。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="网站相关" scheme="http://winotes.net/categories/%E7%BD%91%E7%AB%99%E7%9B%B8%E5%85%B3/"/>
+    
+    
+      <category term="GitHub" scheme="http://winotes.net/tags/GitHub/"/>
+    
+      <category term="Hexo" scheme="http://winotes.net/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>本站博客迁移至 Hexo</title>
+    <link href="http://winotes.net/move-to-hexo/"/>
+    <id>http://winotes.net/move-to-hexo/</id>
+    <published>2017-06-10T06:40:11.000Z</published>
+    <updated>2017-09-29T03:25:52.103Z</updated>
+    
+    <content type="html"><![CDATA[<p>在 BlueHost 的服务到期之后，由于其夸张的续费价格，我并没有继续将其托管在 BlueHost，在折腾折腾来去之后，发现可以利用 GitHub Pages 来做静态博客，于是乎捣鼓了三天，将本博客从 WordPress 迁移到了 Hexo，目前是发布在了 <strong>GitHub Pages</strong>，继续使用 <a href="http://winotes.net">http://winotes.net</a> 来提供服务。</p><p>由于 CloudFlare 在大陆的访问速度较慢，所以暂时没有启用 HTTPS，待出现更好的解决方案之前，先用 HTTP 来访问。</p><p>WordPress 的迁移是用插件来做的，不过导出来的 md 文件并不干净，需要手工修正，顺便清理了下原来的分类目录和标签，现在至少看起来清爽了不少。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在 BlueHost 的服务到期之后，由于其夸张的续费价格，我并没有继续将其托管在 BlueHost，在折腾折腾来去之后，发现可以利用 GitHub Pages 来做静态博客，于是乎捣鼓了三天，将本博客从 WordPress 迁移到了 Hexo，目前是发布在了 &lt;stron
+      
+    
+    </summary>
+    
+      <category term="网站相关" scheme="http://winotes.net/categories/%E7%BD%91%E7%AB%99%E7%9B%B8%E5%85%B3/"/>
+    
+    
+      <category term="GitHub" scheme="http://winotes.net/tags/GitHub/"/>
+    
+      <category term="Hexo" scheme="http://winotes.net/tags/Hexo/"/>
+    
+      <category term="WordPress" scheme="http://winotes.net/tags/WordPress/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何在 Win10 中安装 SQL Server 2005</title>
+    <link href="http://winotes.net/how-to-install-sql2005-on-win10/"/>
+    <id>http://winotes.net/how-to-install-sql2005-on-win10/</id>
+    <published>2015-11-20T14:50:50.000Z</published>
+    <updated>2017-09-29T03:25:52.059Z</updated>
+    
+    <content type="html"><![CDATA[<p>正常情况下，在 Windows 10 是没有办法安装 SQL2005 的，参见微软的这个文章：<br><a href="https://support.microsoft.com/en-us/help/2681562/using-sql-server-in-windows-8-and-later-versions-of-windows-operating" target="_blank" rel="external">Using SQL Server in Windows 8 and later versions of Windows operating system</a></p><blockquote><p>Microsoft SQL Server 2005 (the release version and service packs) and earlier versions of SQL Server are not supported on Windows 10, Windows Server 2016, Windows Server 2012 R2, Windows Server 2012, Windows 8.1, or Windows 8. You will receive a warning in the Action Center if Windows 10, Windows 8.1, or Windows 8 detects an instance of SQL Server 2005.</p></blockquote><p>其实，办法还是有的，不过因为并不是官方推荐做法或者解决方案，所以微软不会在这种场景下为你提供技术支持。</p><ol><li>找一台已经安装好 SQL Server 2005 并且打上 SP4 补丁的机器 （Windows Server 2003/Windows7 等都行），从上面拷贝 <strong>sqlservr.exe</strong> 和 <strong>sqlos.dll</strong> 两个文件 （默认应该在 C:\Program Files\Microsoft SQL Server\MSSQL.1\MSSQL\Binn）到临时目录，需要注意的是这个机器上面的 SQL 版本应该和你在 Win10 上面要装的版本一致 (x86/x64，中文/英文等等)；</li><li>在 Win10 上面安装 SQL Server 2005 RTM；</li><li>安装到一半会报个错，SQL Server 服务无法启动，见下图；<br><img src="/how-to-install-sql2005-on-win10/install_sql2005_on_win10_error.jpg" alt="安装错误"><br>此时先不要关掉这个界面，从临时目录复制 <strong>sqlservr.exe</strong> 和 <strong>sqlos.dll</strong> 到 Win10 的 SQL 安装路径 （同样是 C:\Program Files\Microsoft SQL Server\MSSQL.1\MSSQL\Binn）下面替换原来的 RTM 的文件；</li></ol><p>替换前的文件信息<br><img src="/how-to-install-sql2005-on-win10/install_sql2005_on_win10_files_before.jpg" alt="替换前的文件"></p><p>替换后的文件信息<br><img src="/how-to-install-sql2005-on-win10/install_sql2005_on_win10_files_replaced.jpg" alt="替换后的文件"><br><strong>注意 SP4 文件的修改时间应该是 2010年12月10日</strong></p><ol><li>回到 SQL Server 的安装界面，点击 “<strong>Retry</strong>“ 重试，安装得以继续进行；<br><img src="/how-to-install-sql2005-on-win10/install_sql2005_on_win10_ongoging.jpg" alt="安装继续"></li><li>安装完成之后，马上打上 SP4 的补丁，确保所有应该被更新的文件都更新到了 SP4。<br><img src="/how-to-install-sql2005-on-win10/install_sql2005_on_win10_finish.jpg" alt="安装完成"></li></ol><p>另：SQL Server 2005 的 Management Studio 在 Win10 下面会有些小问题，比如连接的时候看不到实例，如果需要可以安装 SQL Server 2008 R2 之后的版本。</p><p>以上测试环境为<br>Windows 10 LTSB 10240 Pro 64-bit<br>SQL Server 2005 std 64-bit RTM + SP4</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;正常情况下，在 Windows 10 是没有办法安装 SQL2005 的，参见微软的这个文章：&lt;br&gt;&lt;a href=&quot;https://support.microsoft.com/en-us/help/2681562/using-sql-server-in-windows-
+      
+    
+    </summary>
+    
+      <category term="Microsoft" scheme="http://winotes.net/categories/Microsoft/"/>
+    
+      <category term="SQL数据库" scheme="http://winotes.net/categories/Microsoft/SQL%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="MSSQL" scheme="http://winotes.net/tags/MSSQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何从Maxmind的CSV数据源生成 GeoIP 的二进制数据库</title>
+    <link href="http://winotes.net/how-to-build-geoip-database-from-maxmind-csv-format/"/>
+    <id>http://winotes.net/how-to-build-geoip-database-from-maxmind-csv-format/</id>
+    <published>2015-06-25T02:40:09.000Z</published>
+    <updated>2017-09-29T03:25:52.043Z</updated>
+    
+    <content type="html"><![CDATA[<p>所谓GeoIP，就是通过来访者的IP， 定位他的经纬度，国家/地区，省市，甚至街道等位置信息。</p><p>网上能下载到的 geoip 可能都比较旧了，下面我们来自己生成最新的GeoIP 的二进制数据库 (geoipdb.bin, geoipdb.bin)</p><h4 id="1-环境准备"><a href="#1-环境准备" class="headerlink" title="1. 环境准备"></a>1. 环境准备</h4><p>我们需要一台 Linux, 这里我们使用 Ubuntu</p><p>然后再安装基本的编译工具</p><p><code>apt-get install build-essential zip</code></p><h4 id="2-下载最新的-GeoIP-数据库并将其解压缩"><a href="#2-下载最新的-GeoIP-数据库并将其解压缩" class="headerlink" title="2. 下载最新的 GeoIP 数据库并将其解压缩"></a>2. 下载最新的 GeoIP 数据库并将其解压缩</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wget http://www.maxmind.com/download/geoip/database/GeoIPCountryCSV.zip</div><div class="line">unzip GeoIPCountryCSV.zip</div></pre></td></tr></table></figure><h4 id="3-下载-gcsv2bin-的转换工具"><a href="#3-下载-gcsv2bin-的转换工具" class="headerlink" title="3. 下载 gcsv2bin 的转换工具"></a>3. 下载 gcsv2bin 的转换工具</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wget http://people.netfilter.org/acidfu/geoip/tools/gcsv2bin.tar.gz</div><div class="line">tar xzvf gcsv2bin.tar.gz</div></pre></td></tr></table></figure><h4 id="4-修改源码，编译工具"><a href="#4-修改源码，编译工具" class="headerlink" title="4. 修改源码，编译工具"></a>4. 修改源码，编译工具</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> gcsvbin</div><div class="line">nano gcsvbin.c <span class="comment">#找到 COUNTRYCOUNT，将其改到 275或者更大</span></div><div class="line">make</div></pre></td></tr></table></figure><p><img src="/how-to-build-geoip-database-from-maxmind-csv-format/Change_Countrycount.jpg" alt="Change_Countrycount"></p><h4 id="5-生成-geoipdb-bin-和geoipdb-bin"><a href="#5-生成-geoipdb-bin-和geoipdb-bin" class="headerlink" title="5. 生成 geoipdb.bin 和geoipdb.bin"></a>5. 生成 geoipdb.bin 和geoipdb.bin</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./gcsv2bin ../GeoIPCountryWhois.csv</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;所谓GeoIP，就是通过来访者的IP， 定位他的经纬度，国家/地区，省市，甚至街道等位置信息。&lt;/p&gt;
+&lt;p&gt;网上能下载到的 geoip 可能都比较旧了，下面我们来自己生成最新的GeoIP 的二进制数据库 (geoipdb.bin, geoipdb.bin)&lt;/p&gt;
+&lt;h4
+      
+    
+    </summary>
+    
+      <category term="*Nix" scheme="http://winotes.net/categories/Nix/"/>
+    
+    
+      <category term="GeoIP" scheme="http://winotes.net/tags/GeoIP/"/>
+    
+      <category term="MaxMind" scheme="http://winotes.net/tags/MaxMind/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>解决 Windows 下 Java8 的 1603 安装错误</title>
+    <link href="http://winotes.net/fix-java8-install-1603-error/"/>
+    <id>http://winotes.net/fix-java8-install-1603-error/</id>
+    <published>2015-03-19T14:40:11.000Z</published>
+    <updated>2017-09-29T03:25:52.031Z</updated>
+    
+    <content type="html"><![CDATA[<p>近期访问一些应用的网站老是提示 Java 版本过低，需要升级，于是下载了 jre-8u40-windows 来安装，结果老是装不上去，出现这个 1603 错误，试了很多次都一样。<br><img src="/fix-java8-install-1603-error/Java8_Error_1603.png" alt="Java8u40 Install Error Code: 1603"></p><p>最后终于解决：</p><ol><li>关闭 Java 安装程序;</li><li>在 C:\Program Files (x86)\Java\jre1.8.0_40\bin 找到 <strong>javacpl.exe</strong> 文件，运行之；（这里的jre1.8.0_40 指的是 Java 8u40，你的版本如有不同请自行替换）</li><li>在 Java 的控制面板的 Security 标签页取消勾选  Enable Java content in browser ， OK 确认；</li><li>重新尝试安装 Java8u40;</li><li>安装成功后再次运行 <strong>javacpl.exe</strong>，恢复勾选 <code>Enable Java content in browser</code></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;近期访问一些应用的网站老是提示 Java 版本过低，需要升级，于是下载了 jre-8u40-windows 来安装，结果老是装不上去，出现这个 1603 错误，试了很多次都一样。&lt;br&gt;&lt;img src=&quot;/fix-java8-install-1603-error/Java
+      
+    
+    </summary>
+    
+      <category term="Microsoft" scheme="http://winotes.net/categories/Microsoft/"/>
+    
+    
+      <category term="Java" scheme="http://winotes.net/tags/Java/"/>
+    
+      <category term="JRE" scheme="http://winotes.net/tags/JRE/"/>
+    
+      <category term="MSI" scheme="http://winotes.net/tags/MSI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>解决 WSUS 下载速度慢的问题</title>
+    <link href="http://winotes.net/fix-wsus-slow-download-problem/"/>
+    <id>http://winotes.net/fix-wsus-slow-download-problem/</id>
+    <published>2014-06-10T06:40:11.000Z</published>
+    <updated>2017-09-29T03:25:52.035Z</updated>
+    
+    <content type="html"><![CDATA[<p>解决 WSUS 下载速度慢的问题:</p><p>新建的 WSUS 3.0 SP2 服务器，操作系统为 2008 R2，更新补丁非常慢，总共几十个G的补丁文件，下载了三天了才2G。</p><p>出现这样的问题，大部分情况是因为 WSUS 通过后台下载补丁文件所导致，也就是我们所说的 BITS 服务，可以试着将后台下载改为前台下载。</p><p>解决方案：</p><ol><li><p>如果你的 WSUS 用的是WID（Windows Internal Database）默认数据库：</p><figure class="highlight cmd"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">%programfiles%</span>\Update Services\Setup\ExecuteSQL.exe -S <span class="variable">%Computername%</span>\MICROSOFT##SSEE -d "SUSDB" -Q "update tbConfigurationC <span class="built_in">set</span> BitsDownloadPriorityForeground=<span class="number">1</span>"</div></pre></td></tr></table></figure></li><li><p>如果你使用 SQL 数据库：</p><figure class="highlight cmd"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">%programfiles%</span>\Update Services\Setup\ExecuteSQL.exe -S <span class="variable">%Computername%</span> -d "SUSDB" -Q "update tbConfigurationC <span class="built_in">set</span> BitsDownloadPriorityForeground=<span class="number">1</span>"</div></pre></td></tr></table></figure></li></ol><p>最后重启WSUS服务生效。</p><p>注：<strong>BITS</strong> (后台智能传送服务 Background Intelligent Transfer Service) 是一个 Windows 组件，它可以在前台或后台异步传输文件，为保证其他网络应用程序获得响应而调整传输速度，并在重新启动计算机或重新建立网络连接之后自动恢复文件传输。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;解决 WSUS 下载速度慢的问题:&lt;/p&gt;
+&lt;p&gt;新建的 WSUS 3.0 SP2 服务器，操作系统为 2008 R2，更新补丁非常慢，总共几十个G的补丁文件，下载了三天了才2G。&lt;/p&gt;
+&lt;p&gt;出现这样的问题，大部分情况是因为 WSUS 通过后台下载补丁文件所导致，也就是
+      
+    
+    </summary>
+    
+      <category term="Microsoft" scheme="http://winotes.net/categories/Microsoft/"/>
+    
+    
+      <category term="BITS" scheme="http://winotes.net/tags/BITS/"/>
+    
+      <category term="Microsoft" scheme="http://winotes.net/tags/Microsoft/"/>
+    
+      <category term="WSUS" scheme="http://winotes.net/tags/WSUS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Fixed: Please wait while Windows configures Microsoft Office Professional Plus 2010</title>
+    <link href="http://winotes.net/fixed-please-wait-windows-configures-microsoft-office-professional-plus-2010/"/>
+    <id>http://winotes.net/fixed-please-wait-windows-configures-microsoft-office-professional-plus-2010/</id>
+    <published>2014-04-28T04:02:35.000Z</published>
+    <updated>2017-09-29T03:25:52.035Z</updated>
+    
+    <content type="html"><![CDATA[<p>上周五通过 .msi 安装包部署了一个软件，今天发现每次启动 Office 2010 的组件—不管是 Word, Excel, PowerPoint 还是 Outlook，都会出现这个提示：</p><p><img src="/fixed-please-wait-windows-configures-microsoft-office-professional-plus-2010/Windows-configures-microsoft-office.jpg" alt="Windows configures microsoft office "></p><p>Please wait while windows configures Microsoft Office Professional Plus 2010.</p><p>而且是每次都会有，不厌其烦。微软官方也给出了解决方案：</p><p>请参考KB2528748: <a href="http://support.microsoft.com/kb/2528748" title="Microsoft Office 2010 Professional Plus configures each time you start" target="_blank" rel="external">http://support.microsoft.com/kb/2528748</a></p><p>运气好的话，说不定问题就能解决，但如果你和我这个倒霉蛋一样，这个方案根本没用的时候，不妨再检查你的日志：</p><p><img src="/fixed-please-wait-windows-configures-microsoft-office-professional-plus-2010/EventID-1004.jpg" alt="EventID-1004"></p><p>The resource ‘HKEY_CLASSES_ROOT.aw\’ does not exist. 其实 .aw 这个键值不是不存在，而是由于某种原因，权限丢失了，只要将其所有者改为 SYSTEM 账号，然后赋予如下权限即可。</p><p><img src="/fixed-please-wait-windows-configures-microsoft-office-professional-plus-2010/Permissions-aw.jpg" alt="Permissions-aw"></p><p>By the way, 这个方法适用于所有 Office 系列。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;上周五通过 .msi 安装包部署了一个软件，今天发现每次启动 Office 2010 的组件—不管是 Word, Excel, PowerPoint 还是 Outlook，都会出现这个提示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/fixed-please-wait-windo
+      
+    
+    </summary>
+    
+      <category term="Microsoft" scheme="http://winotes.net/categories/Microsoft/"/>
+    
+      <category term="Office" scheme="http://winotes.net/categories/Microsoft/Office/"/>
+    
+    
+      <category term="MSI" scheme="http://winotes.net/tags/MSI/"/>
+    
+      <category term="Microsoft" scheme="http://winotes.net/tags/Microsoft/"/>
+    
+      <category term="Office" scheme="http://winotes.net/tags/Office/"/>
+    
+      <category term="Windows" scheme="http://winotes.net/tags/Windows/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>KB289949 - Items that you place in Outlook Today seem to be lost</title>
+    <link href="http://winotes.net/kb289949-items-place-outlook-today-seem-lost/"/>
+    <id>http://winotes.net/kb289949-items-place-outlook-today-seem-lost/</id>
+    <published>2014-02-13T02:55:56.000Z</published>
+    <updated>2017-09-29T03:25:52.103Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="http://support.microsoft.com/kb/289949" title="Items that you place in Outlook Today seem to be lost" target="_blank" rel="external">KB289949 - Items that you place in Outlook Today seem to be lost</a></p><p>不知道有没有人注意到这个旧的 KB 文章，说的是啥事呢？</p><p>你试着从 Outlook 里面选中一些邮件，然后鼠标右键，Move-Other Folder，选中顶级目录，也就是 username@mail.com 这个级别，然后你会发现这些邮件不见了！ 收件箱里面没有，只有用搜索功能才能找到，点到顶级目录，你也只能看到这个：</p><p><img src="/kb289949-items-place-outlook-today-seem-lost/Outlook_Today.jpg" alt="Outlook_Today"></p><p>&nbsp;</p><p>那么，我的邮件去哪儿了呢？</p><p>其实，这些被移动的邮件去到了 邮箱的顶级目录，但是默认情况下，这里被 Outlook Today 所代替了，这个 KB 讲的就是如何关掉 Outlook Today, 然后让你“丢失”的邮件重见天日的。说的是 Outlook 2003，实际上从 Outlook 2003 一直到 2013 版本都适用。</p><p><img src="/kb289949-items-place-outlook-today-seem-lost/Outlook_Today_HomePage.jpg" alt="Outlook_Today_HomePage"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;a href=&quot;http://support.microsoft.com/kb/289949&quot; title=&quot;Items that you place in Outlook Today seem to be lost&quot; target=&quot;_blank&quot; rel=&quot;exter
+      
+    
+    </summary>
+    
+      <category term="Microsoft" scheme="http://winotes.net/categories/Microsoft/"/>
+    
+      <category term="Office" scheme="http://winotes.net/categories/Microsoft/Office/"/>
+    
+    
+      <category term="Exchange" scheme="http://winotes.net/tags/Exchange/"/>
+    
+      <category term="Outlook" scheme="http://winotes.net/tags/Outlook/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Exchange 2010 最佳实践01 - CAS Array</title>
+    <link href="http://winotes.net/exchange-2010-best-practice-01-cas-array/"/>
+    <id>http://winotes.net/exchange-2010-best-practice-01-cas-array/</id>
+    <published>2013-12-06T01:44:56.000Z</published>
+    <updated>2017-09-29T03:25:52.023Z</updated>
+    
+    <content type="html"><![CDATA[<p>CAS Array 的概念是第一次在 Exchange 2010 中被引入，其主要目的是在于统一客户端访问名称，便于不管连接哪台服务器均能够使用同样一个名字访问，因此在不建立NLB的情况下使用CAS ARRAY能够统一访问名称。</p><p>实际的部署 CAS Array 的过程我就不说了，网上很多教程。这里要提出来的三点建议，也许对你的环境会有帮助。  </p><p><strong>CAS Array 的内外部 FQDN 不要用一样的，说更清楚点，内部 CAS Array 的 FQDN 不要能被外部 DNS 解析。</strong></p><p>Why? 就算我内外FQDN一样，我也还是能正常访问 Exchange 啊。对，你确实还是能够访问，但是却增加了 Outlook 的连接时间，在某些慢速网络下，甚至会导致连接超时。我们下面详细来看看各种场景下的连接情况。</p><p>a)  内部 Outlook 用户 (TCP连接)。</p><ul><li>Outlook会通过DNS去查询内部 FQDN 对应的 IP，比如说outlook.internal.local -&gt; 192.168.1.30 (内网IP)。</li><li>Outlook 会认为自己在内网，于是尝试使用DCE/RPC 也就是135 端口去连接 192.168.1.30。</li><li>连接建立。</li></ul><p>b)  外部 Outlook 用户 （CAS Array内部FQDN可以从公网解析）</p><ul><li>Outlook会通过DNS去查询内部 FQDN 对应的 IP，比如说outlook.internal.local -&gt; 123.234.213.213 (公网IP)。</li><li>Outlook会认为自己在内网，于是尝试使用DCE/RPC 也就是135 端口去连接123.234.213.213。</li><li>而大多数情况下，防火墙是不会允许公网的 135 端口通信的，所以得等待TCP连接超时，这其中还有几次重试的时间。</li><li>当 Outlook 发现 TCP/135 的端口无法连接的时候，才发现，哦，原来我不在内网啊，那就只能尝试使用 https协议去连接 443 端口。<br>默认情况下， 在快速网络环境下，Outlook 会使用 TCP 先行尝试连接，不成功的情况下才会使用 Http/Https ，这里TCP连接浪费的时间，短则10来秒，最长可达30秒钟以上，所以，Outlook Anywhere用户体验会变得糟糕。</li></ul><p>当然，你可以改成无论何时都是先用http/https 连接，对于 Outlook Anywhere 用户，很适合，不过这会对内网用户造成困扰，甚至无法登陆，因为内外网证书很可能不一致，导致设定的 FQDN 名称和证书的 Common Name 不匹配，会总提示输入用户名和密码，即便你输入的是正确的，还是会不停地跳出来。</p><p>c)  外部 Outlook 用户 （CAS Array内部FQDN不能从公网解析）</p><ul><li>Outlook会通过DNS去查询内部 FQDN 对应的 IP，但此时从 DNS 并不能返回查询结果。</li><li>Outlook 知悉，哦，地址无法解析，我在外网，于是直接使用 Https 去建立连接。</li></ul><p><strong> CAS Array </strong>的场景下，客户端最好能做<strong> Kerberos </strong>认证 （Exchange 2010 SP1）。</p><p>在 Exchange 2010 中，所有的域客户端的 MAPI 访问实际上都是通过 CAS 来走，而客户端的认证会使用协商认证，即negotiate authentication，也就是会先使用 Kerberos 认证。失败之后再尝试 NTLM 认证。（注：Outlook Anywhere 不适用）</p><p>而在配置了 CAS Array 的环境下，Kerberos 认证会失败的，因为 Kerberos 认证的时候，发起的service ticket中的authenticator 使用的是 CAS Array FQDN的 SPN，而不是 CAS Server 的 SPN，所以会认证失败。具体的实现步骤可以参考这里：<a href="http://blogs.technet.com/b/exchange/archive/2011/04/15/recommendation-enabling-kerberos-authentication-for-mapi-clients.aspx" target="_blank" rel="external">http://blogs.technet.com/b/exchange/archive/2011/04/15/recommendation-enabling-kerberos-authentication-for-mapi-clients.aspx</a></p><p>那么，开启 Kerberos 认证有啥好处呢？除了可以满足一些企业的安全需求外，还能减少 CAS 服务器和 AD 的负载，这对大型企业中的性能优化很有帮助。</p><p><strong>即便你只有一个 CAS 服务器，也建议配置 CAS Array </strong>。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;CAS Array 的概念是第一次在 Exchange 2010 中被引入，其主要目的是在于统一客户端访问名称，便于不管连接哪台服务器均能够使用同样一个名字访问，因此在不建立NLB的情况下使用CAS ARRAY能够统一访问名称。&lt;/p&gt;
+&lt;p&gt;实际的部署 CAS Array
+      
+    
+    </summary>
+    
+      <category term="Microsoft" scheme="http://winotes.net/categories/Microsoft/"/>
+    
+      <category term="Exchange" scheme="http://winotes.net/categories/Microsoft/Exchange/"/>
+    
+    
+      <category term="最佳实践" scheme="http://winotes.net/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/"/>
+    
+      <category term="Exchange" scheme="http://winotes.net/tags/Exchange/"/>
+    
+      <category term="Kerberos" scheme="http://winotes.net/tags/Kerberos/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>VMWare vCenter 4.x 数据库由SQL Express 迁移至SQL Server 2008 R2</title>
+    <link href="http://winotes.net/migrating-the-vcenter-server-4-database-from-sql-express-to-sql-server-2008-r2/"/>
+    <id>http://winotes.net/migrating-the-vcenter-server-4-database-from-sql-express-to-sql-server-2008-r2/</id>
+    <published>2013-11-28T08:38:52.000Z</published>
+    <updated>2017-09-29T03:25:52.103Z</updated>
+    
+    <content type="html"><![CDATA[<p>默认安装下的 VMware vCenter 4.x 会在本地安装 SQL Express 2005 版本，如果你有需要迁移至 Full SQL Server版本比如 SQL Server 2008 R2的话，可以参考以下步骤：</p><ol><li>停止 VirtualCenter Server service服务，4.x 的服务名是 VMware VirtualCenter Server。</li><li>对现有的 SQL Express 数据库实例上的 vCenter 数据库做一次完全备份。</li><li>停止现有 SQL Express 的 SQL 服务。</li><li>在新的 SQL Server 2008 R2 服务器上面创建新数据库，并将之前备份的文件还原至改新建数据库。为了确保还原正确，最好还原的时候去到 Options ，勾选 Overwrite existing database with replace 选项以保证完全覆盖还原。</li><li>在 SQL Server 2008 R2 上面创建 vCenter 的 SQL 用户，给其分配 DB Owner 和 dbo 角色。</li><li>修改 vCenter 服务器上面的 System DSN，默认名称是 VMware VirtualCenter，将其连接改至新服务器。</li><li>修改 vCenter 的注册表,<ol><li><strong>HKEY_LOCAL_MACHINE &gt; SOFTWARE &gt; VMware Inc, VMware VirtualCenter &gt; DB</strong></li><li>确认键值 1 是 System DSN 中指定的名字，比如 VMware VirtualCenter</li><li>确认键值 2 用来连接新数据库的SQL用户名，比如 vCenter_User</li></ol></li><li><p>更改注册表中所存储的SQL用户密码，也就是在上一步中的键值 3</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">C:\Program Files\VMware\Infrastructure\VirtualCenter Server\vpxd.exe -p</div></pre></td></tr></table></figure></li><li><p>重建 rollup jobs。参考 <a href="http://kb.vmware.com/selfservice/microsites/search.do?cmd=displayKC&amp;docType=kc&amp;docTypeID=DT_KB_1_1&amp;externalId=1029824" target="_blank" rel="external">http://kb.vmware.com/selfservice/microsites/search.do?cmd=displayKC&amp;docType=kc&amp;docTypeID=DT_KB_1_1&amp;externalId=1029824</a></p></li><li>重启 vCenter 服务全文参考 <a href="http://kb.vmware.com/selfservice/microsites/search.do?cmd=displayKC&amp;docType=kc&amp;externalId=1028601&amp;sliceId=1&amp;docTypeID=DT_KB_1_1&amp;dialogID=100018749&amp;stateId=0%200%20111449579" target="_blank" rel="external">VMWare KB - Migrating the vCenter Server database from SQL Express to full SQL Server (1028601)</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;默认安装下的 VMware vCenter 4.x 会在本地安装 SQL Express 2005 版本，如果你有需要迁移至 Full SQL Server版本比如 SQL Server 2008 R2的话，可以参考以下步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;停止 Virtual
+      
+    
+    </summary>
+    
+      <category term="虚拟化" scheme="http://winotes.net/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
+    
+    
+      <category term="VMware" scheme="http://winotes.net/tags/VMware/"/>
+    
+      <category term="MSSQL" scheme="http://winotes.net/tags/MSSQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>AD 管理小技巧系列01 - 不重置密码也可延长密码有效期</title>
+    <link href="http://winotes.net/active-directory-tips-01-extend-password-expiration-date-not-changing-it/"/>
+    <id>http://winotes.net/active-directory-tips-01-extend-password-expiration-date-not-changing-it/</id>
+    <published>2013-11-19T02:19:10.000Z</published>
+    <updated>2017-09-29T03:25:52.023Z</updated>
+    
+    <content type="html"><![CDATA[<p>在大多数企业里面，一般都有设置密码策略，包括密码复杂度、密码历史、密码有效期等等。密码到期不修改，系统在你登陆的时候会要求你更改密码，不更改便不让你登陆。但有些人，尤其是上了年纪的用户，往往记不住太复杂或者太多的密码，他们通常会拿纸笔记下来，反而有泄漏的风险。</p><p>如果你想不修改密码，延长你的账户有效期的话，这里有个办法：</p><p>在 AD 用户的账号属性页面，有个选项叫做 “<em>用户下次登录时须更改密码</em>”，把这个选项先勾选上，应用一下，然后再取消勾选，再应用一次，就达到不重置密码也能延长密码有效期的目的了。</p><ul><li><strong>User must change password at next logon </strong><br><img src="/active-directory-tips-01-extend-password-expiration-date-not-changing-it/ADUser-Properties.jpg" alt="AD 用户属性页面"></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在大多数企业里面，一般都有设置密码策略，包括密码复杂度、密码历史、密码有效期等等。密码到期不修改，系统在你登陆的时候会要求你更改密码，不更改便不让你登陆。但有些人，尤其是上了年纪的用户，往往记不住太复杂或者太多的密码，他们通常会拿纸笔记下来，反而有泄漏的风险。&lt;/p&gt;
+&lt;p
+      
+    
+    </summary>
+    
+      <category term="Microsoft" scheme="http://winotes.net/categories/Microsoft/"/>
+    
+      <category term="活动目录" scheme="http://winotes.net/categories/Microsoft/%E6%B4%BB%E5%8A%A8%E7%9B%AE%E5%BD%95/"/>
+    
+    
+      <category term="Active Directory" scheme="http://winotes.net/tags/Active-Directory/"/>
+    
+      <category term="Tips" scheme="http://winotes.net/tags/Tips/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Solved: The Security Database on the Server Does Not Have a Computer Account for This Workstation Trust Relationship - Part2</title>
+    <link href="http://winotes.net/solved-the-security-database-on-the-server-does-not-have-a-computer-account-for-this-workstation-trust-relationship-part2/"/>
+    <id>http://winotes.net/solved-the-security-database-on-the-server-does-not-have-a-computer-account-for-this-workstation-trust-relationship-part2/</id>
+    <published>2013-10-21T02:12:38.000Z</published>
+    <updated>2017-09-29T03:25:52.119Z</updated>
+    
+    <content type="html"><![CDATA[<p>在 Part1 里面，我们用 ADSIEdit.msc 解决了用户登录域的问题，在 Part2，我们来看看可能的另外一个原因：</p><p>用户计算机录域的时候出现如下错误：</p><p>Error: The security database on the server does not have a computer account for this workstation trust relationship</p><p>退出域重新加域，问题解决，可是第二天早上又在出现。</p><p>检查 AD 的日志，发现有  Event 5722 NETLOGON 错误：</p><p><strong>Event 5722</strong>: The session setup from the computer ComputerName failed to authenticate. The name(s) of the account(s) referenced in the security database is ComputerName$. The following error occurred:<br><span style="color: #ff0000">Access is denied.</span></p><p>在用户端的电脑上，也有Event 3210 NETLOGON 报错:</p><p><strong>Event 3210:</strong> This computer could not authenticate with \DC01.contoso.com, a Windows domain controller for domain Contoso, and therefore this computer might deny logon requests. This inability to authenticate might be caused by <span style="color: #ff0000"><strong>another computer on the same network using the same name</strong> or the password for this computer account is not recognized</span>. If this message appears again, contact your system administrator.</p><p>注意红色加粗标注部分，实际上，计算机账户的密码，也就是所说的 Secure Channel 安全通道，这个密码是由客户端发起的，一般不存在无法识别的问题，所以很有可能是在网络中有同名的计算机存在。</p><p>后来经过排查，发现有两台计算机重名，两台在碰到无法登陆域的情况下都有做退域重新加域的动作，哪一台后加域，另外一台就会出现无法登陆域的情况，因为在加域的时候，会重置计算机账户密码，所以对于原来已经加域的计算机来讲，密码就不一致了，导致安全通道被破坏，无法认证，最终不能登录域。</p><p>解决方法：将重名的计算机退域，改名，再重新加域，保险起见，用 netdom 重置下计算机账户密码 (重建 Secure Channel)</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在 Part1 里面，我们用 ADSIEdit.msc 解决了用户登录域的问题，在 Part2，我们来看看可能的另外一个原因：&lt;/p&gt;
+&lt;p&gt;用户计算机录域的时候出现如下错误：&lt;/p&gt;
+&lt;p&gt;Error: The security database on the serve
+      
+    
+    </summary>
+    
+      <category term="Microsoft" scheme="http://winotes.net/categories/Microsoft/"/>
+    
+      <category term="活动目录" scheme="http://winotes.net/categories/Microsoft/%E6%B4%BB%E5%8A%A8%E7%9B%AE%E5%BD%95/"/>
+    
+    
+      <category term="Active Directory" scheme="http://winotes.net/tags/Active-Directory/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Exchange Activesync returned an HTTP 500 response</title>
+    <link href="http://winotes.net/exchange-activesync-returned-an-http-500-response/"/>
+    <id>http://winotes.net/exchange-activesync-returned-an-http-500-response/</id>
+    <published>2013-07-19T05:40:52.000Z</published>
+    <updated>2017-09-29T03:25:52.023Z</updated>
+    
+    <content type="html"><![CDATA[<p>Exchange Server 2010 SP1, 手机是 Google Nexus (Samsung i9250)，系统是 Android 4.0.4，用户已经启用 ActiveSync, 结果用手机无法创建 Exchange 邮件账户，提示无法连接到服务器。</p><p>去到 <a href="https://www.testexchangeconnectivity.com/" title="Microsoft Remote Connectivity Analyzer" target="_blank" rel="external">TestExchangeConnectivity</a> 网站测试，发现有报错：</p><p>Attempting the FolderSync command on the Exchange ActiveSync session.<br>The test of the FolderSync command failed.</p><p>Additional Details<br>Exchange Activesync returned an HTTP 500 response. (Internal Server Error)</p><img src="/exchange-activesync-returned-an-http-500-response/FolderSync-Failed.jpg" alt="500 error" title="500 error"><p>换个用户测试，发现可以通过，确定问题在用户设置上面。继而查看 Exchange 服务器的日志，发现有 ID:1053 的错误纪录：</p><img src="/exchange-activesync-returned-an-http-500-response/EventID-1053.jpg" alt="EventID-1053" title="EventID-1053"><p>Exchange ActiveSync doesn’t have sufficient permissions to create the “CN=Randy Zhong,OU=IT,DC=company,DC=com” container under Active Directory user “Active Directory operation failed on DC01.company.com. This error is not retriable. Additional information: <span style="color: #ff0000">Access is denied.</span></p><p>Active directory response: 00000005: SecErr: DSID-031521D0, problem 4003 (INSUFF_ACCESS_RIGHTS), data 0”.</p><p><span style="color: #ff0000">Make sure the user has inherited permission granted to domain\Exchange Servers</span> to allow List, Create child, Delete child of object type “msExchActiveSyncDevices” and doesn’t have any deny permissions that block such operations.</p><p>Details:%3</p><p>从上面可以看到，出错原因是 Exchange Servers 没有足够的权限，导致 Access is denied.</p><p><strong>解决方法：</strong></p><ol><li>在DC上打开Active Directory Users and Computers</li><li>在菜单上点击 View, 勾选 Advanced Features</li><li>找到该问题用户，鼠标右键点击选中用户，在弹出菜单中选择 properties ，然后去到 Security 标签卡</li><li>点击 Advanced，选中 Include inheritable permissions from this object’s parent.</li><li><img src="/exchange-activesync-returned-an-http-500-response/AdvancedSecurity-Setting.jpg" alt="AdvancedSecurity-Setting" title="AdvancedSecurity-Setting"></li></ol><p>等待 AD 复制完成后，再尝试配置手机，问题解决。</p><p><span style="color: #ff0000">补充：<br></span><span style="color: #ff0000">如果碰到某些用户以上操作都不起作用的话，可以尝试在 EMC 中先禁掉用户的 ActiveSync，然后尝试配置手机，当然会提示失败，之后再开启 ActiveSync, 再试一下，多半就可以了。</span></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Exchange Server 2010 SP1, 手机是 Google Nexus (Samsung i9250)，系统是 Android 4.0.4，用户已经启用 ActiveSync, 结果用手机无法创建 Exchange 邮件账户，提示无法连接到服务器。&lt;/p&gt;
+&lt;
+      
+    
+    </summary>
+    
+      <category term="Microsoft" scheme="http://winotes.net/categories/Microsoft/"/>
+    
+      <category term="Exchange" scheme="http://winotes.net/categories/Microsoft/Exchange/"/>
+    
+    
+      <category term="Exchange" scheme="http://winotes.net/tags/Exchange/"/>
+    
+      <category term="Activesync" scheme="http://winotes.net/tags/Activesync/"/>
+    
+      <category term="Android" scheme="http://winotes.net/tags/Android/"/>
+    
+      <category term="Google" scheme="http://winotes.net/tags/Google/"/>
+    
+      <category term="Nexus" scheme="http://winotes.net/tags/Nexus/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Solved: The Security Database on the Server Does Not Have a Computer Account for This Workstation Trust Relationship - Part1</title>
+    <link href="http://winotes.net/solved-the-security-database-on-the-server-does-not-have-a-computer-account-for-this-workstation-trust-relationship-part1/"/>
+    <id>http://winotes.net/solved-the-security-database-on-the-server-does-not-have-a-computer-account-for-this-workstation-trust-relationship-part1/</id>
+    <published>2013-07-09T04:54:20.000Z</published>
+    <updated>2017-09-29T03:25:52.119Z</updated>
+    
+    <content type="html"><![CDATA[<p>用户计算机录域的时候出现如下错误：</p><p>Error: The security database on the server does not have a computer account for this workstation trust relationship</p><p><img src="/solved-the-security-database-on-the-server-does-not-have-a-computer-account-for-this-workstation-trust-relationship-part1/Domain-relationship-error.jpg" alt="Domain relationship error"></p><p>退出域重新加域，问题依旧。</p><p>最终找到了原因，在用户计算机的属性SPN里面，只有 WINS 的主机名记录，没有 FQDN 的</p><p>servicePrincipalName:</p><ul><li>HOST/SRV1</li><li><span style="color: #ff0000">HOST/srv1.mydomainname.com</span></li><li>RestrictedKrbHost/SRV1</li><li><span style="color: #ff0000"><br>RestrictedKrbHost/srv1.mydomainname.com</span><br>TERMSRV/SRV1</li><li><span style="color: #ff0000"> TERMSRV/srv1.mydomainname.com</span></li></ul><p>缺少红字部分，用 SetSPN 或者 ADSIEdit 来添加相对应的 FQDN 即可</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;用户计算机录域的时候出现如下错误：&lt;/p&gt;
+&lt;p&gt;Error: The security database on the server does not have a computer account for this workstation trust relations
+      
+    
+    </summary>
+    
+      <category term="Microsoft" scheme="http://winotes.net/categories/Microsoft/"/>
+    
+      <category term="活动目录" scheme="http://winotes.net/categories/Microsoft/%E6%B4%BB%E5%8A%A8%E7%9B%AE%E5%BD%95/"/>
+    
+    
+      <category term="Active Directory" scheme="http://winotes.net/tags/Active-Directory/"/>
+    
+      <category term="SPN" scheme="http://winotes.net/tags/SPN/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>APC: undefined symbol: pcre_exec in Unknown on line 0</title>
+    <link href="http://winotes.net/apc-undefined-symbol-pcre-exec-in-unknown-on-line-0/"/>
+    <id>http://winotes.net/apc-undefined-symbol-pcre-exec-in-unknown-on-line-0/</id>
+    <published>2013-05-12T14:46:45.000Z</published>
+    <updated>2017-09-29T03:25:52.023Z</updated>
+    
+    <content type="html"><![CDATA[<p>APC是一个类似 eaccelerator 的免费PHP加速器，但你安装通过 yum 安装之后有可能会看到这样的错误：</p><p>Problem: /usr/lib/php/modules/apc.so: undefined symbol: pcre_exec in Unknown on line 0</p><p>以下是解决方法：</p><ol><li><p>先复制 /etc/php.d/apc.ini 文件到临时目录 /tmp</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp /etc/php.d/apc.ini /tmp</div></pre></td></tr></table></figure></li><li><p>移除原来的安装包</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum remove php-pecl-apc</div></pre></td></tr></table></figure></li><li><p>用 pecl 来安装 apc</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pecl install apc</div></pre></td></tr></table></figure></li><li><p>再把 apc.ini 复制回去</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mv /tmp/apc.ini /etc/php.d/apc.ini</div></pre></td></tr></table></figure></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;APC是一个类似 eaccelerator 的免费PHP加速器，但你安装通过 yum 安装之后有可能会看到这样的错误：&lt;/p&gt;
+&lt;p&gt;Problem: /usr/lib/php/modules/apc.so: undefined symbol: pcre_exec in U
+      
+    
+    </summary>
+    
+      <category term="*Nix" scheme="http://winotes.net/categories/Nix/"/>
+    
+    
+      <category term="APC" scheme="http://winotes.net/tags/APC/"/>
+    
+      <category term="PECL" scheme="http://winotes.net/tags/PECL/"/>
+    
+      <category term="PHP" scheme="http://winotes.net/tags/PHP/"/>
+    
+      <category term="Yum" scheme="http://winotes.net/tags/Yum/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>修复安装于VMware上的CentOS启动时出现 piix4_smbus Host SMBus controller not enabled 的错误</title>
+    <link href="http://winotes.net/fixing-piix4-host-smbus-controller-not-enabled-error-for-centos-on-vmware/"/>
+    <id>http://winotes.net/fixing-piix4-host-smbus-controller-not-enabled-error-for-centos-on-vmware/</id>
+    <published>2013-05-01T15:45:49.000Z</published>
+    <updated>2017-09-29T03:25:52.039Z</updated>
+    
+    <content type="html"><![CDATA[<p>如果你的 CentOS 6.4 是在 VMware 的虚拟机上安装的，那么在启动的时候，你可能会看到这样一个错误：</p><p><img src="/fixing-piix4-host-smbus-controller-not-enabled-error-for-centos-on-vmware/piix4_smbus_not_enabled.jpg" alt="piix4_smbus 0000:00:007.3: Host SMBus controller not enabled"> </p><p><strong>piix4_smbus 0000:00:007.3: Host SMBus controller not enabled</strong></p><blockquote><p>“The PIIX4 (properly known as the 82371AB) is an Intel chip with a lot of functionality. Among other things, it implements the PCI bus. One of its minor functions is implementing a System Management Bus. This is a true SMBus - you can not access it on I2C levels. The good news is that it natively understands SMBus commands and you do not have to worry about timing problems. The bad news is that non-SMBus devices connected to it can confuse it…”</p></blockquote><p>从内核的说明文档来看，这个 piix4 实际上是 Intel 82371AB 南桥芯片，多功能总线控制器，而在 VMware 里面并没有这个真实的芯片组，但在启动时最会尝试载入这个驱动模块，所以会报错，虽然对系统没有任何影响，但如果你看着不爽想移除掉的话，也是可以的：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vi /etc/modprobe.d/blacklist.conf</div><div class="line"><span class="comment">#加入以下两行</span></div><div class="line"><span class="comment">#intel piix4 driver</span></div><div class="line">blacklist i2c_piix4</div></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;如果你的 CentOS 6.4 是在 VMware 的虚拟机上安装的，那么在启动的时候，你可能会看到这样一个错误：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/fixing-piix4-host-smbus-controller-not-enabled-error-for-cent
+      
+    
+    </summary>
+    
+      <category term="*Nix" scheme="http://winotes.net/categories/Nix/"/>
+    
+    
+      <category term="CentOS" scheme="http://winotes.net/tags/CentOS/"/>
+    
+      <category term="VMware" scheme="http://winotes.net/tags/VMware/"/>
+    
+  </entry>
+  
+</feed>

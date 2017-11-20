@@ -2,16 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://winotes.net/install-docker-ce-on-ubuntu-16/</loc>
+    
+    <lastmod>2017-11-20T08:59:36.977Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://winotes.net/how-to-fix-arrow-key-that-display-abcd-in-vi-on-ubuntu/</loc>
     
-    <lastmod>2017-11-20T05:36:37.709Z</lastmod>
+    <lastmod>2017-11-20T07:44:53.815Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://winotes.net/about/index.html</loc>
     
-    <lastmod>2017-09-29T03:25:52.131Z</lastmod>
+    <lastmod>2017-11-20T05:49:12.066Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/workaround-to-resolve-cant-install-virtualbox-usb-driver-in-windows7/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.127Z</lastmod>
     
   </url>
   
@@ -31,13 +45,6 @@
   
   <url>
     <loc>http://winotes.net/unofficial-consolidated-server-deployment-guide-for-hmc4/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.127Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://winotes.net/workaround-to-resolve-cant-install-virtualbox-usb-driver-in-windows7/</loc>
     
     <lastmod>2017-09-29T03:25:52.127Z</lastmod>
     
@@ -233,13 +240,6 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/how-to-turn-off-password-expiration-in-hmc-40/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.087Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://winotes.net/how-to-use-url-rewrite-to-redirect-http-to-https-on-iis7/</loc>
     
     <lastmod>2017-09-29T03:25:52.087Z</lastmod>
@@ -247,9 +247,9 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/how-to-remove-official-ie11-baidu-homepage-locking-on-simplified-chinese-win10-ltsb/</loc>
+    <loc>http://winotes.net/how-to-turn-off-password-expiration-in-hmc-40/</loc>
     
-    <lastmod>2017-09-29T03:25:52.071Z</lastmod>
+    <lastmod>2017-09-29T03:25:52.087Z</lastmod>
     
   </url>
   
@@ -261,9 +261,9 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/how-to-fix-sql2008-ssrs-teradata-extension-load-error/</loc>
+    <loc>http://winotes.net/how-to-remove-official-ie11-baidu-homepage-locking-on-simplified-chinese-win10-ltsb/</loc>
     
-    <lastmod>2017-09-29T03:25:52.059Z</lastmod>
+    <lastmod>2017-09-29T03:25:52.071Z</lastmod>
     
   </url>
   
@@ -290,6 +290,13 @@
   
   <url>
     <loc>http://winotes.net/how-to-install-sql2005-on-win10/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.059Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/how-to-fix-sql2008-ssrs-teradata-extension-load-error/</loc>
     
     <lastmod>2017-09-29T03:25:52.059Z</lastmod>
     

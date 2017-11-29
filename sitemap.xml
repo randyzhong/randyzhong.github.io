@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://winotes.net/deploying-hexo-on-github/</loc>
+    
+    <lastmod>2017-11-29T07:26:11.821Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://winotes.net/how-to-fix-file-path-too-long-on-windows-when-copying/</loc>
     
     <lastmod>2017-11-29T06:11:16.474Z</lastmod>
@@ -72,14 +79,14 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/python-practice-1-ustc-online-course-downloader/</loc>
+    <loc>http://winotes.net/the-specified-cgi-application-encountered-an-error-and-the-server-terminated-the-process/</loc>
     
     <lastmod>2017-09-29T03:25:52.119Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://winotes.net/the-specified-cgi-application-encountered-an-error-and-the-server-terminated-the-process/</loc>
+    <loc>http://winotes.net/problem-when-installing-ocs2007-r2-cu6-dotnet-40/</loc>
     
     <lastmod>2017-09-29T03:25:52.119Z</lastmod>
     
@@ -149,7 +156,7 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/problem-when-installing-ocs2007-r2-cu6-dotnet-40/</loc>
+    <loc>http://winotes.net/python-practice-1-ustc-online-course-downloader/</loc>
     
     <lastmod>2017-09-29T03:25:52.119Z</lastmod>
     
@@ -275,13 +282,6 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/how-to-fix-wordpress-admin-blank-white-screen/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.059Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://winotes.net/how-to-install-sql2005-on-win10/</loc>
     
     <lastmod>2017-09-29T03:25:52.059Z</lastmod>
@@ -304,6 +304,13 @@
   
   <url>
     <loc>http://winotes.net/how-to-fix-sql2008-ssrs-teradata-extension-load-error/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.059Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/how-to-fix-wordpress-admin-blank-white-screen/</loc>
     
     <lastmod>2017-09-29T03:25:52.059Z</lastmod>
     
@@ -514,13 +521,6 @@
   
   <url>
     <loc>http://winotes.net/exception-from-hresult-0x800a03ec/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.023Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://winotes.net/deploying-hexo-on-github/</loc>
     
     <lastmod>2017-09-29T03:25:52.023Z</lastmod>
     

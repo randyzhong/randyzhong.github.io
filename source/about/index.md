@@ -5,7 +5,7 @@ title: 我是谁
 ---
 <script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
 
-Randy Zhong 是我的英文名，80后奶爸。我也曾经用 PowerK6 这个自造词作为互联网上的用户名，http://www.powerk6.org 这个网站是我的第一个博客，基于 Moveable Type 架设，如果你发现这个网站无法打开，请来这里看看，我把多半曾经写过的技术文章都转移来了这里。
+Randy Zhong 是我的英文名，80后奶爸。我也曾经用 PowerK6 这个自造词作为互联网上的用户名，于是 http://www.powerk6.org 这个网站就顺理成章地成为了我的第一个博客，基于 Moveable Type 架设，如果你发现这个网站无法打开，请来这里看看，我把多半曾经写过的技术文章都转移来了这里。
 
 * 大学主修环境工程，出于对计算机的热爱选择了 IT 行业。
 * 目前我和家人居住在深圳。

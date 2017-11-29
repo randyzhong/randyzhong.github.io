@@ -151,10 +151,10 @@ div {
              padding-left: 5px;
              color: #6E7173;
         }
-        .category-list-count:before {
+        .category-list-count::before {
             content: "(";
         }
-        .category-list-count:after {
+        .category-list-count::after {
             content: ")";
         }
         .search-form {
@@ -208,7 +208,7 @@ div {
         text-indent: .15em;
         &:before {
               font-family: "FontAwesome";
-              content: "\f017";
+              content: "\f073";
               padding-right: 0.3em;
         }
         .category {
@@ -221,7 +221,7 @@ div {
         #busuanzi_value_page_pv {
             &:before {
               font-family: "FontAwesome";
-              content: "\f0f4";
+              content: "\f024";
               padding-right: 0.3em;
             }
         }
@@ -346,7 +346,7 @@ div {
             margin-right: .5em;
             &:before {
                 font-family: "FontAwesome";
-                content: "\f02b";
+                content: "\f0c6";
                 padding-right: 0.3em;
             }
         }
@@ -443,6 +443,7 @@ div {
     #header {
         .site-name {
             margin-bottom: 20px;
+            text-align: center;
         }
         #nav-menu {
             position: relative;
@@ -474,14 +475,24 @@ div {
 }
 
 blockquote,.stressed {
-    padding: 0 1em;
-    color: rgb(106, 115, 125);
-    border-left: 0.25em solid rgb(223, 226, 229);
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 2.5em 0;
+    padding: 0 0 0 50px;
+    color: #555;
+    border-left: none;
 }
-blockquote:before,.stressed-quote:before {
-    padding: 0 1em;
-    color: rgb(106, 115, 125);
-    border-left: 0.25em solid rgb(223, 226, 229);
+blockquote::before,.stressed-quote::before {
+    content: "\201C";
+    display: block;
+    font-family: times;
+    font-style: normal;
+    font-size: 48px;
+    color: #444;
+    font-weight: bold;
+    line-height: 30px;
+    margin-left: -50px;
+    position: absolute;
 }
 strong,b,em {
     font-weight: bold;
@@ -569,15 +580,15 @@ pre {
     position: relative;
     margin-bottom: 30px;
 }
-#process .timeline-centered:before, #process .timeline-centered:after,
-#process .timeline-centered:before, #process .timeline-centered:after {
+#process .timeline-centered::before, #process .timeline-centered::after,
+#process .timeline-centered::before, #process .timeline-centered::after {
     content: " ";
     display: table;
 }
-#process .timeline-centered:after {
+#process .timeline-centered::after {
     clear: both;
 }
-#process .timeline-centered:before {
+#process .timeline-centered::before {
     content: '';
     position: absolute;
     display: block;
@@ -597,12 +608,12 @@ pre {
     margin-bottom: 10px;
     clear: both;
 }
-#process .timeline-centered .timeline-entry:before,
-#process .timeline-centered .timeline-entry:after {
+#process .timeline-centered .timeline-entry::before,
+#process .timeline-centered .timeline-entry::after {
     content: " ";
     display: table;
 }
-#process .timeline-centered .timeline-entry:after {
+#process .timeline-centered .timeline-entry::after {
     clear: both;
 }
 #process .timeline-centered .timeline-entry.begin {
@@ -636,7 +647,7 @@ pre {
     margin-left: 0;
     margin-right: 70px;
 }
-#process .timeline-centered .timeline-entry.left-aligned .timeline-entry-inner .timeline-label:after {
+#process .timeline-centered .timeline-entry.left-aligned .timeline-entry-inner .timeline-label::after {
     left: auto;
     right: 0;
     margin-left: 0;
@@ -655,12 +666,12 @@ pre {
     position: relative;
     margin-left: -20px;
 }
-#process .timeline-centered .timeline-entry .timeline-entry-inner:before,
-#process .timeline-centered .timeline-entry .timeline-entry-inner:after {
+#process .timeline-centered .timeline-entry .timeline-entry-inner::before,
+#process .timeline-centered .timeline-entry .timeline-entry-inner::after {
     content: " ";
     display: table;
 }
-#process .timeline-centered .timeline-entry .timeline-entry-inner:after {
+#process .timeline-centered .timeline-entry .timeline-entry-inner::after {
     clear: both;
 }
 #process .timeline-centered .timeline-entry .timeline-entry-inner .timeline-time {
@@ -720,7 +731,7 @@ pre {
     -moz-border-radius: 3px;
     border-radius: 3px;
 }
-#process .timeline-centered .timeline-entry .timeline-entry-inner .timeline-label:after {
+#process .timeline-centered .timeline-entry .timeline-entry-inner .timeline-label::after {
     content: '';
     display: block;
     position: absolute;
@@ -755,8 +766,8 @@ pre {
   -moz-border-radius: 3px;
   border-radius: 3px;
 }
-#process .present:after,
-#process .born:after {
+#process .present::after,
+#process .born::after {
   left: 100%;
   top: 50%;
   border: solid transparent;
@@ -2050,3 +2061,4 @@ em.search-keyword {
     animation-delay: 0.2s;
   }
 }
+                                                                                                                                                                                                                                                          

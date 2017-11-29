@@ -212,10 +212,11 @@ $ hexo -d g
     "hexo-deployer-git": "^0.3.1",
     "hexo-generator-archive": "^0.1.4",
     "hexo-generator-category": "^0.1.3",
-    "hexo-generator-feed": "^1.2.0",
+    "hexo-generator-feed": "^1.2.2",
     "hexo-generator-index": "^0.2.0",
     "hexo-generator-sitemap": "^1.2.0",
     "hexo-generator-tag": "^0.2.0",
+    "hexo-helper-qrcode": "^1.0.2",
     "hexo-renderer-ejs": "^0.3.1",
     "hexo-renderer-jade": "^0.3.0",
     "hexo-renderer-marked": "^0.3.0",
@@ -229,13 +230,14 @@ $ hexo -d g
 
 所以在安装了 Hexo 之后，可以运行如下命令添加这些插件：
 ``` bash
-$ npm install hexo-asset-image --save
-$ npm install hexo-deployer-git --save
-$ npm install hexo-generator-feed --save
-$ npm install hexo-generator-sitemap --save
-$ npm install hexo-renderer-jade --save
-$ npm install hexo-renderer-stylus --save
-$ npm install hexo-wordcount --save
+$ npm install hexo-asset-image --registry=https://registry.npm.taobao.org --save
+$ npm install hexo-deployer-git --registry=https://registry.npm.taobao.org --save
+$ npm install hexo-generator-feed --registry=https://registry.npm.taobao.org --save
+$ npm install hexo-generator-sitemap --registry=https://registry.npm.taobao.org --save
+$ npm install hexo-renderer-jade --registry=https://registry.npm.taobao.org --save
+$ npm install hexo-renderer-stylus --registry=https://registry.npm.taobao.org --save
+$ npm install hexo-wordcount --registry=https://registry.npm.taobao.org --save
+$ npm install hexo-helper-qrcode --registry=https://registry.npm.taobao.org --save
 ```
 
 #### CNAME 设置

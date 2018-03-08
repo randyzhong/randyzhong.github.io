@@ -44,14 +44,16 @@ CertUtil 所支持的加密算法有 **MD2 MD4 MD5 SHA1 SHA256 SHA384 SHA512**
 比如我们要得到计算器程序的 MD5 值
 `CertUtil -hashfile c:\Windows\System32\calc.exe MD5` 注意，这里的 MD5 一定要大写
 
+```
 MD5 hash of file c:\Windows\System32\calc.exe:
 10 e4 a1 d2 13 2c cb 5c 67 59 f0 38 cd b6 f3 c9
 CertUtil: -hashfile command completed successfully.
-
+```
 如果 MD5 没有大写，这样运行命令的话：
 `CertUtil -hashfile c:\Windows\System32\calc.exe md5`
 
 程序会报错
+```
 CertUtil: -hashfile command FAILED: 0xd00000bb (-805306181)
 CertUtil: WsResetMetadata
-
+```

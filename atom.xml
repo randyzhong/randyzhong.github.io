@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://winotes.net/"/>
-  <updated>2018-02-28T02:37:10.286Z</updated>
+  <updated>2018-03-08T04:15:55.995Z</updated>
   <id>http://winotes.net/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用 Windows 内置的 CertUtil 程序计算文件的哈希校验值</title>
+    <link href="http://winotes.net/computing-cryptographic-hash-values-with-certutil/"/>
+    <id>http://winotes.net/computing-cryptographic-hash-values-with-certutil/</id>
+    <published>2018-03-08T03:51:23.000Z</published>
+    <updated>2018-03-08T04:15:55.995Z</updated>
+    
+    <content type="html"><![CDATA[<p>在 Windows 中，通常我们需要计算一个文件的 MD5 或者 SHA1 值的时候，需要下载一些第三方的工具，哪怕是微软的，也有 File Checksum Integrity Verifier (<a href="https://support.microsoft.com/en-us/help/841290/availability-and-description-of-the-file-checksum-integrity-verifier-u" target="_blank" rel="external">FCIV</a>) 或者 Sysinternals 的 <a href="https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck" target="_blank" rel="external">Sigcheck</a> 小工具来做，不过可能很少有人知道，Windows 内置的 <strong>CertUtil</strong> 程序也可以干这个事。</p><p>CertUtil 是个强大的证书相关的管理工具，涉及到证书的加解密，所以相关的 MD5/SHA1 之类的加密算法都是支持的，在 CertUtil 中有个参数 -hashfile 可以帮助我们计算任意文件的哈希校验值，不过如果你在命令行中输入<br><code>CertUtil -hashfile -?</code> 来试图获取帮助的时候，给出来的帮助信息很简单：</p><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">CertUtil [<span class="keyword">Options</span>] -hashfile InFile [HashAlgorithm]</div><div class="line">  Generate <span class="keyword">and</span> <span class="keyword">display</span> cryptographic hash over a <span class="keyword">file</span></div></pre></td></tr></table></figure><p>其实，完全的信息应该是这样的：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Usage:</div><div class="line">  CertUtil [Options] -hashfile InFile [HashAlgorithm]</div><div class="line">  Generate <span class="built_in">and</span> <span class="keyword">display</span> cryptographic hash over <span class="keyword">a</span> <span class="keyword">file</span></div><div class="line"></div><div class="line">Option<span class="variable">s:</span></div><div class="line">  -gmt              -- Display times <span class="keyword">as</span> GMT</div><div class="line">  -seconds          -- Display times with seconds <span class="built_in">and</span> milliseconds</div><div class="line">  -v                -- Verbose operation</div><div class="line">  -privatekey       -- Display password <span class="built_in">and</span> private key data</div><div class="line"></div><div class="line">HashAlgorithm:    MD2 MD4 MD5 SHA1 SHA256 SHA384 SHA512 </div><div class="line"></div><div class="line">CertUtil -?              -- Display <span class="keyword">a</span> <span class="keyword">verb</span> <span class="keyword">list</span> (<span class="keyword">command</span> <span class="keyword">list</span>)</div><div class="line">CertUtil -hashfile -?    -- Display <span class="keyword">help</span> text <span class="keyword">for</span> the <span class="string">"hashfile"</span> <span class="keyword">verb</span></div><div class="line">CertUtil -v -?           -- Display <span class="keyword">all</span> <span class="keyword">help</span> text <span class="keyword">for</span> <span class="keyword">all</span> verbs</div></pre></td></tr></table></figure></p><p>CertUtil 所支持的加密算法有 <strong>MD2 MD4 MD5 SHA1 SHA256 SHA384 SHA512</strong></p><h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>比如我们要得到计算器程序的 MD5 值<br><code>CertUtil -hashfile c:\Windows\System32\calc.exe MD5</code> 注意，这里的 MD5 一定要大写</p><p>MD5 hash of file c:\Windows\System32\calc.exe:<br>10 e4 a1 d2 13 2c cb 5c 67 59 f0 38 cd b6 f3 c9<br>CertUtil: -hashfile command completed successfully.</p><p>如果 MD5 没有大写，这样运行命令的话：<br><code>CertUtil -hashfile c:\Windows\System32\calc.exe md5</code></p><p>程序会报错<br>CertUtil: -hashfile command FAILED: 0xd00000bb (-805306181)<br>CertUtil: WsResetMetadata</p>]]></content>
+    
+    <summary type="html">
+    
+      使用 Windows 内置的 CertUtil 程序计算文件的哈希校验值
+    
+    </summary>
+    
+      <category term="Windows" scheme="http://winotes.net/categories/Windows/"/>
+    
+    
+      <category term="Windows" scheme="http://winotes.net/tags/Windows/"/>
+    
+  </entry>
   
   <entry>
     <title>无需插件查看浏览器中已保存的星号密码</title>
@@ -531,42 +553,6 @@
     
     
       <category term="Active Directory" scheme="http://winotes.net/tags/Active-Directory/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Exchange Activesync returned an HTTP 500 response</title>
-    <link href="http://winotes.net/exchange-activesync-returned-an-http-500-response/"/>
-    <id>http://winotes.net/exchange-activesync-returned-an-http-500-response/</id>
-    <published>2013-07-19T05:40:52.000Z</published>
-    <updated>2017-09-29T03:25:52.023Z</updated>
-    
-    <content type="html"><![CDATA[<p>Exchange Server 2010 SP1, 手机是 Google Nexus (Samsung i9250)，系统是 Android 4.0.4，用户已经启用 ActiveSync, 结果用手机无法创建 Exchange 邮件账户，提示无法连接到服务器。</p><p>去到 <a href="https://www.testexchangeconnectivity.com/" title="Microsoft Remote Connectivity Analyzer" target="_blank" rel="external">TestExchangeConnectivity</a> 网站测试，发现有报错：</p><p>Attempting the FolderSync command on the Exchange ActiveSync session.<br>The test of the FolderSync command failed.</p><p>Additional Details<br>Exchange Activesync returned an HTTP 500 response. (Internal Server Error)</p><img src="/exchange-activesync-returned-an-http-500-response/FolderSync-Failed.jpg" alt="500 error" title="500 error"><p>换个用户测试，发现可以通过，确定问题在用户设置上面。继而查看 Exchange 服务器的日志，发现有 ID:1053 的错误纪录：</p><img src="/exchange-activesync-returned-an-http-500-response/EventID-1053.jpg" alt="EventID-1053" title="EventID-1053"><p>Exchange ActiveSync doesn’t have sufficient permissions to create the “CN=Randy Zhong,OU=IT,DC=company,DC=com” container under Active Directory user “Active Directory operation failed on DC01.company.com. This error is not retriable. Additional information: <span style="color: #ff0000">Access is denied.</span></p><p>Active directory response: 00000005: SecErr: DSID-031521D0, problem 4003 (INSUFF_ACCESS_RIGHTS), data 0”.</p><p><span style="color: #ff0000">Make sure the user has inherited permission granted to domain\Exchange Servers</span> to allow List, Create child, Delete child of object type “msExchActiveSyncDevices” and doesn’t have any deny permissions that block such operations.</p><p>Details:%3</p><p>从上面可以看到，出错原因是 Exchange Servers 没有足够的权限，导致 Access is denied.</p><p><strong>解决方法：</strong></p><ol><li>在DC上打开Active Directory Users and Computers</li><li>在菜单上点击 View, 勾选 Advanced Features</li><li>找到该问题用户，鼠标右键点击选中用户，在弹出菜单中选择 properties ，然后去到 Security 标签卡</li><li>点击 Advanced，选中 Include inheritable permissions from this object’s parent.</li><li><img src="/exchange-activesync-returned-an-http-500-response/AdvancedSecurity-Setting.jpg" alt="AdvancedSecurity-Setting" title="AdvancedSecurity-Setting"></li></ol><p>等待 AD 复制完成后，再尝试配置手机，问题解决。</p><p><span style="color: #ff0000">补充：<br></span><span style="color: #ff0000">如果碰到某些用户以上操作都不起作用的话，可以尝试在 EMC 中先禁掉用户的 ActiveSync，然后尝试配置手机，当然会提示失败，之后再开启 ActiveSync, 再试一下，多半就可以了。</span></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Exchange Server 2010 SP1, 手机是 Google Nexus (Samsung i9250)，系统是 Android 4.0.4，用户已经启用 ActiveSync, 结果用手机无法创建 Exchange 邮件账户，提示无法连接到服务器。&lt;/p&gt;
-&lt;
-      
-    
-    </summary>
-    
-      <category term="Microsoft" scheme="http://winotes.net/categories/Microsoft/"/>
-    
-      <category term="Exchange" scheme="http://winotes.net/categories/Microsoft/Exchange/"/>
-    
-    
-      <category term="Exchange" scheme="http://winotes.net/tags/Exchange/"/>
-    
-      <category term="Activesync" scheme="http://winotes.net/tags/Activesync/"/>
-    
-      <category term="Android" scheme="http://winotes.net/tags/Android/"/>
-    
-      <category term="Google" scheme="http://winotes.net/tags/Google/"/>
-    
-      <category term="Nexus" scheme="http://winotes.net/tags/Nexus/"/>
     
   </entry>
   

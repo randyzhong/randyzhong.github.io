@@ -4,8 +4,8 @@ tags:
   - HMC
 id: 72
 categories:
+  - Microsoft
   - HMC
-  - Hosting
 date: 2008-06-15 13:38:45
 ---
 

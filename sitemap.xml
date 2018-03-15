@@ -65,14 +65,14 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/virtual-server-undo-disks-merge-parent-disk-part-of-saved-state/</loc>
+    <loc>http://winotes.net/upgrade-to-exchange-2010-sp1-issues/</loc>
     
     <lastmod>2017-09-29T03:25:52.127Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://winotes.net/upgrade-to-exchange-2010-sp1-issues/</loc>
+    <loc>http://winotes.net/virtual-server-undo-disks-merge-parent-disk-part-of-saved-state/</loc>
     
     <lastmod>2017-09-29T03:25:52.127Z</lastmod>
     
@@ -184,6 +184,13 @@
   </url>
   
   <url>
+    <loc>http://winotes.net/move-to-hexo/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.103Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://winotes.net/migrating-the-vcenter-server-4-database-from-sql-express-to-sql-server-2008-r2/</loc>
     
     <lastmod>2017-09-29T03:25:52.103Z</lastmod>
@@ -212,14 +219,7 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/lync-server-2010-publish-topology-error/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.103Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://winotes.net/move-to-hexo/</loc>
+    <loc>http://winotes.net/mscrm-2011-beta-installation/</loc>
     
     <lastmod>2017-09-29T03:25:52.103Z</lastmod>
     
@@ -233,21 +233,14 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/mscrm-2011-beta-installation/</loc>
+    <loc>http://winotes.net/lync-server-2010-publish-topology-error/</loc>
     
     <lastmod>2017-09-29T03:25:52.103Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://winotes.net/internet-explorer-zonemapping-failed-due-to-the-data-is-invalid-event-id-7016/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.095Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://winotes.net/install-microsoft-dynamics-crm-4-0-server-on-multiple-computers/</loc>
+    <loc>http://winotes.net/installing-mscrm-4-0-without-internet-access/</loc>
     
     <lastmod>2017-09-29T03:25:52.095Z</lastmod>
     
@@ -268,7 +261,14 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/installing-mscrm-4-0-without-internet-access/</loc>
+    <loc>http://winotes.net/internet-explorer-zonemapping-failed-due-to-the-data-is-invalid-event-id-7016/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.095Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/install-microsoft-dynamics-crm-4-0-server-on-multiple-computers/</loc>
     
     <lastmod>2017-09-29T03:25:52.095Z</lastmod>
     
@@ -303,20 +303,6 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/how-to-remember-your-oc-and-outlook-password/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.059Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://winotes.net/how-to-extract-rpm-package-on-centos/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.059Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://winotes.net/how-to-fix-sql2008-ssrs-teradata-extension-load-error/</loc>
     
     <lastmod>2017-09-29T03:25:52.059Z</lastmod>
@@ -332,6 +318,20 @@
   
   <url>
     <loc>http://winotes.net/how-to-install-sql2005-on-win10/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.059Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/how-to-remember-your-oc-and-outlook-password/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.059Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/how-to-extract-rpm-package-on-centos/</loc>
     
     <lastmod>2017-09-29T03:25:52.059Z</lastmod>
     
@@ -506,7 +506,7 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/apc-undefined-symbol-pcre-exec-in-unknown-on-line-0/</loc>
+    <loc>http://winotes.net/centos-64-upgrade-to-kernel-3x/</loc>
     
     <lastmod>2017-09-29T03:25:52.023Z</lastmod>
     
@@ -555,7 +555,7 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/centos-64-upgrade-to-kernel-3x/</loc>
+    <loc>http://winotes.net/active-directory-tips-01-extend-password-expiration-date-not-changing-it/</loc>
     
     <lastmod>2017-09-29T03:25:52.023Z</lastmod>
     
@@ -569,7 +569,7 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/active-directory-tips-01-extend-password-expiration-date-not-changing-it/</loc>
+    <loc>http://winotes.net/apc-undefined-symbol-pcre-exec-in-unknown-on-line-0/</loc>
     
     <lastmod>2017-09-29T03:25:52.023Z</lastmod>
     

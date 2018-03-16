@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://winotes.net//404.html</loc>
+    
+    <lastmod>2018-03-16T08:35:49.956Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://winotes.net/computing-cryptographic-hash-values-with-certutil/</loc>
     
     <lastmod>2018-03-08T04:25:56.174Z</lastmod>
@@ -51,6 +58,13 @@
   </url>
   
   <url>
+    <loc>https://winotes.net/upgrade-to-exchange-2010-sp1-issues/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.127Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://winotes.net/unofficial-consolidated-server-deployment-guide-for-hmc4/</loc>
     
     <lastmod>2017-09-29T03:25:52.127Z</lastmod>
@@ -66,13 +80,6 @@
   
   <url>
     <loc>https://winotes.net/virtual-server-undo-disks-merge-parent-disk-part-of-saved-state/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.127Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://winotes.net/upgrade-to-exchange-2010-sp1-issues/</loc>
     
     <lastmod>2017-09-29T03:25:52.127Z</lastmod>
     
@@ -156,13 +163,6 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/the-specified-cgi-application-encountered-an-error-and-the-server-terminated-the-process/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.119Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://winotes.net/the-reportservervirtualdirectory-element-is-missing/</loc>
     
     <lastmod>2017-09-29T03:25:52.119Z</lastmod>
@@ -177,7 +177,21 @@
   </url>
   
   <url>
+    <loc>https://winotes.net/the-specified-cgi-application-encountered-an-error-and-the-server-terminated-the-process/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.119Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://winotes.net/movabletype-2-wordpress/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.103Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://winotes.net/move-to-hexo/</loc>
     
     <lastmod>2017-09-29T03:25:52.103Z</lastmod>
     
@@ -205,14 +219,7 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/migrating-the-vcenter-server-4-database-from-sql-express-to-sql-server-2008-r2/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.103Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://winotes.net/move-to-hexo/</loc>
+    <loc>https://winotes.net/mscrm-2011-beta-installation/</loc>
     
     <lastmod>2017-09-29T03:25:52.103Z</lastmod>
     
@@ -226,28 +233,14 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/mscrm-2011-beta-installation/</loc>
+    <loc>https://winotes.net/migrating-the-vcenter-server-4-database-from-sql-express-to-sql-server-2008-r2/</loc>
     
     <lastmod>2017-09-29T03:25:52.103Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://winotes.net/installing-lighttpd-php5-mysql-on-centos-64/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.095Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://winotes.net/install-microsoft-dynamics-crm-4-0-server-on-multiple-computers/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.095Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://winotes.net/internet-explorer-zonemapping-failed-due-to-the-data-is-invalid-event-id-7016/</loc>
+    <loc>https://winotes.net/installing-mscrm-4-0-without-internet-access/</loc>
     
     <lastmod>2017-09-29T03:25:52.095Z</lastmod>
     
@@ -261,7 +254,21 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/installing-mscrm-4-0-without-internet-access/</loc>
+    <loc>https://winotes.net/internet-explorer-zonemapping-failed-due-to-the-data-is-invalid-event-id-7016/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.095Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://winotes.net/install-microsoft-dynamics-crm-4-0-server-on-multiple-computers/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.095Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://winotes.net/installing-lighttpd-php5-mysql-on-centos-64/</loc>
     
     <lastmod>2017-09-29T03:25:52.095Z</lastmod>
     
@@ -296,13 +303,6 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/how-to-remember-your-oc-and-outlook-password/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.059Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://winotes.net/how-to-extract-rpm-package-on-centos/</loc>
     
     <lastmod>2017-09-29T03:25:52.059Z</lastmod>
@@ -331,6 +331,13 @@
   </url>
   
   <url>
+    <loc>https://winotes.net/how-to-remember-your-oc-and-outlook-password/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.059Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://winotes.net/hmc-45-update-rollup-3-has-been-released/</loc>
     
     <lastmod>2017-09-29T03:25:52.043Z</lastmod>
@@ -345,7 +352,7 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/hmc-resource-management-part2-hmc-resource-management-and-active-directory/</loc>
+    <loc>https://winotes.net/how-to-add-send-on-behalf-permission-to-users-with-mps/</loc>
     
     <lastmod>2017-09-29T03:25:52.043Z</lastmod>
     
@@ -380,7 +387,7 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/how-to-add-send-on-behalf-permission-to-users-with-mps/</loc>
+    <loc>https://winotes.net/hmc-resource-management-part2-hmc-resource-management-and-active-directory/</loc>
     
     <lastmod>2017-09-29T03:25:52.043Z</lastmod>
     
@@ -549,13 +556,6 @@
   
   <url>
     <loc>https://winotes.net/centos-64-upgrade-to-kernel-3x/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.023Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://winotes.net//404.html</loc>
     
     <lastmod>2017-09-29T03:25:52.023Z</lastmod>
     

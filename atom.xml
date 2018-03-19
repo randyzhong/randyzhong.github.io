@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://winotes.net/"/>
-  <updated>2018-03-16T09:59:15.373Z</updated>
+  <updated>2018-03-19T01:31:48.166Z</updated>
   <id>https://winotes.net/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://winotes.net/tencent-404-support-https-now/"/>
     <id>https://winotes.net/tencent-404-support-https-now/</id>
     <published>2018-03-16T08:48:35.000Z</published>
-    <updated>2018-03-16T09:59:15.373Z</updated>
+    <updated>2018-03-19T01:31:48.166Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="公益-404-页面介绍"><a href="#公益-404-页面介绍" class="headerlink" title="公益 404 页面介绍"></a>公益 404 页面介绍</h3><p><a href="http://www.qq.com/404/" target="_blank" rel="external">公益404页面</a>是由腾讯公司员工志愿者自主发起的互联网公益活动。</p><p>网站只需要在自己的404页面中嵌入一段简单的代码，就能通过互联网来迅速传播失踪儿童信息，从而提高找回失踪儿童的概率。失踪儿童信息来自宝贝回家寻子网。</p><p>之前不支持 https，这两天因为打算将本站的国内镜像站点挂到 Coding.net，然后启用全站 https，这才发现不知道啥时候腾讯公益404页面现已支持 https。</p><h3 id="公益-404-页面接入方法"><a href="#公益-404-页面接入方法" class="headerlink" title="公益 404 页面接入方法"></a>公益 404 页面接入方法</h3><blockquote><p>注意事项<br>如果一个 404 页面的内容小于 512B，IE 会认为该 404 页面不够友好，在 IE 下将不会成功返回该 404 错误页面</p></blockquote><p>复制以下 js 代码，嵌入到您的 404 页面，可以自适应移动设备。</p><p>旧版本的嵌入代码：<br><code>&lt;script type=&quot;text/javascript&quot; src=&quot;http://www.qq.com/404/search_children.js&quot; charset=&quot;utf-8&quot; homePageUrl=&quot;http://winotes.net&quot; homePageName=&quot;返回主页&quot;&gt;&lt;/script&gt;</code></p><p>新版本的嵌入代码：<br><code>&lt;script type=&quot;text/javascript&quot; src=&quot;//qzonestyle.gtimg.cn/qzone/hybrid/app/404/search_children.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;</code></p><h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>可以看到，新的 js 引用源并没有写死是 http 还是 https 协议，这样写的好处就是它会根据你自己网站的情况来自动匹配。<br>本站已启用全站 https，所以最终的引用地址就会是<br><a href="https://qzonestyle.gtimg.cn/qzone/hybrid/app/404/search_children.js" target="_blank" rel="external"><strong>https</strong>://qzonestyle.gtimg.cn/qzone/hybrid/app/404/search_children.js</a><br>不管怎样，还是要给鹅厂一个赞。</p>]]></content>
+    <content type="html"><![CDATA[<h3 id="公益-404-页面介绍"><a href="#公益-404-页面介绍" class="headerlink" title="公益 404 页面介绍"></a>公益 404 页面介绍</h3><p><a href="http://www.qq.com/404/" target="_blank" rel="external">公益404页面</a>是由腾讯公司员工志愿者自主发起的互联网公益活动。</p><p>网站只需要在自己的404页面中嵌入一段简单的代码，就能通过互联网来迅速传播失踪儿童信息，从而提高找回失踪儿童的概率。失踪儿童信息来自宝贝回家寻子网。</p><p>之前不支持 https，这两天因为打算将本站的国内镜像站点挂到 Coding.net，然后启用全站 https，这才发现不知道啥时候腾讯公益404页面现已支持 https。</p><h3 id="公益-404-页面接入方法"><a href="#公益-404-页面接入方法" class="headerlink" title="公益 404 页面接入方法"></a>公益 404 页面接入方法</h3><blockquote><p>注意事项<br>如果一个 404 页面的内容小于 512B，IE 会认为该 404 页面不够友好，在 IE 下将不会成功返回该 404 错误页面</p></blockquote><p>复制以下 js 代码，嵌入到您的 404 页面，可以自适应移动设备。</p><p>旧版本的嵌入代码：<br><code>&lt;script type=&quot;text/javascript&quot; src=&quot;http://www.qq.com/404/search_children.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;</code></p><p>新版本的嵌入代码：<br><code>&lt;script type=&quot;text/javascript&quot; src=&quot;//qzonestyle.gtimg.cn/qzone/hybrid/app/404/search_children.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;</code></p><h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>可以看到，新的 js 引用源并没有写死是 http 还是 https 协议，这样写的好处就是它会根据你自己网站的情况来自动匹配。<br>本站已启用全站 https，所以最终的引用地址就会是<br><a href="https://qzonestyle.gtimg.cn/qzone/hybrid/app/404/search_children.js" target="_blank" rel="external"><strong>https</strong>://qzonestyle.gtimg.cn/qzone/hybrid/app/404/search_children.js</a><br>不管怎样，还是要给鹅厂一个赞。</p>]]></content>
     
     <summary type="html">
     

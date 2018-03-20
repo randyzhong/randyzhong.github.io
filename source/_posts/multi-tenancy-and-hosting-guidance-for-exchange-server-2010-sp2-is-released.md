@@ -5,6 +5,7 @@ tags:
   - Hosting
   - MultiTenancy
 categories:
+  - Microsoft
   - Exchange
 date: 2011-12-14 16:06:29
 ---

@@ -5,7 +5,7 @@ tags:
 categories:
   - Windows
 date: 2018-03-08 11:51:23
-keywords: Windows, MD5，Hashfile，checksum, CertUtil, Cryptographic。 FCIV
+keywords: Windows, MD5，Hashfile，checksum, CertUtil, Cryptographic, FCIV
 description: 使用 Windows 内置的 CertUtil 程序计算文件的哈希校验值
 ---
 
@@ -20,7 +20,7 @@ CertUtil [Options] -hashfile InFile [HashAlgorithm]
 ```
 
 其实，完全的信息应该是这样的：
-```
+``` 
 Usage:
   CertUtil [Options] -hashfile InFile [HashAlgorithm]
   Generate and display cryptographic hash over a file

@@ -4,6 +4,7 @@ tags:
   - Exchange
   - PowerShell
 categories:
+  - Microsoft
   - Exchange
 date: 2010-09-12 11:46:31
 ---

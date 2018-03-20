@@ -244,9 +244,9 @@
       <category term="网站相关" scheme="https://winotes.net/categories/%E7%BD%91%E7%AB%99%E7%9B%B8%E5%85%B3/"/>
     
     
-      <category term="GitHub" scheme="https://winotes.net/tags/GitHub/"/>
-    
       <category term="Hexo" scheme="https://winotes.net/tags/Hexo/"/>
+    
+      <category term="GitHub" scheme="https://winotes.net/tags/GitHub/"/>
     
   </entry>
   
@@ -271,11 +271,11 @@
       <category term="网站相关" scheme="https://winotes.net/categories/%E7%BD%91%E7%AB%99%E7%9B%B8%E5%85%B3/"/>
     
     
-      <category term="GitHub" scheme="https://winotes.net/tags/GitHub/"/>
+      <category term="WordPress" scheme="https://winotes.net/tags/WordPress/"/>
     
       <category term="Hexo" scheme="https://winotes.net/tags/Hexo/"/>
     
-      <category term="WordPress" scheme="https://winotes.net/tags/WordPress/"/>
+      <category term="GitHub" scheme="https://winotes.net/tags/GitHub/"/>
     
   </entry>
   

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://winotes.net/"/>
-  <updated>2018-09-29T08:07:22.212Z</updated>
+  <updated>2018-11-09T07:09:15.800Z</updated>
   <id>https://winotes.net/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Cisco 路由器作为 DHCP 服务器在 Skyepe for Business (Lync) 部署中的注意事项</title>
+    <link href="https://winotes.net/using-cisco-router-as-dhcp-with-long-option43-in-skype-lync-deployment/"/>
+    <id>https://winotes.net/using-cisco-router-as-dhcp-with-long-option43-in-skype-lync-deployment/</id>
+    <published>2018-11-05T07:40:11.000Z</published>
+    <updated>2018-11-09T07:09:15.800Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>这个问题是以前遇到过的，最近又有人问起，索性在此记录一下：</p><p>在部署 Skype/Lync 过程中，我们需要用到 DHCP Option 120 和 43，通常来说，我们会使用 Windows 服务器来做 DHCP，但有的时候，我们在分支机构可能会使用本地的路由器来当 DHCP 服务器，Option 120 通常没有问题，而坑出现在 Option 43, 因为 Skype 走的是 TCP，而且是 SIP over TLS，所以 Option 43 里面是不可以用 IP 地址的，必须要用 FQDN，而且大多数设备需要输入16进制而不是 ASCII 码，那这个时候，你有可能会遇到以下两种情况：</p><a id="more"></a><ol><li>你的 SIP 服务器的 FQDN 名字长度很短，没有超过23个字符，那么使用 DHCPUtil.exe 生成的 Option 43 的 Hex 值长度会在180个字符以内，这种情况使用思科路由器作 DHCP 没有问题:<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">C:\Program Files\Common Files\Skype for Business Server 2015&gt;DHCPUtil.exe -sipserver server.fqdn.company.com</div><div class="line">SIP Server FQDN : server.fqdn.company.com</div><div class="line">Certificate Provisioning Service URL : https://server.fqdn.company.com:443/CertProv/CertProvisioningService.svc</div><div class="line"></div><div class="line">Option 120:</div><div class="line">0006736572766572046671646E07636F6D70616E7903636F6D00</div><div class="line"></div><div class="line">Vendor Class Identifier: MS-UC-Client</div><div class="line">Option 43 (for vendor=MS-UC-Client):</div><div class="line">        Full Option 43 value (Length: 180) : </div><div class="line">        010C4D532D55432D436C69656E740205687474707303177365727665722E6671646E2E636F6</div><div class="line">        D70616E792E636F6D040334343305252F4365727450726F762F4365727450726F766973696F6E696E67536572766963652E737663</div><div class="line">        sub-option 1 &lt;UC Identifier&gt;: 4D532D55432D436C69656E74</div><div class="line">        sub-option 2 &lt;URL Scheme&gt;: 6874747073</div><div class="line">        sub-option 3 &lt;Web Server FQDN&gt;: 7365727665722E6671646E2E636F6D70616E792E636F6D</div><div class="line">        sub-option 4 &lt;Port&gt;: 343433</div><div class="line">        sub-option 5 &lt;Relative Path for Cert Prov&gt;: 2F4365727450726F762F4365727450726F766973696F6E696E67536572766963652E737663</div><div class="line"></div><div class="line">To configure DHCP Server with appropriate values, you can do one of the following things:</div><div class="line">        1. Run DHCPUtil on the DHCP Server: use &apos;-RunConfigScript&apos; switch</div><div class="line">        2. Run the following command on the DHCP Server (modify the path of DHCPConfigScript.bat appropriately):</div><div class="line">&quot;C:\Program Files\Common Files\Skype for Business Server 2015\DHCPConfigScript.bat&quot; Configure MS-UC-Client 0006736572766572046671646E07636F6D70616E7903636F6D00 4D532D55432D436C69656E74 6874747073 </div><div class="line">7365727665722E6671646E2E636F6D70616E792E636F6D 343433 2F4365727450726F762F4365727450726F766973696F6E696E67536572766963652E737663</div></pre></td></tr></table></figure></li></ol><h3 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h3><ol><li>一旦你的 SIP 服务器的 FQDN 名字长度超过23个字符，DHCPUtil.exe 生成的 Option 43 的 Hex 值长度会超过180个字符：<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">C:\Program Files\Common Files\Skype for Business Server 2015&gt;DHCPUtil.exe -sipserver sipserver.fqdn.company.com</div><div class="line">SIP Server FQDN : sipserver.fqdn.company.com</div><div class="line">Certificate Provisioning Service URL : https://sipserver.fqdn.company.com:443/CertProv/CertProvisioningService.svc</div><div class="line"></div><div class="line">Option 120:</div><div class="line">0009736970736572766572046671646E07636F6D70616E7903636F6D00</div><div class="line"></div><div class="line">Vendor Class Identifier: MS-UC-Client</div><div class="line">Option 43 (for vendor=MS-UC-Client):</div><div class="line">        Full Option 43 value (Length: 186) : </div><div class="line">        010C4D532D55432D436C69656E7402056874747073031A7369707365727665722E6671646E2</div><div class="line">        E636F6D70616E792E636F6D040334343305252F4365727450726F762F4365727450726F766973696F6E696E67536572766963652E737663</div><div class="line">        sub-option 1 &lt;UC Identifier&gt;: 4D532D55432D436C69656E74</div><div class="line">        sub-option 2 &lt;URL Scheme&gt;: 6874747073</div><div class="line">        sub-option 3 &lt;Web Server FQDN&gt;: 7369707365727665722E6671646E2E636F6D70616E792E636F6D</div><div class="line">        sub-option 4 &lt;Port&gt;: 343433</div><div class="line">        sub-option 5 &lt;Relative Path for Cert Prov&gt;: 2F4365727450726F762F4365727450726F766973696F6E696E67536572766963652E737663</div><div class="line"></div><div class="line">To configure DHCP Server with appropriate values, you can do one of the following things:</div><div class="line">        1. Run DHCPUtil on the DHCP Server: use &apos;-RunConfigScript&apos; switch</div><div class="line">        2. Run the following command on the DHCP Server (modify the path of DHCPConfigScript.bat appropriately):</div><div class="line">&quot;C:\Program Files\Common Files\Skype for Business Server 2015\DHCPConfigScript.bat&quot; Configure MS-UC-Client 0009736970736572766572046671646E07636F6D70616E7903636F6D00 4D532D55432D436C69656E74 6874747073 7369707365727665722E6671646E2E636F6D70616E792E636F6D 343433 2F4365727450726F762F4365727450726F766973696F6E696E67536572766963652E737663</div></pre></td></tr></table></figure></li></ol><p>这个时候，坑就来了，当你复制 Option 43 这一段去到思科路由器上的时候，路由器并不会报错，但是会将你输入的值截短至<strong>180</strong>个字符</p><p>而且没有任何提示，如果是在部署 Skype 电话的时候，你会发现 PIN 认证始终没法出现，你要不仔细检查的话是发现不了问题。</p><p>输入的命令<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">ip dhcp pool POOL1</div><div class="line"> network 192.168.10.0 255.255.255.0</div><div class="line"> domain-name corp.company.local</div><div class="line"> dns-server 119.29.29.29 8.8.8.8</div><div class="line"> default-router 192.168.10.1</div><div class="line"> option 43 hex 010C4D532D55432D436C69656E7402056874747073031A7369707365727665722E6671646E2E636F6D70616E792E636F6D040334343305252F4365727450726F762F4365727450726F766973696F6E696E67536572766963652E737663</div><div class="line"> option 120 hex 0009736970736572766572046671646E07636F6D70616E7903636F6D00</div><div class="line"> lease 1</div></pre></td></tr></table></figure></p><p>路由器接受的：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">ip dhcp pool POOL1</div><div class="line"> network 192.168.10.0 255.255.255.0</div><div class="line"> domain-name corp.company.local</div><div class="line"> dns-server 119.29.29.29 8.8.8.8</div><div class="line"> default-router 192.168.10.1</div><div class="line"> option 43 hex 010c.4d53.2d55.432d.436c.6965.6e74.0205.6874.7470.7303.1a73.6970.7365.7276.6572.2e66.7164.6e2e.636f.6d70.616e.792e.636f.6d04.0334.3433.0525.2f43.6572.7450.726f.762f.4365.7274.5072.6f76.6973.696f.6e69.6e67.5365.7276.6963.652e</div><div class="line"> option 120 hex 0009.7369.7073.6572.7665.7204.6671.646e.0763.6f6d.7061.6e79.0363.6f6d.00</div><div class="line"> lease 1</div></pre></td></tr></table></figure></p><p>可以看到，Option 43 最后的6个字符 <strong>737663</strong> 被吃了！</p><p>思科对此的解释如下，自 IOS 15.1(3)S 以后，Option 后面跟的 hex 部分做了长度限制，超过 180 字符的部分将被截短。</p><table><thead><tr><th>Release</th><th>Modification</th></tr></thead><tbody><tr><td>12.0(1)T</td><td>This command was introduced.</td></tr><tr><td>12.2(33)SRA</td><td>This command was integrated into Cisco IOS Release 12.2(33)SRA.</td></tr><tr><td>12.2SX</td><td>This command was supported in the Cisco IOS Release 12.2SX train. Support in a specific 12.2SX release of this train depends on your feature set, platform, and platform hardware.</td></tr><tr><td>12.4(24)T</td><td>This command was modified. The none keyword was added.</td></tr><tr><td>15.1(3)S</td><td>This command was modified. A maximum limit of 180 characters was set for the dotted hexadecimal data and 255 characters for the ASCII data.</td></tr></tbody></table><blockquote><p>The hexadecimal value is truncated to 180 characters entered. Each byte in hexadecimal character strings is two hexadecimal digits. Each byte can be separated by a period, colon, or white space.</p></blockquote><h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>那么有什么解决方案吗？</p><ol><li>缩短你的 SIP 服务器 FQDN 名称小于等于23个字符</li><li>换用其它设备或者服务器系统作为 DHCP，比如把 DHCP 从思科路由器上移到思科交换机（思科交换机不存在这个问题）上或者干脆用 Windows Server</li><li>降级路由器的 IOS 版本至 15.1(3)S 以下</li><li>升级 IOS 版本，在 Cisco IOS XE Release 3.2.1S 之后引入了一个 option ext 的命令，这个扩展命令可以支持 255 个字节的 hex 值。</li></ol><blockquote><p>思科官方介绍：<br>Using the option ext command you can specify an ASCII string upto 255 characters or 255 bytes of hexadecimal data.</p></blockquote><p>所以你的命令看起来应该是这样的：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">ip dhcp pool POOL1</div><div class="line"> network 192.168.10.0 255.255.255.0</div><div class="line"> domain-name corp.company.local</div><div class="line"> dns-server 119.29.29.29 8.8.8.8</div><div class="line"> default-router 192.168.10.1</div><div class="line"> option ext 43 hex Your full Option 43 hex value here</div><div class="line"> option 120 hex Your Option 120 hex value khere</div><div class="line"> lease 1</div></pre></td></tr></table></figure></p><p>如果这些方案你都没办法实施，那么在部署某些设备比如 Polycom VVX 系列的 Skype Phone 的时候，你还可以用 DHCP Override 去指定 SIP 服务的 URI：<br><img src="/using-cisco-router-as-dhcp-with-long-option43-in-skype-lync-deployment/using-cisco-router-as-dhcp-with-long-option43-in-Skype-Lync-deployment/polycom_dhcp_option43_override.jpg" alt="Polycom VVX DHCP Override"></p><h3 id="附件"><a href="#附件" class="headerlink" title="附件"></a>附件</h3><p>最后，再附上 <a href="/using-cisco-router-as-dhcp-with-long-option43-in-skype-lync-deployment/dhcputil.zip" title="DHCPUtil.exe">DHCPUtil.exe</a> 和相关的 <a href="/using-cisco-router-as-dhcp-with-long-option43-in-skype-lync-deployment/msvcr110.zip" title="DLL文件">DLL文件</a> 下载，希望以上能帮到被此困扰的朋友。</p>]]></content>
+    
+    <summary type="html">
+    
+      Cisco 路由器作为 DHCP 服务器在 Skyepe for Business (Lync) 部署中的注意事项
+    
+    </summary>
+    
+      <category term="Microsoft" scheme="https://winotes.net/categories/Microsoft/"/>
+    
+      <category term="Unified Communications" scheme="https://winotes.net/categories/Microsoft/Unified-Communications/"/>
+    
+    
+      <category term="Lync" scheme="https://winotes.net/tags/Lync/"/>
+    
+      <category term="Skype for Business" scheme="https://winotes.net/tags/Skype-for-Business/"/>
+    
+      <category term="DHCP" scheme="https://winotes.net/tags/DHCP/"/>
+    
+      <category term="Cisco" scheme="https://winotes.net/tags/Cisco/"/>
+    
+  </entry>
   
   <entry>
     <title>如何从命令行获取电脑的序列号</title>
@@ -509,38 +539,6 @@
       <category term="Exchange" scheme="https://winotes.net/tags/Exchange/"/>
     
       <category term="Outlook" scheme="https://winotes.net/tags/Outlook/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Exchange 2010 最佳实践01 - CAS Array</title>
-    <link href="https://winotes.net/exchange-2010-best-practice-01-cas-array/"/>
-    <id>https://winotes.net/exchange-2010-best-practice-01-cas-array/</id>
-    <published>2013-12-06T01:44:56.000Z</published>
-    <updated>2017-09-29T03:25:52.023Z</updated>
-    
-    <content type="html"><![CDATA[<p>CAS Array 的概念是第一次在 Exchange 2010 中被引入，其主要目的是在于统一客户端访问名称，便于不管连接哪台服务器均能够使用同样一个名字访问，因此在不建立NLB的情况下使用CAS ARRAY能够统一访问名称。</p><p>实际的部署 CAS Array 的过程我就不说了，网上很多教程。这里要提出来的三点建议，也许对你的环境会有帮助。  </p><p><strong>CAS Array 的内外部 FQDN 不要用一样的，说更清楚点，内部 CAS Array 的 FQDN 不要能被外部 DNS 解析。</strong></p><p>Why? 就算我内外FQDN一样，我也还是能正常访问 Exchange 啊。对，你确实还是能够访问，但是却增加了 Outlook 的连接时间，在某些慢速网络下，甚至会导致连接超时。我们下面详细来看看各种场景下的连接情况。</p><p>a)  内部 Outlook 用户 (TCP连接)。</p><ul><li>Outlook会通过DNS去查询内部 FQDN 对应的 IP，比如说outlook.internal.local -&gt; 192.168.1.30 (内网IP)。</li><li>Outlook 会认为自己在内网，于是尝试使用DCE/RPC 也就是135 端口去连接 192.168.1.30。</li><li>连接建立。</li></ul><p>b)  外部 Outlook 用户 （CAS Array内部FQDN可以从公网解析）</p><ul><li>Outlook会通过DNS去查询内部 FQDN 对应的 IP，比如说outlook.internal.local -&gt; 123.234.213.213 (公网IP)。</li><li>Outlook会认为自己在内网，于是尝试使用DCE/RPC 也就是135 端口去连接123.234.213.213。</li><li>而大多数情况下，防火墙是不会允许公网的 135 端口通信的，所以得等待TCP连接超时，这其中还有几次重试的时间。</li><li>当 Outlook 发现 TCP/135 的端口无法连接的时候，才发现，哦，原来我不在内网啊，那就只能尝试使用 https协议去连接 443 端口。<br>默认情况下， 在快速网络环境下，Outlook 会使用 TCP 先行尝试连接，不成功的情况下才会使用 Http/Https ，这里TCP连接浪费的时间，短则10来秒，最长可达30秒钟以上，所以，Outlook Anywhere用户体验会变得糟糕。</li></ul><p>当然，你可以改成无论何时都是先用http/https 连接，对于 Outlook Anywhere 用户，很适合，不过这会对内网用户造成困扰，甚至无法登陆，因为内外网证书很可能不一致，导致设定的 FQDN 名称和证书的 Common Name 不匹配，会总提示输入用户名和密码，即便你输入的是正确的，还是会不停地跳出来。</p><p>c)  外部 Outlook 用户 （CAS Array内部FQDN不能从公网解析）</p><ul><li>Outlook会通过DNS去查询内部 FQDN 对应的 IP，但此时从 DNS 并不能返回查询结果。</li><li>Outlook 知悉，哦，地址无法解析，我在外网，于是直接使用 Https 去建立连接。</li></ul><p><strong> CAS Array </strong>的场景下，客户端最好能做<strong> Kerberos </strong>认证 （Exchange 2010 SP1）。</p><p>在 Exchange 2010 中，所有的域客户端的 MAPI 访问实际上都是通过 CAS 来走，而客户端的认证会使用协商认证，即negotiate authentication，也就是会先使用 Kerberos 认证。失败之后再尝试 NTLM 认证。（注：Outlook Anywhere 不适用）</p><p>而在配置了 CAS Array 的环境下，Kerberos 认证会失败的，因为 Kerberos 认证的时候，发起的service ticket中的authenticator 使用的是 CAS Array FQDN的 SPN，而不是 CAS Server 的 SPN，所以会认证失败。具体的实现步骤可以参考这里：<a href="http://blogs.technet.com/b/exchange/archive/2011/04/15/recommendation-enabling-kerberos-authentication-for-mapi-clients.aspx" target="_blank" rel="noopener">http://blogs.technet.com/b/exchange/archive/2011/04/15/recommendation-enabling-kerberos-authentication-for-mapi-clients.aspx</a></p><p>那么，开启 Kerberos 认证有啥好处呢？除了可以满足一些企业的安全需求外，还能减少 CAS 服务器和 AD 的负载，这对大型企业中的性能优化很有帮助。</p><p><strong>即便你只有一个 CAS 服务器，也建议配置 CAS Array </strong>。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;CAS Array 的概念是第一次在 Exchange 2010 中被引入，其主要目的是在于统一客户端访问名称，便于不管连接哪台服务器均能够使用同样一个名字访问，因此在不建立NLB的情况下使用CAS ARRAY能够统一访问名称。&lt;/p&gt;
-&lt;p&gt;实际的部署 CAS Array
-      
-    
-    </summary>
-    
-      <category term="Microsoft" scheme="https://winotes.net/categories/Microsoft/"/>
-    
-      <category term="Exchange" scheme="https://winotes.net/categories/Microsoft/Exchange/"/>
-    
-    
-      <category term="最佳实践" scheme="https://winotes.net/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/"/>
-    
-      <category term="Exchange" scheme="https://winotes.net/tags/Exchange/"/>
-    
-      <category term="Kerberos" scheme="https://winotes.net/tags/Kerberos/"/>
     
   </entry>
   

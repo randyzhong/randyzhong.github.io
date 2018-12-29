@@ -4,7 +4,7 @@
   <url>
     <loc>https://winotes.net/install-php56-nginx-mariadb-mysql-lemp-stack-on-centos7-with-fastcgi/</loc>
     
-    <lastmod>2018-12-29T05:29:50.569Z</lastmod>
+    <lastmod>2018-12-29T05:46:16.546Z</lastmod>
     
   </url>
   
@@ -128,6 +128,13 @@
   </url>
   
   <url>
+    <loc>https://winotes.net/python-practice-1-ustc-online-course-downloader/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.119Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://winotes.net/problem-when-installing-ocs2007-r2-cu6-dotnet-40/</loc>
     
     <lastmod>2017-09-29T03:25:52.119Z</lastmod>
@@ -163,14 +170,14 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/the-reportservervirtualdirectory-element-is-missing/</loc>
+    <loc>https://winotes.net/mscrm-40-email-router-404-notfound/</loc>
     
     <lastmod>2017-09-29T03:25:52.119Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://winotes.net/mscrm-40-email-router-404-notfound/</loc>
+    <loc>https://winotes.net/the-reportservervirtualdirectory-element-is-missing/</loc>
     
     <lastmod>2017-09-29T03:25:52.119Z</lastmod>
     
@@ -206,13 +213,6 @@
   
   <url>
     <loc>https://winotes.net/reporting-service-cant-start-event-id-107/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.119Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://winotes.net/python-practice-1-ustc-online-course-downloader/</loc>
     
     <lastmod>2017-09-29T03:25:52.119Z</lastmod>
     
@@ -373,7 +373,7 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/hmc-45-rollup-1/</loc>
+    <loc>https://winotes.net/hmc-45-is-out/</loc>
     
     <lastmod>2017-09-29T03:25:52.043Z</lastmod>
     
@@ -422,13 +422,6 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/hmc-45-update-rollup-5-has-been-released/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.043Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://winotes.net/hmc-45-update-rollup-3-has-been-released/</loc>
     
     <lastmod>2017-09-29T03:25:52.043Z</lastmod>
@@ -436,14 +429,21 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/hmc-45-and-exchange-2007-sp1-part3-offline-address-book-generations/</loc>
+    <loc>https://winotes.net/hmc-45-update-rollup-5-has-been-released/</loc>
     
     <lastmod>2017-09-29T03:25:52.043Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://winotes.net/hmc-45-is-out/</loc>
+    <loc>https://winotes.net/hmc-45-and-exchange-2007-sp1-part4-internal-and-external-out-of-office/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.043Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://winotes.net/hmc-45-rollup-1/</loc>
     
     <lastmod>2017-09-29T03:25:52.043Z</lastmod>
     
@@ -457,7 +457,7 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/hmc-45-and-exchange-2007-sp1-part4-internal-and-external-out-of-office/</loc>
+    <loc>https://winotes.net/hmc-45-and-exchange-2007-sp1-part3-offline-address-book-generations/</loc>
     
     <lastmod>2017-09-29T03:25:52.043Z</lastmod>
     

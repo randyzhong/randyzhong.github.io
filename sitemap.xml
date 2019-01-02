@@ -4,7 +4,7 @@
   <url>
     <loc>https://winotes.net/install-php56-nginx-mariadb-mysql-lemp-stack-on-centos7-with-fastcgi/</loc>
     
-    <lastmod>2019-01-02T05:49:21.158Z</lastmod>
+    <lastmod>2019-01-02T05:51:33.712Z</lastmod>
     
   </url>
   
@@ -114,14 +114,14 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/virtual-server-undo-disks-merge-parent-disk-part-of-saved-state/</loc>
+    <loc>https://winotes.net/workaround-to-resolve-cant-install-virtualbox-usb-driver-in-windows7/</loc>
     
     <lastmod>2017-09-29T03:25:52.127Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://winotes.net/workaround-to-resolve-cant-install-virtualbox-usb-driver-in-windows7/</loc>
+    <loc>https://winotes.net/virtual-server-undo-disks-merge-parent-disk-part-of-saved-state/</loc>
     
     <lastmod>2017-09-29T03:25:52.127Z</lastmod>
     
@@ -156,14 +156,14 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/the-specified-cgi-application-encountered-an-error-and-the-server-terminated-the-process/</loc>
+    <loc>https://winotes.net/mscrm-contacts-and-accounts-are-not-showing-up-in-outlook/</loc>
     
     <lastmod>2017-09-29T03:25:52.119Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://winotes.net/the-reportservervirtualdirectory-element-is-missing/</loc>
+    <loc>https://winotes.net/the-specified-cgi-application-encountered-an-error-and-the-server-terminated-the-process/</loc>
     
     <lastmod>2017-09-29T03:25:52.119Z</lastmod>
     
@@ -177,7 +177,7 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/mscrm-contacts-and-accounts-are-not-showing-up-in-outlook/</loc>
+    <loc>https://winotes.net/the-reportservervirtualdirectory-element-is-missing/</loc>
     
     <lastmod>2017-09-29T03:25:52.119Z</lastmod>
     
@@ -247,21 +247,7 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/movabletype-2-wordpress/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.103Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://winotes.net/move-to-hexo/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.103Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://winotes.net/mscrm-2011-beta-installation/</loc>
     
     <lastmod>2017-09-29T03:25:52.103Z</lastmod>
     
@@ -275,6 +261,20 @@
   </url>
   
   <url>
+    <loc>https://winotes.net/mscrm-2011-beta-installation/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.103Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://winotes.net/movabletype-2-wordpress/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.103Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://winotes.net/installing-mscrm-4-0-without-internet-access/</loc>
     
     <lastmod>2017-09-29T03:25:52.095Z</lastmod>
@@ -282,14 +282,14 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/install-microsoft-dynamics-crm-4-0-server-on-multiple-computers/</loc>
+    <loc>https://winotes.net/installing-lighttpd-php5-mysql-on-centos-64/</loc>
     
     <lastmod>2017-09-29T03:25:52.095Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://winotes.net/installing-lighttpd-php5-mysql-on-centos-64/</loc>
+    <loc>https://winotes.net/install-microsoft-dynamics-crm-4-0-server-on-multiple-computers/</loc>
     
     <lastmod>2017-09-29T03:25:52.095Z</lastmod>
     
@@ -373,7 +373,7 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/hmc-45-rollup-1/</loc>
+    <loc>https://winotes.net/hmc-45-is-out/</loc>
     
     <lastmod>2017-09-29T03:25:52.043Z</lastmod>
     
@@ -387,14 +387,14 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/how-to-add-send-on-behalf-permission-to-users-with-mps/</loc>
+    <loc>https://winotes.net/hmc-resource-management-part2-hmc-resource-management-and-active-directory/</loc>
     
     <lastmod>2017-09-29T03:25:52.043Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://winotes.net/hmc-resource-management-part2-hmc-resource-management-and-active-directory/</loc>
+    <loc>https://winotes.net/how-to-add-send-on-behalf-permission-to-users-with-mps/</loc>
     
     <lastmod>2017-09-29T03:25:52.043Z</lastmod>
     
@@ -415,13 +415,6 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/hmc-45-update-rollup-6-has-been-released/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.043Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://winotes.net/hmc-45-update-rollup-5-has-been-released/</loc>
     
     <lastmod>2017-09-29T03:25:52.043Z</lastmod>
@@ -436,6 +429,13 @@
   </url>
   
   <url>
+    <loc>https://winotes.net/hmc-45-update-rollup-6-has-been-released/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.043Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://winotes.net/hmc-45-and-exchange-2007-sp1-part3-offline-address-book-generations/</loc>
     
     <lastmod>2017-09-29T03:25:52.043Z</lastmod>
@@ -443,7 +443,7 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/hmc-45-is-out/</loc>
+    <loc>https://winotes.net/hmc-45-rollup-1/</loc>
     
     <lastmod>2017-09-29T03:25:52.043Z</lastmod>
     

@@ -2,16 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://winotes.net/using-cisco-router-as-dhcp-with-long-option43-in-skype-lync-deployment/</loc>
+    <loc>https://winotes.net/install-php56-nginx-mariadb-mysql-lemp-stack-on-centos7-with-fastcgi/</loc>
     
-    <lastmod>2019-01-02T01:40:18.122Z</lastmod>
+    <lastmod>2019-01-02T05:49:21.158Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://winotes.net/install-php56-nginx-mariadb-mysql-lemp-stack-on-centos7-with-fastcgi/</loc>
+    <loc>https://winotes.net/using-cisco-router-as-dhcp-with-long-option43-in-skype-lync-deployment/</loc>
     
-    <lastmod>2019-01-02T01:36:45.684Z</lastmod>
+    <lastmod>2019-01-02T01:40:18.122Z</lastmod>
     
   </url>
   
@@ -107,13 +107,6 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/workaround-to-resolve-cant-install-virtualbox-usb-driver-in-windows7/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.127Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://winotes.net/unofficial-consolidated-server-deployment-guide-for-hmc4/</loc>
     
     <lastmod>2017-09-29T03:25:52.127Z</lastmod>
@@ -128,16 +121,9 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/patches-for-hmc40/</loc>
+    <loc>https://winotes.net/workaround-to-resolve-cant-install-virtualbox-usb-driver-in-windows7/</loc>
     
-    <lastmod>2017-09-29T03:25:52.119Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://winotes.net/ocs-docs/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.119Z</lastmod>
+    <lastmod>2017-09-29T03:25:52.127Z</lastmod>
     
   </url>
   
@@ -149,7 +135,21 @@
   </url>
   
   <url>
+    <loc>https://winotes.net/patches-for-hmc40/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.119Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://winotes.net/packtpub-offer-free-learning/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.119Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://winotes.net/ocs-docs/</loc>
     
     <lastmod>2017-09-29T03:25:52.119Z</lastmod>
     
@@ -261,13 +261,6 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/mpf-service-account-error-in-deployment-tools/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.103Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://winotes.net/mscrm-2011-beta-installation/</loc>
     
     <lastmod>2017-09-29T03:25:52.103Z</lastmod>
@@ -275,7 +268,14 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/installing-lighttpd-php5-mysql-on-centos-64/</loc>
+    <loc>https://winotes.net/mpf-service-account-error-in-deployment-tools/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.103Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://winotes.net/installing-mscrm-4-0-without-internet-access/</loc>
     
     <lastmod>2017-09-29T03:25:52.095Z</lastmod>
     
@@ -289,14 +289,14 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/internet-explorer-zonemapping-failed-due-to-the-data-is-invalid-event-id-7016/</loc>
+    <loc>https://winotes.net/installing-lighttpd-php5-mysql-on-centos-64/</loc>
     
     <lastmod>2017-09-29T03:25:52.095Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://winotes.net/installing-mscrm-4-0-without-internet-access/</loc>
+    <loc>https://winotes.net/internet-explorer-zonemapping-failed-due-to-the-data-is-invalid-event-id-7016/</loc>
     
     <lastmod>2017-09-29T03:25:52.095Z</lastmod>
     
@@ -310,13 +310,6 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/how-to-turn-off-password-expiration-in-hmc-40/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.087Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://winotes.net/how-to-use-url-rewrite-to-redirect-http-to-https-on-iis7/</loc>
     
     <lastmod>2017-09-29T03:25:52.087Z</lastmod>
@@ -324,14 +317,21 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/how-to-remove-a-vmhost-from-scvmm-2008-r2-forcefully/</loc>
+    <loc>https://winotes.net/how-to-turn-off-password-expiration-in-hmc-40/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.087Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://winotes.net/how-to-remove-official-ie11-baidu-homepage-locking-on-simplified-chinese-win10-ltsb/</loc>
     
     <lastmod>2017-09-29T03:25:52.071Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://winotes.net/how-to-remove-official-ie11-baidu-homepage-locking-on-simplified-chinese-win10-ltsb/</loc>
+    <loc>https://winotes.net/how-to-remove-a-vmhost-from-scvmm-2008-r2-forcefully/</loc>
     
     <lastmod>2017-09-29T03:25:52.071Z</lastmod>
     
@@ -541,7 +541,7 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/change-idx-sub-order/</loc>
+    <loc>https://winotes.net/apc-undefined-symbol-pcre-exec-in-unknown-on-line-0/</loc>
     
     <lastmod>2017-09-29T03:25:52.023Z</lastmod>
     
@@ -583,7 +583,7 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/apc-undefined-symbol-pcre-exec-in-unknown-on-line-0/</loc>
+    <loc>https://winotes.net/change-idx-sub-order/</loc>
     
     <lastmod>2017-09-29T03:25:52.023Z</lastmod>
     

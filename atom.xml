@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://winotes.net/"/>
-  <updated>2019-02-02T07:25:21.091Z</updated>
+  <updated>2019-03-07T09:30:50.807Z</updated>
   <id>https://winotes.net/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CentOS 6 虚拟机扩容 LVM 根分区</title>
+    <link href="https://winotes.net/extending-lvm-root-partition-on-centos6-vm/"/>
+    <id>https://winotes.net/extending-lvm-root-partition-on-centos6-vm/</id>
+    <published>2019-02-28T08:48:35.000Z</published>
+    <updated>2019-03-07T09:30:50.807Z</updated>
+    
+    <content type="html"><![CDATA[<p>环境介绍：</p><ul><li>VMware 5.5</li><li>CentOS 6.3 64-bit</li><li>/ 根分区为 LVM</li><li>原磁盘大小 40GB</li><li>扩容后磁盘大小： 50GB</li></ul><p>查看原来的磁盘文件系统空间状态， 根分区已经 100% 爆了！<br><figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">[root@localhost ~]# df -h</div><div class="line">Filesystem            Size  Used Avail Use% Mounted on</div><div class="line">/dev/mapper/VolGroup-lv_root</div><div class="line">                       38G   38G     0 100% /</div><div class="line">tmpfs                 246M     0  246M   0% /dev/shm</div><div class="line">/dev/sda1             485M   32M  428M   7% /boot</div></pre></td></tr></table></figure></p><p>在 VMware 中对原磁盘扩容到 50GB, 查看磁盘 sda 已经扩展到 50GB<br><strong>安全起见，在扩容前，建议对数据进行备份。</strong><br><figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">[root@localhost ~]# fdisk /dev/sda -l</div><div class="line"></div><div class="line">Disk /dev/sda: 53.7 GB, 53687091200 bytes</div><div class="line">255 heads, 63 sectors/track, 6527 cylinders</div><div class="line">Units = cylinders of 16065 * 512 = 8225280 bytes</div><div class="line">Sector size (logical/physical): 512 bytes / 512 bytes</div><div class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</div><div class="line">Disk identifier: 0x00026a39</div><div class="line"></div><div class="line">   Device Boot      Start         End      Blocks   Id  System</div><div class="line">/dev/sda1   *           1          64      512000   83  Linux</div><div class="line">Partition 1 does not end on cylinder boundary.</div><div class="line">/dev/sda2              64        5222    41430016   8e  Linux LVM</div></pre></td></tr></table></figure></p><p>在本文的例子中，磁盘 /dev/sda 已经扩展至 53.7 GB 而且当前只有两个主分区，所以我们后面就直接创建主分区 sda3 来帮助扩容。</p><p>查看 PV, VG, LV 状态，大小还没有变化<br><figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">[root@localhost ~]# pvs</div><div class="line">  PV         VG       Fmt  Attr PSize  PFree</div><div class="line">  /dev/sda2  VolGroup lvm2 a--  39.51g    0</div><div class="line">[root@localhost ~]# vgs</div><div class="line">  /etc/lvm/archive/.lvm_localhost.localdomain_18508_1413645104: write error failed: No space left on device</div><div class="line">  Volume group "VolGroup" metadata archive failed.</div><div class="line">  /etc/lvm/backup/VolGroup.tmp: write error failed: No space left on device</div><div class="line">  Backup of volume group VolGroup metadata failed.</div><div class="line">  VG       #PV #LV #SN Attr   VSize  VFree</div><div class="line">  VolGroup   1   2   0 wz--n- 39.51g    0</div><div class="line">[root@localhost ~]# lvs</div><div class="line">  LV      VG       Attr     LSize   Pool Origin Data%  Move Log Copy%  Convert</div><div class="line">  lv_root VolGroup -wi-ao--  38.54g</div><div class="line">  lv_swap VolGroup -wi-ao-- 992.00m</div></pre></td></tr></table></figure></p><p>接下来我们需要将扩展出未曾使用的 10GB 空间创建一个新的主分区 <strong>sda3</strong> 来给逻辑卷扩容用。<br><figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">[root@localhost ~]# fdisk /dev/sda</div><div class="line"></div><div class="line">WARNING: DOS-compatible mode is deprecated. It's strongly recommended to</div><div class="line">         switch off the mode (command 'c') and change display units to</div><div class="line">         sectors (command 'u').</div><div class="line"></div><div class="line">Command (m for help): m</div><div class="line">Command action</div><div class="line">   a   toggle a bootable flag</div><div class="line">   b   edit bsd disklabel</div><div class="line">   c   toggle the dos compatibility flag</div><div class="line">   d   delete a partition</div><div class="line">   l   list known partition types</div><div class="line">   m   print this menu</div><div class="line">   n   add a new partition</div><div class="line">   o   create a new empty DOS partition table</div><div class="line">   p   print the partition table</div><div class="line">   q   quit without saving changes</div><div class="line">   s   create a new empty Sun disklabel</div><div class="line">   t   change a partition's system id</div><div class="line">   u   change display/entry units</div><div class="line">   v   verify the partition table</div><div class="line">   w   write table to disk and exit</div><div class="line">   x   extra functionality (experts only)</div><div class="line"></div><div class="line">Command (m for help): n</div><div class="line">Command action</div><div class="line">   e   extended</div><div class="line">   p   primary partition (1-4)</div><div class="line">p</div><div class="line">Partition number (1-4): 3</div><div class="line">First cylinder (5222-6527, default 5222):</div><div class="line">Using default value 5222</div><div class="line">Last cylinder, +cylinders or +size&#123;K,M,G&#125; (5222-6527, default 6527):</div><div class="line">Using default value 6527</div></pre></td></tr></table></figure></p><p>然后修改分区类型为 8e 并写入分区表保存<br><figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">Command (m for help): t</div><div class="line">Partition number (1-4): 3</div><div class="line">Hex code (type L to list codes): 8e</div><div class="line">Changed system type of partition 3 to 8e (Linux LVM)</div><div class="line"></div><div class="line">Command (m for help): w</div><div class="line">The partition table has been altered!</div><div class="line"></div><div class="line">Calling ioctl() to re-read partition table.</div><div class="line"></div><div class="line">WARNING: Re-reading the partition table failed with error 16: Device or resource busy.</div><div class="line">The kernel still uses the old table. The new table will be used at</div><div class="line">the next reboot or after you run partprobe(8) or kpartx(8)</div><div class="line">Syncing disks.</div></pre></td></tr></table></figure></p><p>重新扫描磁盘检查分区情况<br><figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">[root@localhost ~]# partx -v -a /dev/sda</div><div class="line">device /dev/sda: start 0 size 104857600</div><div class="line">gpt: 0 slices</div><div class="line">dos: 4 slices</div><div class="line"><span class="meta">#</span><span class="bash"> 1:      2048-  1026047 (  1024000 sectors,    524 MB)</span></div><div class="line"><span class="meta">#</span><span class="bash"> 2:   1026048- 83886079 ( 82860032 sectors,  42424 MB)</span></div><div class="line"><span class="meta">#</span><span class="bash"> 3:  83886080-104856254 ( 20970175 sectors,  10736 MB)</span></div><div class="line"><span class="meta">#</span><span class="bash"> 4:         0-       -1 (        0 sectors,      0 MB)</span></div><div class="line">BLKPG: Device or resource busy</div><div class="line">error adding partition 1</div><div class="line">BLKPG: Device or resource busy</div><div class="line">error adding partition 2</div><div class="line">added partition 3</div></pre></td></tr></table></figure></p><p>分区 1/2 的报错可以忽略，我们需要看到的是分区 3 已经添加成功，如果看不到分区 3 或者添加失败需要重启使之生效。</p><p>创建新的 PV<br><figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">[root@localhost ~]# pvcreate /dev/sda3</div><div class="line">  Writing physical volume data to disk "/dev/sda3"</div><div class="line">  Physical volume "/dev/sda3" successfully created</div></pre></td></tr></table></figure></p><p>找到当前系统所使用的卷组名<br><figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">[root@localhost ~]# vgdisplay</div><div class="line">  --- Volume group ---</div><div class="line">  VG Name               VolGroup</div><div class="line">  System ID</div><div class="line">  Format                lvm2</div><div class="line">  Metadata Areas        1</div><div class="line">  Metadata Sequence No  3</div><div class="line">  VG Access             read/write</div><div class="line">  VG Status             resizable</div><div class="line">  MAX LV                0</div><div class="line">  Cur LV                2</div><div class="line">  Open LV               2</div><div class="line">  Max PV                0</div><div class="line">  Cur PV                1</div><div class="line">  Act PV                1</div><div class="line">  VG Size               39.51 GiB</div><div class="line">  PE Size               4.00 MiB</div><div class="line">  Total PE              10114</div><div class="line">  Alloc PE / Size       10114 / 39.51 GiB</div><div class="line">  Free  PE / Size       0 / 0</div><div class="line">  VG UUID               2JrSeG-4Is7-ocIQ-zVrN-eha1-gYJQ-L1UnPn</div><div class="line"></div><div class="line">  /etc/lvm/archive/.lvm_localhost.localdomain_15862_675165963: write error failed: No space left on device</div><div class="line">  Volume group "VolGroup" metadata archive failed.</div><div class="line">  /etc/lvm/backup/VolGroup.tmp: write error failed: No space left on device</div><div class="line">  Backup of volume group VolGroup metadata failed.</div></pre></td></tr></table></figure></p><p><strong>VolGroup</strong> 就是它了！</p><p>接下来 <strong>vgextend</strong> 扩容VG：<br><figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">[root@localhost ~]# vgextend VolGroup /dev/sda3</div><div class="line">  /etc/lvm/archive/.lvm_localhost.localdomain_17322_173527374: write error failed: No space left on device</div><div class="line">  Volume group "VolGroup" metadata archive failed.</div><div class="line">  Internal error: Attempt to unlock unlocked VG #orphans.</div></pre></td></tr></table></figure></p><p>结果因为剩余空间为零扩容失败，囧， 删除掉一些文件再试。</p><figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">[root@localhost ~]# vgextend VolGroup /dev/sda3</div><div class="line">  Volume group "VolGroup" successfully extended</div></pre></td></tr></table></figure><p>用 <strong>pvscan</strong> 来查看 PV 空间使用情况来决定谁给谁加以及加多少空间。<br><figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">[root@localhost ~]# pvscan</div><div class="line">  PV /dev/sda2   VG VolGroup   lvm2 [39.51 GiB / 0    free]</div><div class="line">  PV /dev/sda3   VG VolGroup   lvm2 [10.00 GiB / 10.00 GiB free]</div><div class="line">  Total: 2 [49.50 GiB] / in use: 2 [49.50 GiB] / in no VG: 0 [0   ]</div></pre></td></tr></table></figure></p><p>在本文例子中我们需要增加 / 根分区的空间，用 <strong>df</strong> 命令来查看根分区所挂载的逻辑卷。<br><figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">[root@localhost ~]# df -h</div><div class="line">Filesystem            Size  Used Avail Use% Mounted on</div><div class="line">/dev/mapper/VolGroup-lv_root</div><div class="line">                       38G  8.3G   28G  23% /</div><div class="line">tmpfs                 246M     0  246M   0% /dev/shm</div><div class="line">/dev/sda1             485M   32M  428M   7% /boot</div></pre></td></tr></table></figure></p><p>所以我们可以看到 / 根分区是挂载在 <strong>VolGroup-lv_root</strong> 卷组下面的 <strong>root</strong> 逻辑卷</p><p>扩容 root 逻辑卷<br><figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">[root@localhost ~]# lvextend -L+10G /dev/mapper/VolGroup-lv_root  /dev/sda3</div><div class="line">  Extending logical volume lv_root to 48.54 GiB</div><div class="line">  Insufficient free space: 2560 extents needed, but only 2559 available</div><div class="line"></div><div class="line">[root@localhost ~]# lvextend -L+9.99G /dev/mapper/VolGroup-lv_root  /dev/sda3</div><div class="line">  Rounding size to boundary between physical extents: 9.99 GiB</div><div class="line">  Extending logical volume lv_root to 48.53 GiB</div><div class="line">  Logical volume lv_root successfully resized</div></pre></td></tr></table></figure></p><p>文件系统扩容:<br><figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">[root@localhost ~]# resize2fs /dev/mapper/VolGroup-lv_root</div><div class="line">resize2fs 1.41.12 (17-May-2010)</div><div class="line">Filesystem at /dev/mapper/VolGroup-lv_root is mounted on /; on-line resizing required</div><div class="line">old desc_blocks = 3, new_desc_blocks = 4</div><div class="line">Performing an on-line resize of /dev/mapper/VolGroup-lv_root to 12722176 (4k) blocks.</div><div class="line">The filesystem on /dev/mapper/VolGroup-lv_root is now 12722176 blocks long.</div></pre></td></tr></table></figure></p><p>扩容完毕！<br><figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">[root@localhost ~]# df -h</div><div class="line">Filesystem            Size  Used Avail Use% Mounted on</div><div class="line">/dev/mapper/VolGroup-lv_root</div><div class="line">                       48G  8.4G   37G  19% /</div><div class="line">tmpfs                 246M     0  246M   0% /dev/shm</div><div class="line">/dev/sda1             485M   32M  428M   7% /boot</div></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      单位有一台基于 CentOS 6.3 搭建的 Cacti 监控系统，使用了很长一段时间了，最后发现 / 根分区空间已经满了，无法再提供服务，于是有了扩容的需求，以下是扩容过程：
+    
+    </summary>
+    
+      <category term="*Nix" scheme="https://winotes.net/categories/Nix/"/>
+    
+    
+      <category term="CentOS, LVM, 扩容, 根分区" scheme="https://winotes.net/tags/CentOS-LVM-%E6%89%A9%E5%AE%B9-%E6%A0%B9%E5%88%86%E5%8C%BA/"/>
+    
+  </entry>
   
   <entry>
     <title>HP EliteDesk 800 G3 DM 安装黑苹果</title>
@@ -56,13 +78,13 @@
       <category term="*Nix" scheme="https://winotes.net/categories/Nix/"/>
     
     
+      <category term="PHP" scheme="https://winotes.net/tags/PHP/"/>
+    
       <category term="CentOS" scheme="https://winotes.net/tags/CentOS/"/>
     
       <category term="LEMP" scheme="https://winotes.net/tags/LEMP/"/>
     
       <category term="Nginx" scheme="https://winotes.net/tags/Nginx/"/>
-    
-      <category term="PHP" scheme="https://winotes.net/tags/PHP/"/>
     
       <category term="MariaDB" scheme="https://winotes.net/tags/MariaDB/"/>
     
@@ -497,37 +519,6 @@
       <category term="JRE" scheme="https://winotes.net/tags/JRE/"/>
     
       <category term="MSI" scheme="https://winotes.net/tags/MSI/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>解决 WSUS 下载速度慢的问题</title>
-    <link href="https://winotes.net/fix-wsus-slow-download-problem/"/>
-    <id>https://winotes.net/fix-wsus-slow-download-problem/</id>
-    <published>2014-06-10T06:40:11.000Z</published>
-    <updated>2017-09-29T03:25:52.035Z</updated>
-    
-    <content type="html"><![CDATA[<p>解决 WSUS 下载速度慢的问题:</p><p>新建的 WSUS 3.0 SP2 服务器，操作系统为 2008 R2，更新补丁非常慢，总共几十个G的补丁文件，下载了三天了才2G。</p><p>出现这样的问题，大部分情况是因为 WSUS 通过后台下载补丁文件所导致，也就是我们所说的 BITS 服务，可以试着将后台下载改为前台下载。</p><p>解决方案：</p><ol><li><p>如果你的 WSUS 用的是WID（Windows Internal Database）默认数据库：</p><figure class="highlight cmd"><table><tr><td class="code"><pre><div class="line"><span class="variable">%programfiles%</span>\Update Services\Setup\ExecuteSQL.exe -S <span class="variable">%Computername%</span>\MICROSOFT##SSEE -d "SUSDB" -Q "update tbConfigurationC <span class="built_in">set</span> BitsDownloadPriorityForeground=<span class="number">1</span>"</div></pre></td></tr></table></figure></li><li><p>如果你使用 SQL 数据库：</p><figure class="highlight cmd"><table><tr><td class="code"><pre><div class="line"><span class="variable">%programfiles%</span>\Update Services\Setup\ExecuteSQL.exe -S <span class="variable">%Computername%</span> -d "SUSDB" -Q "update tbConfigurationC <span class="built_in">set</span> BitsDownloadPriorityForeground=<span class="number">1</span>"</div></pre></td></tr></table></figure></li></ol><p>最后重启WSUS服务生效。</p><p>注：<strong>BITS</strong> (后台智能传送服务 Background Intelligent Transfer Service) 是一个 Windows 组件，它可以在前台或后台异步传输文件，为保证其他网络应用程序获得响应而调整传输速度，并在重新启动计算机或重新建立网络连接之后自动恢复文件传输。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;解决 WSUS 下载速度慢的问题:&lt;/p&gt;
-&lt;p&gt;新建的 WSUS 3.0 SP2 服务器，操作系统为 2008 R2，更新补丁非常慢，总共几十个G的补丁文件，下载了三天了才2G。&lt;/p&gt;
-&lt;p&gt;出现这样的问题，大部分情况是因为 WSUS 通过后台下载补丁文件所导致，也就是
-      
-    
-    </summary>
-    
-      <category term="Microsoft" scheme="https://winotes.net/categories/Microsoft/"/>
-    
-    
-      <category term="BITS" scheme="https://winotes.net/tags/BITS/"/>
-    
-      <category term="Microsoft" scheme="https://winotes.net/tags/Microsoft/"/>
-    
-      <category term="WSUS" scheme="https://winotes.net/tags/WSUS/"/>
     
   </entry>
   

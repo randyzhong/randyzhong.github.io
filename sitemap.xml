@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://winotes.net/extending-lvm-root-partition-on-centos6-vm/</loc>
+    
+    <lastmod>2019-03-07T09:30:50.807Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://winotes.net/hp-elitedesk-800-g3-dm-hackintosh/</loc>
     
     <lastmod>2019-02-02T07:25:21.091Z</lastmod>
@@ -135,7 +142,7 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/reporting-service-cant-start-event-id-107/</loc>
+    <loc>https://winotes.net/patches-for-hmc40/</loc>
     
     <lastmod>2017-09-29T03:25:52.119Z</lastmod>
     
@@ -156,21 +163,7 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/solved-the-security-database-on-the-server-does-not-have-a-computer-account-for-this-workstation-trust-relationship-part1/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.119Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://winotes.net/solved-the-security-database-on-the-server-does-not-have-a-computer-account-for-this-workstation-trust-relationship-part2/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.119Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://winotes.net/mscrm-40-email-router-404-notfound/</loc>
+    <loc>https://winotes.net/the-specified-cgi-application-encountered-an-error-and-the-server-terminated-the-process/</loc>
     
     <lastmod>2017-09-29T03:25:52.119Z</lastmod>
     
@@ -184,28 +177,14 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/problem-when-installing-ocs2007-r2-cu6-dotnet-40/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.119Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://winotes.net/patches-for-hmc40/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.119Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://winotes.net/the-specified-cgi-application-encountered-an-error-and-the-server-terminated-the-process/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.119Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://winotes.net/the-reportservervirtualdirectory-element-is-missing/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.119Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://winotes.net/mscrm-40-email-router-404-notfound/</loc>
     
     <lastmod>2017-09-29T03:25:52.119Z</lastmod>
     
@@ -219,6 +198,27 @@
   </url>
   
   <url>
+    <loc>https://winotes.net/solved-the-security-database-on-the-server-does-not-have-a-computer-account-for-this-workstation-trust-relationship-part2/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.119Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://winotes.net/solved-the-security-database-on-the-server-does-not-have-a-computer-account-for-this-workstation-trust-relationship-part1/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.119Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://winotes.net/reporting-service-cant-start-event-id-107/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.119Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://winotes.net/python-practice-1-ustc-online-course-downloader/</loc>
     
     <lastmod>2017-09-29T03:25:52.119Z</lastmod>
@@ -226,9 +226,9 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/movabletype-2-wordpress/</loc>
+    <loc>https://winotes.net/problem-when-installing-ocs2007-r2-cu6-dotnet-40/</loc>
     
-    <lastmod>2017-09-29T03:25:52.103Z</lastmod>
+    <lastmod>2017-09-29T03:25:52.119Z</lastmod>
     
   </url>
   
@@ -240,7 +240,7 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/mscrm-2011-beta-installation/</loc>
+    <loc>https://winotes.net/kb974571-crypto-api-update-may-break-office-communications-server-2007-r2-installations/</loc>
     
     <lastmod>2017-09-29T03:25:52.103Z</lastmod>
     
@@ -261,7 +261,7 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/mpf-service-account-error-in-deployment-tools/</loc>
+    <loc>https://winotes.net/movabletype-2-wordpress/</loc>
     
     <lastmod>2017-09-29T03:25:52.103Z</lastmod>
     
@@ -275,28 +275,21 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/kb974571-crypto-api-update-may-break-office-communications-server-2007-r2-installations/</loc>
+    <loc>https://winotes.net/mpf-service-account-error-in-deployment-tools/</loc>
     
     <lastmod>2017-09-29T03:25:52.103Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://winotes.net/internet-explorer-zonemapping-failed-due-to-the-data-is-invalid-event-id-7016/</loc>
+    <loc>https://winotes.net/mscrm-2011-beta-installation/</loc>
     
-    <lastmod>2017-09-29T03:25:52.095Z</lastmod>
+    <lastmod>2017-09-29T03:25:52.103Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://winotes.net/install-microsoft-dynamics-crm-4-0-server-on-multiple-computers/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.095Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://winotes.net/installing-lighttpd-php5-mysql-on-centos-64/</loc>
     
     <lastmod>2017-09-29T03:25:52.095Z</lastmod>
     
@@ -317,6 +310,20 @@
   </url>
   
   <url>
+    <loc>https://winotes.net/installing-lighttpd-php5-mysql-on-centos-64/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.095Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://winotes.net/internet-explorer-zonemapping-failed-due-to-the-data-is-invalid-event-id-7016/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.095Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://winotes.net/how-to-turn-off-password-expiration-in-hmc-40/</loc>
     
     <lastmod>2017-09-29T03:25:52.087Z</lastmod>
@@ -331,14 +338,14 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/how-to-remove-official-ie11-baidu-homepage-locking-on-simplified-chinese-win10-ltsb/</loc>
+    <loc>https://winotes.net/how-to-remove-a-vmhost-from-scvmm-2008-r2-forcefully/</loc>
     
     <lastmod>2017-09-29T03:25:52.071Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://winotes.net/how-to-remove-a-vmhost-from-scvmm-2008-r2-forcefully/</loc>
+    <loc>https://winotes.net/how-to-remove-official-ie11-baidu-homepage-locking-on-simplified-chinese-win10-ltsb/</loc>
     
     <lastmod>2017-09-29T03:25:52.071Z</lastmod>
     
@@ -366,14 +373,14 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/how-to-remember-your-oc-and-outlook-password/</loc>
+    <loc>https://winotes.net/how-to-install-sql2005-on-win10/</loc>
     
     <lastmod>2017-09-29T03:25:52.059Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://winotes.net/how-to-install-sql2005-on-win10/</loc>
+    <loc>https://winotes.net/how-to-remember-your-oc-and-outlook-password/</loc>
     
     <lastmod>2017-09-29T03:25:52.059Z</lastmod>
     
@@ -443,7 +450,7 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/how-to-configure-ocsr2-xmpp-to-gmail/</loc>
+    <loc>https://winotes.net/hmc-45-and-exchange-2007-sp1-part3-offline-address-book-generations/</loc>
     
     <lastmod>2017-09-29T03:25:52.043Z</lastmod>
     
@@ -471,7 +478,7 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/hmc-45-and-exchange-2007-sp1-part3-offline-address-book-generations/</loc>
+    <loc>https://winotes.net/how-to-configure-ocsr2-xmpp-to-gmail/</loc>
     
     <lastmod>2017-09-29T03:25:52.043Z</lastmod>
     
@@ -548,7 +555,7 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/centos-64-upgrade-to-kernel-3x/</loc>
+    <loc>https://winotes.net/apc-undefined-symbol-pcre-exec-in-unknown-on-line-0/</loc>
     
     <lastmod>2017-09-29T03:25:52.023Z</lastmod>
     
@@ -590,14 +597,14 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/apc-undefined-symbol-pcre-exec-in-unknown-on-line-0/</loc>
+    <loc>https://winotes.net/change-idx-sub-order/</loc>
     
     <lastmod>2017-09-29T03:25:52.023Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://winotes.net/change-idx-sub-order/</loc>
+    <loc>https://winotes.net/centos-64-upgrade-to-kernel-3x/</loc>
     
     <lastmod>2017-09-29T03:25:52.023Z</lastmod>
     

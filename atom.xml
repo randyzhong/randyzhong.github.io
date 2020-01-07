@@ -39,6 +39,28 @@
   </entry>
   
   <entry>
+    <title>How to Fix “Mojave application is damaged, and can’t be used to install macOS” Errors</title>
+    <link href="https://winotes.net/how-to-fix-mojave-application-is-damaged-and-cant-be-used-to-install-macOS-errors/"/>
+    <id>https://winotes.net/how-to-fix-mojave-application-is-damaged-and-cant-be-used-to-install-macOS-errors/</id>
+    <published>2019-11-28T07:28:23.000Z</published>
+    <updated>2020-01-07T16:42:35.777Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>如果你还保留旧的 macOS 安装镜像， 那么很遗憾的告诉你这些镜像会在 2019-10-25 之后停止工作。这主要是由于大多数安装镜像中的证书会过期，从而导致这些镜像无法使用。<br>错误提示如下：<br><img src="/how-to-fix-mojave-application-is-damaged-and-cant-be-used-to-install-macOS-errors/damaged-copy.png" alt="damaged-copy"></p><p>通过检查 Mojave 的安装镜像，你会发现里面包含的证书已经过期;<br><img src="/how-to-fix-mojave-application-is-damaged-and-cant-be-used-to-install-macOS-errors/expired-cert.png" alt="expired-cert"></p><h3 id="Fix："><a href="#Fix：" class="headerlink" title="Fix："></a>Fix：</h3><p>两个解决方法，任选其一：</p><p>第一种，重新从苹果官方下载更新过的 Mojave 安装镜像，里面的证书已经更新：<br><img src="/how-to-fix-mojave-application-is-damaged-and-cant-be-used-to-install-macOS-errors/valid-cert.png" alt="validcert"></p><p>第二种，修改当前系统的时间去到 <strong>2019-10-24</strong> 日之前，使安装镜像的证书还在有效期内：</p><ul><li>断开网络。</li><li>打开终端，输入 <code>sudo date -u 0924150019</code>，修改时间为 2019年9月24日15时，再进行安装即可。</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      如果你还保留旧的 macOS 安装镜像， 那么很遗憾的告诉你这些镜像会在 2019-10-25 之后停止工作。这主要是由于大多数安装镜像中的证书会过期，从而导致这些镜像无法使用。
+    
+    </summary>
+    
+      <category term="Hackintosh" scheme="https://winotes.net/categories/Hackintosh/"/>
+    
+    
+      <category term="Hackintosh, macOS, Mojave" scheme="https://winotes.net/tags/Hackintosh-macOS-Mojave/"/>
+    
+  </entry>
+  
+  <entry>
     <title>CentOS 6 虚拟机扩容 LVM 根分区</title>
     <link href="https://winotes.net/extending-lvm-root-partition-on-centos6-vm/"/>
     <id>https://winotes.net/extending-lvm-root-partition-on-centos6-vm/</id>
@@ -483,35 +505,6 @@
     
     
       <category term="MSSQL" scheme="https://winotes.net/tags/MSSQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何从Maxmind的CSV数据源生成 GeoIP 的二进制数据库</title>
-    <link href="https://winotes.net/how-to-build-geoip-database-from-maxmind-csv-format/"/>
-    <id>https://winotes.net/how-to-build-geoip-database-from-maxmind-csv-format/</id>
-    <published>2015-06-25T02:40:09.000Z</published>
-    <updated>2017-09-29T03:25:52.043Z</updated>
-    
-    <content type="html"><![CDATA[<p>所谓GeoIP，就是通过来访者的IP， 定位他的经纬度，国家/地区，省市，甚至街道等位置信息。</p><p>网上能下载到的 geoip 可能都比较旧了，下面我们来自己生成最新的GeoIP 的二进制数据库 (geoipdb.bin, geoipdb.bin)</p><h4 id="1-环境准备"><a href="#1-环境准备" class="headerlink" title="1. 环境准备"></a>1. 环境准备</h4><p>我们需要一台 Linux, 这里我们使用 Ubuntu</p><p>然后再安装基本的编译工具</p><p><code>apt-get install build-essential zip</code></p><h4 id="2-下载最新的-GeoIP-数据库并将其解压缩"><a href="#2-下载最新的-GeoIP-数据库并将其解压缩" class="headerlink" title="2. 下载最新的 GeoIP 数据库并将其解压缩"></a>2. 下载最新的 GeoIP 数据库并将其解压缩</h4><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">wget http://www.maxmind.com/download/geoip/database/GeoIPCountryCSV.zip</div><div class="line">unzip GeoIPCountryCSV.zip</div></pre></td></tr></table></figure><h4 id="3-下载-gcsv2bin-的转换工具"><a href="#3-下载-gcsv2bin-的转换工具" class="headerlink" title="3. 下载 gcsv2bin 的转换工具"></a>3. 下载 gcsv2bin 的转换工具</h4><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">wget http://people.netfilter.org/acidfu/geoip/tools/gcsv2bin.tar.gz</div><div class="line">tar xzvf gcsv2bin.tar.gz</div></pre></td></tr></table></figure><h4 id="4-修改源码，编译工具"><a href="#4-修改源码，编译工具" class="headerlink" title="4. 修改源码，编译工具"></a>4. 修改源码，编译工具</h4><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="built_in">cd</span> gcsvbin</div><div class="line">nano gcsvbin.c <span class="comment">#找到 COUNTRYCOUNT，将其改到 275或者更大</span></div><div class="line">make</div></pre></td></tr></table></figure><p><img src="/how-to-build-geoip-database-from-maxmind-csv-format/Change_Countrycount.jpg" alt="Change_Countrycount"></p><h4 id="5-生成-geoipdb-bin-和geoipdb-bin"><a href="#5-生成-geoipdb-bin-和geoipdb-bin" class="headerlink" title="5. 生成 geoipdb.bin 和geoipdb.bin"></a>5. 生成 geoipdb.bin 和geoipdb.bin</h4><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">./gcsv2bin ../GeoIPCountryWhois.csv</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;所谓GeoIP，就是通过来访者的IP， 定位他的经纬度，国家/地区，省市，甚至街道等位置信息。&lt;/p&gt;
-&lt;p&gt;网上能下载到的 geoip 可能都比较旧了，下面我们来自己生成最新的GeoIP 的二进制数据库 (geoipdb.bin, geoipdb.bin)&lt;/p&gt;
-&lt;h4
-      
-    
-    </summary>
-    
-      <category term="*Nix" scheme="https://winotes.net/categories/Nix/"/>
-    
-    
-      <category term="GeoIP" scheme="https://winotes.net/tags/GeoIP/"/>
-    
-      <category term="MaxMind" scheme="https://winotes.net/tags/MaxMind/"/>
     
   </entry>
   

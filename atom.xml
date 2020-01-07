@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://winotes.net/"/>
-  <updated>2019-03-07T09:38:17.330Z</updated>
+  <updated>2020-01-07T15:46:58.592Z</updated>
   <id>https://winotes.net/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Intel NUC8i7BEH 读卡器魔改完美安装黑苹果</title>
+    <link href="https://winotes.net/intel-nuc8i7beh-mod-hackintosh/"/>
+    <id>https://winotes.net/intel-nuc8i7beh-mod-hackintosh/</id>
+    <published>2020-01-06T08:48:35.000Z</published>
+    <updated>2020-01-07T15:46:58.592Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h2><p>本文引用自我的 GitHub:<br><a href="https://github.com/randyzhong/OS-X-NUC8i7BEH-Clover" target="_blank" rel="noopener">OS-X-NUC8i7BEH-Clover</a></p><h2 id="OS-X-NUC8i7BEH-Clover"><a href="#OS-X-NUC8i7BEH-Clover" class="headerlink" title="OS-X-NUC8i7BEH-Clover"></a>OS-X-NUC8i7BEH-Clover</h2><p>This repository contains the files and scripts to install macOS on a <strong>modded</strong> Intel NUC8i7BEH (Bean Canyon).</p><p><img src="https://i.loli.net/2020/01/05/cpzUulMALTbi21F.jpg" alt="Catalina-10.15.2.jpg"></p><h2 id="Hardware"><a href="#Hardware" class="headerlink" title="Hardware"></a>Hardware</h2><h3 id="Specs"><a href="#Specs" class="headerlink" title="Specs:"></a>Specs:</h3><ul><li>CPU: Intel i7-8559U, 4c/8t, base 2.7Ghz, turbo 4.5Ghz, 28w TDP.</li><li>Graphic: intel Iris plus 655 with 128 eDRAM.</li><li>RAM: Two sockets 260-pin 1.2 V DDR4 SDRAM SO-DIMM (up to 32Gb, and 2400Mhz)</li><li>LAN: Intel I219V Gigabit Ethernet Controller (10/100/1000 Mbps)</li><li>Wi-Fi/BT: Intel Dual Band Wireless-AC 9560 (soldered)</li><li>1 * Thunderbolt 3 Four lanes 40Gbps, support DisplayPort 1.2 (17Gbps, up to 4096x2304@60Hz), support USB data (10Gbps)</li><li>1 * HDMI 2.0a (MegaChips MCDP2800 LSPCon DisplayPort1.2-to-HDMI 2.0 up to 4096x2160@60Hz)</li><li>1 * SATA 6 Gbps, 2.5” (540 Mbps)</li><li>1 * M.2 connector (key type M and B+M) for 2242 and 2280 modules. Four lanes (4 Gbps)</li><li>4 * USB-A 3.1 (gen2 10Gbps). One port can deliver 1.5A</li><li>1 * Micro SDXC Card Reader</li><li>1 * Jack 3.5mm Realtek HD Audio</li></ul><h3 id="My-specification"><a href="#My-specification" class="headerlink" title="My specification"></a>My specification</h3><ul><li>2 * Hynix HMA81GS6AFR8N-UH 8GB DDR4-2400 SODIMM</li><li>WD Black SN750 NVMe 512G</li><li><strong>BCM94360CS2</strong> Wi-Fi/Bluetooth with adapter (will explain how)</li></ul><h2 id="Mod"><a href="#Mod" class="headerlink" title="Mod"></a>Mod</h2><p>NUC8i7BEH uses RTS5227S (use pcie x1) chipset for SD card which can be desoldered/replaced with a BCM94360CS2(or BCM942602CS) to get native AirDrop/Handoff support.</p><p>Two possible Mods:</p><ul><li><p><a href="https://www.chiphell.com/thread-2004976-1-1.html" target="_blank" rel="noopener">https://www.chiphell.com/thread-2004976-1-1.html</a> (Chinese) - My NUC8 Mod<br><img src="https://www.tonymacx86.com/attachments/193557c1jhu2heyxjjl8w8-jpg.422678/" alt="1"><br><img src="https://www.tonymacx86.com/attachments/200739bhrnx7stnmnxej9z-jpg.422679/" alt="2"><br><img src="https://www.tonymacx86.com/attachments/204632xl75bq1uwbil2i8g-jpg.422686/" alt="3"></p></li><li><p><a href="https://www.mydigit.cn/forum.php?mod=viewthread&amp;tid=34830&amp;extra=&amp;page=1" target="_blank" rel="noopener">https://www.mydigit.cn/forum.php?mod=viewthread&amp;tid=34830&amp;extra=&amp;page=1</a> (Chinese) - also looks great!</p></li></ul><h2 id="Configure-BIOS-Settings"><a href="#Configure-BIOS-Settings" class="headerlink" title="Configure BIOS Settings"></a>Configure BIOS Settings</h2><p>On my NUC8i7BEH, BIOS version updated to <strong>0071</strong>.</p><p>The boot menu and BIOS setup can be accessed by mashing the F2 key during BIOS startup. After the main screen comes up choose “Advanced”. That gets you to the main BIOS setup screens.</p><p>To start, choose “Load Defaults” (choose from the menu or press F9 in the BIOS setup).</p><p>Then change:</p><ul><li>Boot-&gt;Boot Configuration, disable “Network Boot”</li><li>Power-&gt;Secondary Power Settings, “Wake on LAN from S4/S5”, set to “Stay Off”</li></ul><p>These settings are important but are already set as needed by “Load Defaults”</p><ul><li>Devices-&gt;Video, “IGD Minimum Memory” set to 64mb or 128mb</li><li>Devices-&gt;Video, “IGD Aperture Size” set to 256mb</li><li>Boot-&gt;Secure Boot, “Secure Boot” is disabled</li><li>Boot-&gt;Boot Priority-&gt;Legacy Boot Priority, enable “Legacy Boot” (continue to boot UEFI, but enable legacy for CSM)<br>(you will have KP/reboot without it).</li></ul><p>The following settings are important for <strong>Mod</strong> users</p><ul><li>Devices-&gt;Onboard Devices, disable <strong>WLAN</strong> and <strong>Bluetooth</strong></li><li>Devices-&gt;Onboard Devices, enable <strong>SD Card</strong> to Read/Write as we desoldered/replaced with a BCM94360CS2(or BCM942602CS).</li></ul><p>Press <strong>F10</strong> to save changes.</p><h2 id="Power-Management"><a href="#Power-Management" class="headerlink" title="Power Management"></a>Power Management</h2><p>Everything required for CPU/IGPU power management is already installed with the steps above.<br>There is no longer any need to use the ssdtPRgen.sh script.</p><p>Be aware that hibernation (suspend to disk or S4 sleep) is not well supported on hackintosh.</p><p>You should disable it:<br><figure class="highlight stata"><table><tr><td class="code"><pre><div class="line">sudo pmset -a hibernatemode 0</div><div class="line">sudo <span class="keyword">rm</span> /<span class="keyword">var</span>/vm/sleepimage</div><div class="line">sudo <span class="keyword">mkdir</span> /<span class="keyword">var</span>/vm/sleepimage</div></pre></td></tr></table></figure></p><p>Always check your hibernatemode after updates and disable it. System updates tend to re-enable it, although the trick above (making sleepimage a directory) tends to help.</p><h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><ul><li>To be updated</li></ul><h3 id="Tested-OS"><a href="#Tested-OS" class="headerlink" title="Tested OS"></a>Tested OS</h3><ul><li>macOS Mojave 10.14.6</li><li>macOS Catalina 10.15.2</li></ul><h3 id="Clover"><a href="#Clover" class="headerlink" title="Clover"></a>Clover</h3><ul><li>Clover r5102</li></ul><h3 id="Kexts"><a href="#Kexts" class="headerlink" title="Kexts"></a>Kexts</h3><ul><li>CPUFriend.kext (1.1.9)</li><li>VirtualSMC.kext (1.0.9)<ul><li>SMCProcessor.kext (1.0.9)</li><li>SMCSuperIO.kext (1.0.9)</li></ul></li><li>IntelMausi.kext (1.0.2)</li><li>USBPorts.kext (1.0)</li><li>SATA-unsupported (0.9.2)</li><li>Lilu.kext (1.4.0)</li><li>AppleALC (1.4.4)</li><li>WhateverGreen.kext (1.3.5)</li></ul><h2 id="Works"><a href="#Works" class="headerlink" title="Works"></a>Works</h2><ul><li>UEFI booting via Clover</li><li><strong>AirDrop, Handoff</strong> </li><li>DP/HDMI video/audio</li><li>AirPlay mirroring to AppleTV</li><li>Native USB3/USB2</li><li>Native audio with AppleHDA</li><li>Native power management</li><li>GPU Hardware Acceleration</li><li>Wired Ethernet</li><li>Mac App Store working</li><li>Sleep (hibernation disabled, not tested)</li><li><strong>Dual Displays</strong> (1 HDMI, 1 USB-C to DP)</li></ul><h2 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h2><ul><li>Remove USB Port:HS10 (Built-in Bluetooth)</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      Intel 的性能小钢炮 NUC8i7BEH 硬件上几乎和 Macbook Pro 15.2也就是2018款的13寸 MBP 顶配一样，除了板载的无线网卡和蓝牙，理论可以安装黑苹果，而且在数码之家网友 laice 的努力下，实现了读卡器魔改加装苹果原装无线网卡，完美解决无线和蓝牙的问题。
+    
+    </summary>
+    
+      <category term="Hackintosh" scheme="https://winotes.net/categories/Hackintosh/"/>
+    
+    
+      <category term="Intel, NUC, Bean Canyon, 黑苹果, Hackintosh, 读卡器, 魔改" scheme="https://winotes.net/tags/Intel-NUC-Bean-Canyon-%E9%BB%91%E8%8B%B9%E6%9E%9C-Hackintosh-%E8%AF%BB%E5%8D%A1%E5%99%A8-%E9%AD%94%E6%94%B9/"/>
+    
+  </entry>
   
   <entry>
     <title>CentOS 6 虚拟机扩容 LVM 根分区</title>
@@ -78,9 +100,9 @@
       <category term="*Nix" scheme="https://winotes.net/categories/Nix/"/>
     
     
-      <category term="CentOS" scheme="https://winotes.net/tags/CentOS/"/>
-    
       <category term="PHP" scheme="https://winotes.net/tags/PHP/"/>
+    
+      <category term="CentOS" scheme="https://winotes.net/tags/CentOS/"/>
     
       <category term="LEMP" scheme="https://winotes.net/tags/LEMP/"/>
     
@@ -402,9 +424,9 @@
       <category term="网站相关" scheme="https://winotes.net/categories/%E7%BD%91%E7%AB%99%E7%9B%B8%E5%85%B3/"/>
     
     
-      <category term="Hexo" scheme="https://winotes.net/tags/Hexo/"/>
-    
       <category term="GitHub" scheme="https://winotes.net/tags/GitHub/"/>
+    
+      <category term="Hexo" scheme="https://winotes.net/tags/Hexo/"/>
     
   </entry>
   
@@ -429,11 +451,11 @@
       <category term="网站相关" scheme="https://winotes.net/categories/%E7%BD%91%E7%AB%99%E7%9B%B8%E5%85%B3/"/>
     
     
-      <category term="WordPress" scheme="https://winotes.net/tags/WordPress/"/>
+      <category term="GitHub" scheme="https://winotes.net/tags/GitHub/"/>
     
       <category term="Hexo" scheme="https://winotes.net/tags/Hexo/"/>
     
-      <category term="GitHub" scheme="https://winotes.net/tags/GitHub/"/>
+      <category term="WordPress" scheme="https://winotes.net/tags/WordPress/"/>
     
   </entry>
   
@@ -490,35 +512,6 @@
       <category term="GeoIP" scheme="https://winotes.net/tags/GeoIP/"/>
     
       <category term="MaxMind" scheme="https://winotes.net/tags/MaxMind/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>解决 Windows 下 Java8 的 1603 安装错误</title>
-    <link href="https://winotes.net/fix-java8-install-1603-error/"/>
-    <id>https://winotes.net/fix-java8-install-1603-error/</id>
-    <published>2015-03-19T14:40:11.000Z</published>
-    <updated>2017-09-29T03:25:52.031Z</updated>
-    
-    <content type="html"><![CDATA[<p>近期访问一些应用的网站老是提示 Java 版本过低，需要升级，于是下载了 jre-8u40-windows 来安装，结果老是装不上去，出现这个 1603 错误，试了很多次都一样。<br><img src="/fix-java8-install-1603-error/Java8_Error_1603.png" alt="Java8u40 Install Error Code: 1603"></p><p>最后终于解决：</p><ol><li>关闭 Java 安装程序;</li><li>在 C:\Program Files (x86)\Java\jre1.8.0_40\bin 找到 <strong>javacpl.exe</strong> 文件，运行之；（这里的jre1.8.0_40 指的是 Java 8u40，你的版本如有不同请自行替换）</li><li>在 Java 的控制面板的 Security 标签页取消勾选  Enable Java content in browser ， OK 确认；</li><li>重新尝试安装 Java8u40;</li><li>安装成功后再次运行 <strong>javacpl.exe</strong>，恢复勾选 <code>Enable Java content in browser</code></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;近期访问一些应用的网站老是提示 Java 版本过低，需要升级，于是下载了 jre-8u40-windows 来安装，结果老是装不上去，出现这个 1603 错误，试了很多次都一样。&lt;br&gt;&lt;img src=&quot;/fix-java8-install-1603-error/Java
-      
-    
-    </summary>
-    
-      <category term="Microsoft" scheme="https://winotes.net/categories/Microsoft/"/>
-    
-    
-      <category term="Java" scheme="https://winotes.net/tags/Java/"/>
-    
-      <category term="JRE" scheme="https://winotes.net/tags/JRE/"/>
-    
-      <category term="MSI" scheme="https://winotes.net/tags/MSI/"/>
     
   </entry>
   

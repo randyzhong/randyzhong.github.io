@@ -126,13 +126,13 @@
     
       <category term="CentOS" scheme="https://winotes.net/tags/CentOS/"/>
     
-      <category term="MySQL" scheme="https://winotes.net/tags/MySQL/"/>
-    
       <category term="LEMP" scheme="https://winotes.net/tags/LEMP/"/>
     
       <category term="Nginx" scheme="https://winotes.net/tags/Nginx/"/>
     
       <category term="MariaDB" scheme="https://winotes.net/tags/MariaDB/"/>
+    
+      <category term="MySQL" scheme="https://winotes.net/tags/MySQL/"/>
     
   </entry>
   

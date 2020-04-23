@@ -247,7 +247,21 @@
   </url>
   
   <url>
+    <loc>https://winotes.net/movabletype-2-wordpress/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.103Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://winotes.net/kb289949-items-place-outlook-today-seem-lost/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.103Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://winotes.net/kb974571-crypto-api-update-may-break-office-communications-server-2007-r2-installations/</loc>
     
     <lastmod>2017-09-29T03:25:52.103Z</lastmod>
     
@@ -268,21 +282,7 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/movabletype-2-wordpress/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.103Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://winotes.net/kb974571-crypto-api-update-may-break-office-communications-server-2007-r2-installations/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.103Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://winotes.net/move-to-hexo/</loc>
+    <loc>https://winotes.net/mscrm-2011-beta-installation/</loc>
     
     <lastmod>2017-09-29T03:25:52.103Z</lastmod>
     
@@ -296,7 +296,7 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/mscrm-2011-beta-installation/</loc>
+    <loc>https://winotes.net/move-to-hexo/</loc>
     
     <lastmod>2017-09-29T03:25:52.103Z</lastmod>
     
@@ -317,6 +317,13 @@
   </url>
   
   <url>
+    <loc>https://winotes.net/installing-lighttpd-php5-mysql-on-centos-64/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.095Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://winotes.net/installing-mscrm-4-0-without-internet-access/</loc>
     
     <lastmod>2017-09-29T03:25:52.095Z</lastmod>
@@ -325,13 +332,6 @@
   
   <url>
     <loc>https://winotes.net/internet-explorer-zonemapping-failed-due-to-the-data-is-invalid-event-id-7016/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.095Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://winotes.net/installing-lighttpd-php5-mysql-on-centos-64/</loc>
     
     <lastmod>2017-09-29T03:25:52.095Z</lastmod>
     
@@ -436,14 +436,14 @@
   </url>
   
   <url>
-    <loc>https://winotes.net/hmc-45-ur-2-has-been-released/</loc>
+    <loc>https://winotes.net/hmc-45-update-rollup-6-has-been-released/</loc>
     
     <lastmod>2017-09-29T03:25:52.043Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://winotes.net/hmc-45-update-rollup-6-has-been-released/</loc>
+    <loc>https://winotes.net/hmc-45-ur-2-has-been-released/</loc>
     
     <lastmod>2017-09-29T03:25:52.043Z</lastmod>
     
@@ -458,13 +458,6 @@
   
   <url>
     <loc>https://winotes.net/hmc-45-update-rollup-3-has-been-released/</loc>
-    
-    <lastmod>2017-09-29T03:25:52.043Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://winotes.net/hmc-45-and-exchange-2007-sp1-part4-internal-and-external-out-of-office/</loc>
     
     <lastmod>2017-09-29T03:25:52.043Z</lastmod>
     
@@ -486,6 +479,13 @@
   
   <url>
     <loc>https://winotes.net/hmc-45-and-exchange-2007-sp1-part5-autodiscover-in-the-multi-tenancy-environment/</loc>
+    
+    <lastmod>2017-09-29T03:25:52.043Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://winotes.net/hmc-45-and-exchange-2007-sp1-part4-internal-and-external-out-of-office/</loc>
     
     <lastmod>2017-09-29T03:25:52.043Z</lastmod>
     

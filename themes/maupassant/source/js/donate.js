@@ -75,4 +75,22 @@ jQuery(document).ready(function() {
 		}, 600);
 
 	});
-});
+!function (e, t, a) {
+    var script = document.currentScript || (function () {
+        var scripts = document.getElementsByTagName("script");
+        return scripts[scripts.length - 1]
+    })()
+    var successText = $(script).attr("successtext")
+    var clipboard = new ClipboardJS('#BTC');
+    clipboard.on('success',
+        function (e) {
+            console.log(successText)
+            if (successText) {
+                toastr.options = {
+                    "positionClass": "toast-top-center",
+                    "timeOut": "1000",
+                }
+                toastr.success(successText)
+            }
+        });
+}(window, document);

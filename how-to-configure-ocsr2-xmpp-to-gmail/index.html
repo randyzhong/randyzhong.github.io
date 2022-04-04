@@ -1,0 +1,246 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="winotes 闻道录"><title>配置OCS XMPP网关以支持OC和Gmail联系人的通讯 | Win Notes</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.0.2"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script src="https://www.googletagmanager.com/gtag/js?id=UA-20089256-1" async></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-20089256-1');
+</script><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement('script');
+  hm.src = 'https://hm.baidu.com/hm.js?' + 'ee1e3acc8276298e26c935bfd04eb596';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+  </script><script>(function(){var bp = document.createElement('script');
+var curProtocol = window.location.protocol.split(':')[0];
+if (curProtocol === 'https'){
+bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+}
+else{
+bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+}
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(bp, s);})();
+</script><script type="text/javascript" src="//cdn.jsdelivr.net/npm/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.css"><div class="darkmode-toggle">🌓</div><script>var prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+var toggle = document.querySelector('.darkmode-toggle');
+var html = document.querySelector('html');
+
+html.dataset.dark = localStorage.dark || prefersDarkMode.matches;
+
+toggle.addEventListener('click', () => {
+localStorage.dark = !(html.dataset.dark == 'true');
+html.dataset.dark = localStorage.dark;
+});</script><meta name="generator" content="Hexo 6.1.0"></head><body><div class="body_container"><div class="hidden_on_post_page" id="header"><div class="site-name"><h1 class="hidden">配置OCS XMPP网关以支持OC和Gmail联系人的通讯</h1><a id="logo" href="/.">Win Notes</a><p class="description">闻道录</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">配置OCS XMPP网关以支持OC和Gmail联系人的通讯</h1><div class="post-meta">2010-06-23<span> | </span><span class="category"><a href="/categories/%E6%B2%9F%E9%80%9A%E5%8D%8F%E4%BD%9C/">沟通协作</a></span><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><a class="disqus-comment-count" href="/how-to-configure-ocsr2-xmpp-to-gmail/#vcomment"><span class="valine-comment-count" data-xid="/how-to-configure-ocsr2-xmpp-to-gmail/"></span><span> 条评论</span></a><div class="post-content"><html><head></head><body><p>是的，您没有看错，我也没有写错！现在通过安装配置 XMPP 网关，您可以在 Office Communicator 中添加 Gmail （Google Talk）用户作为联系人，查看对方的忙/闲状态，并即时聊天。</p>
+<p>微软的OCS团队早在去年就在其团队博客上面发布了配置指南，请移步<a target="_blank" rel="noopener" href="http://communicationsserverteam.com/archive/2009/10/01/599.aspx">http://communicationsserverteam.com/archive/2009/10/01/599.aspx</a>&nbsp;查看。</p>
+<p>另外本文也参考了MVP-&nbsp;<a target="_blank" rel="noopener" href="http://blogs.pointbridge.com/Blogs/schertz_jeff">Jeff Schertz</a>&nbsp;的博文</p>
+<p><a target="_blank" rel="noopener" href="http://blogs.pointbridge.com/Blogs/schertz_jeff/Pages/Post.aspx?_ID=91">http://blogs.pointbridge.com/Blogs/schertz_jeff/Pages/Post.aspx?_ID=91</a></p>
+<p>基本上，您需要在现有运行良好的 OCS 2007 R2环境中添置至少一台 XMPP 网关服务器，通过配置其相关设定，来支持和Gmail用户的连接。</p>
+<p>下面我也说说我自己的经验和步骤:</p>
+<p><strong>一、拓扑图</strong></p>
+<p>我们先来看看微软官方文档中的一幅图：</p>
+<p><img src="/how-to-configure-ocsr2-xmpp-to-gmail/Fig_1.jpg" alt="Fig_1"></p>
+<ul>
+<li><p><strong>Gmail</strong></p>
+<blockquote>
+<p>Gmail 云部分是由Google提供的XMPP网关服务器，目前有5个不同的Gtalk主机名，其名称和IP如下所示。</p>
+</blockquote>
+</li>
+<li><p>xmpp-server.l.google.com,&nbsp; 74.125.45.125</p>
+</li>
+<li><p>xmpp-server1.l.google.com, 74.125.155.125</p>
+</li>
+<li><p>xmpp-server2.l.google.com, 74.125.47.125</p>
+</li>
+<li><p>xmpp-server3.l.google.com, 74.125.45.125</p>
+</li>
+<li><p>xmpp-server4.l.google.com, 74.125.45.125</p>
+</li>
+<li><p><strong>OCS边缘服务器</strong></p>
+<blockquote>
+<p>一台运行良好的 OCS 2007 R2 Edge 服务器</p>
+</blockquote>
+</li>
+<li><p><strong>XMPP 网关</strong></p>
+<blockquote>
+<p>一台运行在 Windows Server 上面的 XMPP 网关服务器。 一般来说，单网卡就够了，可以同时处理来自外部（Gmail）和内部（OCS边缘）的请求。如果根据您的实际情况需要配置两片网卡，当然也是支持的。<br>支持网络地址转换 (NAT)，在本例中我们用的就是NAT。如果你有单独的公网地址能直接分配给XMPP的话,当然更好。<br>好了，说了这么久，那你也许会问，什么是 XMPP 呢？</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>XMPP&nbsp;<strong>是 E</strong>x</strong>tensible&nbsp;<strong>M</strong>essaging and&nbsp;<strong>P</strong>resence Protocol 的简称，是一种以 XML 为基础的分布式和开放式即时通讯协议，听起来很熟悉？没错，其前身就是&nbsp;<strong>Jabber</strong>。**XMPP&nbsp;**经由 IETF 小组制订，后因为被 Google Talk 采用而被大家所接触。</p>
+<p>Jabber / XMPP 历史</p>
+<p>Jeremie Miller于1998年开始了Jabber这个项目。第一个公开版本于2000年5月发行。这个项目的主要产品是jabberd，XMPP的服务器端软件。它既可以创建私人的XMPP网络，也可以加入全球的公共XMPP网络。 XMPP的关键特色是，分散式的即时通讯系统，以及使用XML流。</p>
+<p>Jabber Logo</p>
+<p>标准化的Jabber已经由IETF XMPP协议（RFC3920）。<br>Jabber是一个开放源码形式组织产生的网络即时通信协议。 XMPP原本是为Instant Messenger而量身定制，但由于XML Stanza本身是XML元素，在基于XML灵活发展的特性下，使得XMPP也可以适用其他方面，已经得到了IETF的批准。 XMPP与IMPP、PRIM、SIP（SIMPLE）合称四大IM协议主流，在此4大协议中，XMPP是最灵活的。</p>
+<p>2005年，Google 发布了 Google Talk，这是一个IP电话及即时通讯的服务，即时通讯功能采用了开放的 XMPP 。预计这将对XMPP社区起很大的推动作用。初期此服务不支持服务器到服务器的通讯功能，所以未能完全发挥XMPP的分散式特色；虽然任何XMPP客户端都能连接到 Google Talk ，但是用户想要登录 Google Talk ，必须拥有 Google Talk 帐号（即 Gmail 帐号），而用户也无法与公共XMPP网络的用户通信。自2006年1月17日起，Google 宣布支持服务器到服务器的通讯，Google Talk 用户可与其他XMPP公共网络的用户聊天。<br>2007年的 Jabber 软件基金会已经成为XMPP标准基金会。</p>
+<p>而微软在去年10月发布的 Office Communications Server 2007 R2 XMPP 网关实现了 Office Communications Server 2007 R2 与指定的基于 XMPP 的 IM 和状态提供程序间的 IM 和状态通信，这里指定的 IM 就是指 Jabber XCP 和 Google Talk 。本文先讨论和 Gmail 通讯的部分， Jabber XCP 放到下篇中再讲。</p>
+<p><strong>二、XMPP&nbsp;网关服务器安装</strong></p>
+<p>系统需求和 OCS Edge 服务器类似，只是说 XMPP 不能和 Edge 安装在一起。</p>
+<p>软件需求：</p>
+<table border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td valign="top" width="242">.NET Framework</td>
+<td valign="top" width="254">3.5</td>
+</tr>
+<tr>
+<td valign="top" width="242">操作系统</td>
+<td valign="top" width="254">Windows Server 2003 SP2 64位标准版/企业版Windows Server 2008 64位标准版/企业版Windows Server 2008 R2 标准版/企业版*</td>
+</tr>
+<tr>
+<td valign="top" width="242">MMC控制台</td>
+<td valign="top" width="254">3.0</td>
+</tr>
+<tr>
+<td valign="top" width="242">Microsoft Visual C ++® 2005 Redistributable or Visual C++ 2008 Redistributable</td>
+<td valign="top" width="254"></td>
+</tr>
+<tr>
+<td valign="top" width="242">Unified Communications Managed API (UCMA)</td>
+<td valign="top" width="254">安装补丁**<span style="color: #ff0000;">KB968802</span>**</td>
+</tr>
+</tbody>
+</table>
+* 微软OCS团队的博文上面说 Windows 2008 R2 暂不支持，但是我测试了，**<span style="color: #ff0000;">2008 R2</span>**是支持的
+
+<p>支持的服务端</p>
+<p>· Microsoft Office Communications Server 2007 R2</p>
+<p>· Microsoft Office Communications Server 2007</p>
+<p>· Jabber XCP Server version 5.4</p>
+<p>· Google Talk</p>
+<p>支持的客户端</p>
+<p>· Microsoft Office Communicator 2007 R2</p>
+<p>· Microsoft Office Communicator 2007</p>
+<p>· Microsoft Office Communicator 2005</p>
+<p>· Jabber MomentIM Client version 5.2.1</p>
+<p>· Google Talk</p>
+<p>下载地址：</p>
+<ol>
+<li>Microsoft Office Communications Server 2007 R2 XMPP Gateway</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="http://www.microsoft.com/downloads/details.aspx?displaylang=zh-cn&amp;FamilyID=aa560bfe-9960-473a-bfb8-53bff678cec4">http://www.microsoft.com/downloads/details.aspx?displaylang=zh-cn&amp;FamilyID=aa560bfe-9960-473a-bfb8-53bff678cec4</a></p>
+<ol start="2">
+<li>Hotfix</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="http://www.microsoft.com/downloads/details.aspx?familyid=80B4E42D-6548-46F4-87B1-7FA0FAF80B82&amp;displaylang=en">http://www.microsoft.com/downloads/details.aspx?familyid=80B4E42D-6548-46F4-87B1-7FA0FAF80B82&amp;displaylang=en</a></p>
+<p>安装过程，典型的 Next to Next，不过这还只是解压：</p>
+<p><img src="/how-to-configure-ocsr2-xmpp-to-gmail/Fig_2.jpg" alt="Fig_2"> <img src="/how-to-configure-ocsr2-xmpp-to-gmail/Fig_3.jpg" alt="Fig_3"> <img src="/how-to-configure-ocsr2-xmpp-to-gmail/Fig_4.jpg" alt="Fig_4"> <img src="/how-to-configure-ocsr2-xmpp-to-gmail/Fig_5.jpg" alt="Fig_5"></p>
+<p>这里安装程序会把安装文件解压至 C:\Program Files\Microsoft Office Communications Server 2007 R2\XMPP Gateway Installer 目录，运行 setup.exe</p>
+<p><img src="/how-to-configure-ocsr2-xmpp-to-gmail/Fig_6.jpg" alt="Fig_6"></p>
+<p>点 Install 进行安装，完毕后我们开始配置。</p>
+<p><strong>需要注意的是，一开始你会看到 Install Files for XMPP Gateway 这一步是正常的，但是当你退出后下次再进入该页面时，你也许会看到如下提示，尤其是在 Windows 2008 R2 中安装时，那么你还需要安装这个更新（包含在KB968802中）：</strong></p>
+<p><strong><a target="_blank" rel="noopener" href="http://download.microsoft.com/download/D/9/6/D967F77F-D0BD-43FB-987B-6FBF7C82251B/UcmaRedist.msp">http://download.microsoft.com/download/D/9/6/D967F77F-D0BD-43FB-987B-6FBF7C82251B/UcmaRedist.msp</a></strong></p>
+<p><img src="/how-to-configure-ocsr2-xmpp-to-gmail/Fig_7.jpg" alt="Fig_7"></p>
+<p><strong>三、XMPP&nbsp;网关配置</strong></p>
+<p><strong>A.&nbsp;要使&nbsp;XMPP&nbsp;网关能正常和 Gtalk 通讯，得满足下面四个条件：</strong></p>
+<ol>
+<li><p>你的环境中的 OCS 2007 R2 运行良好。</p>
+</li>
+<li><p>你的 OCS 有安装边缘 Edge 角色。</p>
+</li>
+<li><p>一张用来和内部边缘服务器通讯的证书，私有或者商业的都行（和Gmail的通信，私有就够了）。</p>
+</li>
+<li><p>需要在你的公网域名下面创建一条 A 记录 和 SRV 记录。</p>
+</li>
+</ol>
+<p>接下来我们再来详细看看 Gmail 和 OCS 的通讯过程</p>
+<p><img src="/how-to-configure-ocsr2-xmpp-to-gmail/Fig_8.jpg" alt="Fig_8"></p>
+<p>看看一个 Gtalk 用户如何发送一个即时消息到 contoso.com 这个域中的OCS 用户:</p>
+<ol>
+<li><p>GoogleTalk 服务器场中的任意一个 XMPP 服务器向 DNS 请求查询 contoso.com 的 XMPP 服务记录&nbsp;<strong>__xmpp-server.<em>tcp.contoso.com</em></strong><em>。</em>&nbsp;这条记录应该指向 contoso.com 组织中 XMPP 网关服务器的公网 A 记录的FQDN地址，A记录的名字任意取，比如&nbsp;<strong><em>xmpp.contoso.com</em></strong><em>。</em></p>
+</li>
+<li><p>得到A记录的地址后，GoogleTalk 服务器会使用标准 TCP 连接去和&nbsp;**<em>xmpp.contoso.com</em><strong>的</strong>5269&nbsp;**端口发送请求。这个过程是非加密的，所以在这里我们并不需要证书。</p>
+</li>
+<li><p>在 contoso 组织的防火墙接到 Gtalk 的请求后，会将其路由给 XMPP 网关的，当然，在这之前，contoso 的管理员需要把 TCP&nbsp;<strong>5269</strong>&nbsp;端口映射给&nbsp;<strong>XMPP</strong>。在上面的图例中，XMPP 网关的内部接口地址是 10.11.12.40。 这一步也是非加密的。</p>
+</li>
+<li><p>当 XMPP 网关接到请求后，它会查看自己的 SIP 配置来确定下一跳怎么走，那么在我们的例子中，这个下一跳就是 OCS 的边缘访问服务器了 (<em>sip.contoso.com</em>)。要注意的是，这里是使用的 Edge 的外部FQDN地址，所以当你的 XMPP 网关和 Edge 在同一个防火墙后面时，也许 XMPP 会得到 Edge 的公网地址，从而连不到 Edge（除非在防火墙上开启了 DNS 别名- DNS Alias or DNS Doctor）。所以这时你需要在 XMPP 网关的本地 Hosts 文件中添加 Edge 的外部接口的内网地址 (10.11.12.33)。多啰嗦一句，在 Edge 的经典配置中，外部接口指的是 Edge 用来监听外部 SIP 通讯和联盟的那张网卡，不是用来和 OCS Pool 通信的那个内部接口。</p>
+</li>
+<li><p>在与边缘访问的 Edge 服务器的联盟监听端口&nbsp;**5061&nbsp;**建立连接后，XMPP 网关需要一张证书来做 MTLS 的加密通讯。 同样的，XMPP 必须要连接到 Edge 的外部接口上的联盟监听端口。很多朋友在此碰到的问题大多是把 XMPP 网关去连 Edge 的内部接口地址。到这一步，Gtalk的消息就发到了OCS用户那里。</p>
+</li>
+<li><p>OCS 用户回消息给 Gtalk 用户过程 - Edge 服务器收到来自 OCS 前端服务器的请求后，会将 gmail.com 当做一个联盟的域来处理，就和OCS连接 Yahoo/MSN 等一样，通讯请求将会把去到 gmail.com 的通讯交给 Gmail 的联盟服务器 - XMPP 网关去处理，在上面的图例中就是**<em>xmpp.jds.local</em>**</p>
+</li>
+</ol>
+<p>这里有几个重点要注意下:</p>
+<p>第一，在 XMPP 网关上的证书一定要安装配置好。</p>
+<ul>
+<li>该证书只是用在 XMPP 和 Edge 服务器的内部通信中间，并不用来和 Google Talk 服务器通信，所以我们可以使用自建 CA 来颁发证书。证书的SN名称应该和 XMPP 网关的内部 FQDN 名称一致，另外，自建 CA 的根证书链应该要导入到 XMPP 网关的计算机账户下受信任的根证书颁发机构中。</li>
+<li>证书的申请，你可以通过边缘服务器 Edge 上面的证书向导来做（因为 XMPP 上面没有这个向导），或者使用 lcscmd.exe。注意的是，该证书的导出和导入必须要包含私钥（Private Key）。</li>
+</ul>
+<p>第二， 证书的必须颁发给 XMPP 服务器的 FQDN 名称。</p>
+<ul>
+<li>因为 XMPP 网关服务器和 Edge 一样，没有加入域，工作组环境，所以我们需要添加相应的 DNS 后缀，比如&nbsp;<strong>jds.local</strong>。</li>
+<li>XMPP 网关服务器的 FQDN， 证书的 CN (或者 SAN 记录) 以及在 Edge 服务器中的 Gmail 联盟服务器的允许列表中，设定的都应该是<strong>真实的</strong>**&nbsp;FQDN&nbsp;*<em><strong>名称</strong>，并且要保持</em>*一致**。</li>
+</ul>
+<p>最后, 防火墙规则的设定:</p>
+<ul>
+<li>XMPP 网关的 TCP&nbsp;<strong>5061</strong>，需要和 Edge 的 TCP&nbsp;<strong>5061</strong>&nbsp;端口进行双向通信</li>
+<li>XMPP 网关的 TCP&nbsp;<strong>5269</strong>，需要接受来自外部的 Google Talk 的请求</li>
+</ul>
+<p><strong>B.&nbsp; DNS&nbsp;记录的创建</strong></p>
+<ul>
+<li>创建 A 记录：<strong>xmpp.contoso.com</strong>&nbsp;- 12.34.56.78</li>
+<li>创建 SRV 记录：**__xmpp-server.<em>tcp.contoso.com</em>**&nbsp;-&nbsp;<strong>xmpp.contoso.com，Port 5269</strong></li>
+</ul>
+<p>参照微软的图</p>
+<p><img src="/how-to-configure-ocsr2-xmpp-to-gmail/Fig_9.jpg" alt="Fig_9"></p>
+<p><strong>C.说了很多，下面开始配置&nbsp;XMPP :</strong></p>
+<p>· 修改&nbsp;<strong>TGWConsoleGUI.dll.config</strong>&nbsp;文件</p>
+<p>默认位置在&nbsp;<strong>C:\Program Files\Microsoft Office Communications Server 2007 R2\XMPP Gateway</strong>&nbsp;下面，这里需要改到的部分是&nbsp;<em>SipIP</em>&nbsp;和&nbsp;_XmppIP&nbsp;_两行，这里一定要改，本例中 SipIP 和 XmppIP 都是用的 XMPP 的内部地址。这里如果改的不对或者没有改而留空的话，会导致 XMPP Gateway 服务一启动就马上自动停止!</p>
+<p><img src="/how-to-configure-ocsr2-xmpp-to-gmail/Fig_10.jpg" alt="Fig_10"></p>
+<h6 id="SIP-配置"><a href="#SIP-配置" class="headerlink" title="SIP 配置"></a>SIP 配置</h6><p>在 XMPP Gateway 的配置界面中点击 SIP Configuration:</p>
+<ol>
+<li><strong>Domain</strong>&nbsp;标签卡, Domain 一栏指定你的域名，本例中我们用&nbsp;<strong>litwareinc.com</strong>。</li>
+<li><strong>Host Name</strong>&nbsp;一栏，填上 Edge 边缘服务器的外部 FQDN 名称，本例中我们用**srv.litewareinc.com&nbsp;**。<br><img src="/how-to-configure-ocsr2-xmpp-to-gmail/Fig_11.jpg" alt="Fig_11"></li>
+<li><strong>TLS Certificate</strong>，选择之前通过自建 CA 申请的内部证书<br><img src="/how-to-configure-ocsr2-xmpp-to-gmail/Fig_12.jpg" alt="Fig_12"></li>
+</ol>
+<p>4.&nbsp;<strong>Validate Connection</strong>&nbsp;在下拉列表中选择&nbsp;<strong>litwareinc.com</strong>，验证是否配置正确。</p>
+<h5 id="XMPP-配置"><a href="#XMPP-配置" class="headerlink" title="XMPP 配置"></a>XMPP 配置</h5><p>选择&nbsp;<strong>XMPP Configuration</strong>&nbsp;节点</p>
+<ol>
+<li><p>在&nbsp;<strong>Allow List</strong>&nbsp;标签卡中, 点击&nbsp;**Add&nbsp;**添加。</p>
+</li>
+<li><p>在弹出的&nbsp;<strong>Federated XMPP Domain names</strong>&nbsp;对话框中,&nbsp;&nbsp;<strong>Domain Name</strong>&nbsp;一栏填_gmail.com__，_选择&nbsp;<strong>TCP Dialback</strong>&nbsp;(required)，其它留空，确定保存。</p>
+</li>
+</ol>
+<p><img src="/how-to-configure-ocsr2-xmpp-to-gmail/Fig_13.jpg" alt="Fig_13"></p>
+<p>3.之前提到过，Gmail不使用加密连接，所以这里不需要配置证书。</p>
+<ol start="4">
+<li>验证 Gmail。</li>
+</ol>
+<h5 id="启动XMPP-服务"><a href="#启动XMPP-服务" class="headerlink" title="启动XMPP 服务"></a>启动XMPP 服务</h5><p><img src="/how-to-configure-ocsr2-xmpp-to-gmail/Fig_14.jpg" alt="Fig_14"></p>
+<p><strong>D. Edge&nbsp;服务器的配置</strong></p>
+<p>这里非常简单，就是把 gmail.com 作为联盟域添加:</p>
+<ol>
+<li>打开 OCS Edge 的属性配置对话框。</li>
+</ol>
+<p><img src="/how-to-configure-ocsr2-xmpp-to-gmail/Fig_15.jpg" alt="Fig_15"></p>
+<ol start="2">
+<li>转到&nbsp;<strong>Allow</strong>&nbsp;标签页, 点击&nbsp;<strong>Add</strong>, 按图中所示添加。</li>
+</ol>
+<p>Federated partner domain name -&nbsp;<strong><em>gmail.com</em></strong>,</p>
+<p>Federated partner Access Edge Server -&nbsp;<strong>srv_xmpp.litewareinc.com</strong></p>
+<ol start="3">
+<li>为了保证 OCS Edge 服务器能和 XMPP 网关正常通信，你需要在内部 DNS 中添加 XMPP 的记录或者是在本地 Hosts 文件中指定，比如</li>
+</ol>
+<p><strong>192.168.1.20 srv_xmpp.litwareinc.com</strong></p>
+<p><strong>四、添加 Gmail 用户并验证</strong></p>
+<p>添加 Gmail 用户之前，得保证你的 OCS 用户策略里面有启用联盟</p>
+<p><img src="/how-to-configure-ocsr2-xmpp-to-gmail/Fig_16.jpg" alt="Fig_16"></p>
+<p>成功!</p>
+<p><img src="/how-to-configure-ocsr2-xmpp-to-gmail/Fig_17.jpg" alt="Fig_17"><img src="/how-to-configure-ocsr2-xmpp-to-gmail/Fig_18.jpg" alt="Fig_18"></p>
+</body></html></div><script type="text/javascript" src="/js/share.js?v=1.0.2" async></script><a class="article-share-link" data-url="http://winotes.net/how-to-configure-ocsr2-xmpp-to-gmail/" data-id="cl1kqom3z0032x94s7zc0800w" data-qrcode="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJUlEQVR42u3aO47DMAxFUe9/0542jeP7SE0AUddVECS2jguCv+vC1/1xPX2T/pI8ZfElQ4aMbRn314v/huPJ0+PnypAh4wDG0yHI4zsBlzC+n02GDBkyyGceWAlVhgwZMtYG3FXlK08lZciQcTKDp2iElDbsflqLy5AhY0MGD4W///wv8w0ZMmRsxbjDq5Ma1ppu6FQyZMgYzagldukIk9ytn2jKkCHjNAZp2fMxZC3pjBt2MmTIGM1IR4zpGKBzn7jNJ0OGjHGMTnrXWcjgAR09XYYMGQcw0r/VEsS0DcfDtwwZMmYzVjX0a6NHnvyhUlaGDBlDGWlCtmoYWWu0Pd5BhgwZoxnkiOmyBWmxpa3/YGAgQ4aM0Yx0zJkePV01a2W7MmTIGMTgCRkpRNMWfye4X7Vby5AhY0NGLcimyVm/9A12RmTIkDGUQYaIq1a7+qOCK32vMmTI2JxRC5r9pC19cS+FrgwZMkYz0hZ/enR+oHQA8DjZkCFDxmgGwdTac7WVVl5Iy5Ah40xG2qxPy91Oqfx4KhkyZBzDqKV9ZC2VL4oVBwwyZMgYyrjDixexPKXjQ4WXRpsMGTKGMvrBjiN5WOdHjzEyZMjYltFfyUpXvvgwQIYMGTJIiCTNtTS962yxvdTiMmTIkNFYragNFYLyWIYMGTJwg4x/w18EWheTIUPGAQye6vXXJkihG4NlyJAxmsFLxwWbHaUBQDqEkCFDxiDGHxtvLLon3p15AAAAAElFTkSuQmCC">分享</a><div class="tags"><a href="/tagsXMPP"><i class="fa fa-tag">XMPP</i></a><a href="/tagsGmail"><i class="fa fa-tag">Gmail</i></a></div><div class="post-nav"><a class="pre" href="/how-to-fix-sql2008-ssrs-teradata-extension-load-error/">解决 SQL 2008 Reporting Service 的 TeraData 扩展错误</a><a class="next" href="/fix-vmware-esxi-40-vc-hardware-status-error/">解决 VMWare ESXi 4.0 在 VC 中主机硬件状态无法监控的问题</a></div><div id="vcomment"></div><script src="//unpkg.com/leancloud-storage@4.12.1/dist/av-min.js"></script><script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'Asp5CLqfPRK7uB2yc7AIwBfy-MdYXbMMI',
+  appKey:'56eFJrQ4dhcjWAgzLkBsRKgI',
+  placeholder:'闻道有先后，术业有专攻。多多交流，互相学习。',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  serverURLs: 'https://asp5clqf.api.lncldglobal.com'
+})
+</script></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://winotes.net"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Nix/">*Nix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hackintosh/">Hackintosh</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MSCRM/">MSCRM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft/">Microsoft</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft/Exchange/">Exchange</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft/HMC/">HMC</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft/MSCRM/">MSCRM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft/MSSQL/">MSSQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft/Office/">Office</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft/SQL%E6%95%B0%E6%8D%AE%E5%BA%93/">SQL数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft/%E6%B4%BB%E5%8A%A8%E7%9B%AE%E5%BD%95/">活动目录</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Ubuntu/">Ubuntu</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/eBook/">eBook</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E7%A0%81%E5%BD%B1%E9%9F%B3/">数码影音</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B2%9F%E9%80%9A%E5%8D%8F%E4%BD%9C/">沟通协作</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%AB%99%E7%9B%B8%E5%85%B3/">网站相关</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/">虚拟化</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/Active-Directory/" style="font-size: 15px;">Active Directory</a> <a href="/tags/Tips/" style="font-size: 15px;">Tips</a> <a href="/tags/APC/" style="font-size: 15px;">APC</a> <a href="/tags/PECL/" style="font-size: 15px;">PECL</a> <a href="/tags/PHP/" style="font-size: 15px;">PHP</a> <a href="/tags/Yum/" style="font-size: 15px;">Yum</a> <a href="/tags/Vobsub/" style="font-size: 15px;">Vobsub</a> <a href="/tags/CentOS/" style="font-size: 15px;">CentOS</a> <a href="/tags/Kernel/" style="font-size: 15px;">Kernel</a> <a href="/tags/VMware/" style="font-size: 15px;">VMware</a> <a href="/tags/Windows/" style="font-size: 15px;">Windows</a> <a href="/tags/GitHub/" style="font-size: 15px;">GitHub</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/DCOM/" style="font-size: 15px;">DCOM</a> <a href="/tags/Excel/" style="font-size: 15px;">Excel</a> <a href="/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/" style="font-size: 15px;">最佳实践</a> <a href="/tags/Exchange/" style="font-size: 15px;">Exchange</a> <a href="/tags/Kerberos/" style="font-size: 15px;">Kerberos</a> <a href="/tags/Rollup/" style="font-size: 15px;">Rollup</a> <a href="/tags/Activesync/" style="font-size: 15px;">Activesync</a> <a href="/tags/Android/" style="font-size: 15px;">Android</a> <a href="/tags/Google/" style="font-size: 15px;">Google</a> <a href="/tags/Nexus/" style="font-size: 15px;">Nexus</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 15px;">日志</a> <a href="/tags/CentOS-LVM-%E6%89%A9%E5%AE%B9-%E6%A0%B9%E5%88%86%E5%8C%BA/" style="font-size: 15px;">CentOS, LVM, 扩容, 根分区</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/JRE/" style="font-size: 15px;">JRE</a> <a href="/tags/MSI/" style="font-size: 15px;">MSI</a> <a href="/tags/Virtual-Center/" style="font-size: 15px;">Virtual Center</a> <a href="/tags/BITS/" style="font-size: 15px;">BITS</a> <a href="/tags/Microsoft/" style="font-size: 15px;">Microsoft</a> <a href="/tags/WSUS/" style="font-size: 15px;">WSUS</a> <a href="/tags/Office/" style="font-size: 15px;">Office</a> <a href="/tags/HMC/" style="font-size: 15px;">HMC</a> <a href="/tags/Autodiscover/" style="font-size: 15px;">Autodiscover</a> <a href="/tags/MultiTenancy/" style="font-size: 15px;">MultiTenancy</a> <a href="/tags/GeoIP/" style="font-size: 15px;">GeoIP</a> <a href="/tags/MaxMind/" style="font-size: 15px;">MaxMind</a> <a href="/tags/XMPP/" style="font-size: 15px;">XMPP</a> <a href="/tags/Gmail/" style="font-size: 15px;">Gmail</a> <a href="/tags/Ubuntu/" style="font-size: 15px;">Ubuntu</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/Hackintosh-macOS-Mojave/" style="font-size: 15px;">Hackintosh, macOS, Mojave</a> <a href="/tags/MSSQL/" style="font-size: 15px;">MSSQL</a> <a href="/tags/SSRS/" style="font-size: 15px;">SSRS</a> <a href="/tags/TeraData/" style="font-size: 15px;">TeraData</a> <a href="/tags/WordPress/" style="font-size: 15px;">WordPress</a> <a href="/tags/Communicator/" style="font-size: 15px;">Communicator</a> <a href="/tags/SCVMM/" style="font-size: 15px;">SCVMM</a> <a href="/tags/VMHost/" style="font-size: 15px;">VMHost</a> <a href="/tags/WMIC/" style="font-size: 15px;">WMIC</a> <a href="/tags/Internet-Explorer/" style="font-size: 15px;">Internet Explorer</a> <a href="/tags/Fiddler/" style="font-size: 15px;">Fiddler</a> <a href="/tags/VBScript/" style="font-size: 15px;">VBScript</a> <a href="/tags/PowerShell/" style="font-size: 15px;">PowerShell</a> <a href="/tags/IIS/" style="font-size: 15px;">IIS</a> <a href="/tags/Rewrite/" style="font-size: 15px;">Rewrite</a> <a href="/tags/HP-EliteDesk-%E9%BB%91%E8%8B%B9%E6%9E%9C-Hackintosh/" style="font-size: 15px;">HP, EliteDesk, 黑苹果, Hackintosh</a> <a href="/tags/MSCRM/" style="font-size: 15px;">MSCRM</a> <a href="/tags/Docker/" style="font-size: 15px;">Docker</a> <a href="/tags/LEMP/" style="font-size: 15px;">LEMP</a> <a href="/tags/Nginx/" style="font-size: 15px;">Nginx</a> <a href="/tags/MariaDB/" style="font-size: 15px;">MariaDB</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/Lighttpd/" style="font-size: 15px;">Lighttpd</a> <a href="/tags/VMware-Tools/" style="font-size: 15px;">VMware Tools</a> <a href="/tags/Intel-NUC-Bean-Canyon-%E9%BB%91%E8%8B%B9%E6%9E%9C-Hackintosh-%E8%AF%BB%E5%8D%A1%E5%99%A8-%E9%AD%94%E6%94%B9/" style="font-size: 15px;">Intel, NUC, Bean Canyon, 黑苹果, Hackintosh, 读卡器, 魔改</a> <a href="/tags/Outlook/" style="font-size: 15px;">Outlook</a> <a href="/tags/Event-ID/" style="font-size: 15px;">Event ID</a> <a href="/tags/Group-Policy/" style="font-size: 15px;">Group Policy</a> <a href="/tags/Zonemapping/" style="font-size: 15px;">Zonemapping</a> <a href="/tags/Lync/" style="font-size: 15px;">Lync</a> <a href="/tags/OCS/" style="font-size: 15px;">OCS</a> <a href="/tags/Movable-Type/" style="font-size: 15px;">Movable Type</a> <a href="/tags/Hosting/" style="font-size: 15px;">Hosting</a> <a href="/tags/Packt/" style="font-size: 15px;">Packt</a> <a href="/tags/eBook/" style="font-size: 15px;">eBook</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Reporting-Service/" style="font-size: 15px;">Reporting Service</a> <a href="/tags/SPN/" style="font-size: 15px;">SPN</a> <a href="/tags/Web-404-https-%E8%85%BE%E8%AE%AF/" style="font-size: 15px;">Web, 404, https, 腾讯</a> <a href="/tags/Chrome/" style="font-size: 15px;">Chrome</a> <a href="/tags/Cookie/" style="font-size: 15px;">Cookie</a> <a href="/tags/MSDN/" style="font-size: 15px;">MSDN</a> <a href="/tags/Hexo-NPM-GitHub/" style="font-size: 15px;">Hexo, NPM, GitHub</a> <a href="/tags/Skype-for-Business/" style="font-size: 15px;">Skype for Business</a> <a href="/tags/DHCP/" style="font-size: 15px;">DHCP</a> <a href="/tags/Cisco/" style="font-size: 15px;">Cisco</a> <a href="/tags/Virtual-Server/" style="font-size: 15px;">Virtual Server</a> <a href="/tags/VirtualBox/" style="font-size: 15px;">VirtualBox</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/upgrade-hexo-to-latest-and-fix-dependency-issues/">更新了下博客的 Hexo 到最新版并修复几个依赖包的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/intel-nuc8i7beh-mod-hackintosh/">Intel NUC8i7BEH 读卡器魔改完美安装黑苹果</a></li><li class="post-list-item"><a class="post-list-link" href="/how-to-fix-mojave-application-is-damaged-and-cant-be-used-to-install-macOS-errors/">How to Fix “Mojave application is damaged, and can’t be used to install macOS” Errors</a></li><li class="post-list-item"><a class="post-list-link" href="/extending-lvm-root-partition-on-centos6-vm/">CentOS 6 虚拟机扩容 LVM 根分区</a></li><li class="post-list-item"><a class="post-list-link" href="/hp-elitedesk-800-g3-dm-hackintosh/">HP EliteDesk 800 G3 DM 安装黑苹果</a></li><li class="post-list-item"><a class="post-list-link" href="/install-php56-nginx-mariadb-mysql-lemp-stack-on-centos7-with-fastcgi/">CentOS 7 安装 LEMP - PHP5.6 + NGINX + MariaDB/MySQL</a></li><li class="post-list-item"><a class="post-list-link" href="/using-cisco-router-as-dhcp-with-long-option43-in-skype-lync-deployment/">Cisco 路由器作为 DHCP 服务器在 Skyepe for Business (Lync) 部署中的注意事项</a></li><li class="post-list-item"><a class="post-list-link" href="/how-to-retrieve-computer-serial-number-from-command-line/">如何从命令行获取电脑的序列号</a></li><li class="post-list-item"><a class="post-list-link" href="/how-to-send-password-expiry-email-with-exchange-2010/">如何在 Exchange 2010 中给密码即将过期用户发送提醒邮件</a></li><li class="post-list-item"><a class="post-list-link" href="/tencent-404-support-https-now/">腾讯公益404页面现已支持 https</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-eye"> 访问热度</i><ul class="hit_counter"><li><span id="busuanzi_container_site_pv"> 总热力值 <span id="busuanzi_value_site_pv"> <i class="fa fa-spinner fa-spin"></i></span><span> </span>次</span></li><li> <span id="busuanzi_container_site_uv"> 总热度数 <span id="busuanzi_value_site_uv"> <i class="fa fa-spinner fa-spin"></i></span><span> </span>人次</span></li></ul></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2022 <a href="/." rel="nofollow">Win Notes.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a> Theme by<a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> maupassant-hexo.</a></div></div></div><div id="floating_container"><a class="toggle_menu home" href="/"></a><a class="toggle_menu archives" href="/archives"></a><a class="toggle_menu about" href="/about"></a><a class="toggle_menu rss" href="/atom.xml"></a><div id="floating_button"><div class="menu"></div><div class="close"></div></div></div><script type="text/javascript" src="/js/toggle_menu.js?v=1.0.2" async></script><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.0.2" async></script><script type="text/javascript" src="/js/copycode.js?v=1.0.2" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css?v=1.0.2"><script type="text/javascript" src="/js/codeblock-resizer.js?v=1.0.2"></script><script type="text/javascript" src="/js/smartresize.js?v=1.0.2"></script></div></body></html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="winotes 闻道录"><title>如何从命令行获取电脑的序列号 | Win Notes</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.0.2"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script src="https://www.googletagmanager.com/gtag/js?id=UA-20089256-1" async></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-20089256-1');
+</script><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement('script');
+  hm.src = 'https://hm.baidu.com/hm.js?' + 'ee1e3acc8276298e26c935bfd04eb596';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+  </script><script>(function(){var bp = document.createElement('script');
+var curProtocol = window.location.protocol.split(':')[0];
+if (curProtocol === 'https'){
+bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+}
+else{
+bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+}
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(bp, s);})();
+</script><script type="text/javascript" src="//cdn.jsdelivr.net/npm/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.css"><div class="darkmode-toggle">🌓</div><script>var prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+var toggle = document.querySelector('.darkmode-toggle');
+var html = document.querySelector('html');
+
+html.dataset.dark = localStorage.dark || prefersDarkMode.matches;
+
+toggle.addEventListener('click', () => {
+localStorage.dark = !(html.dataset.dark == 'true');
+html.dataset.dark = localStorage.dark;
+});</script><meta name="generator" content="Hexo 6.1.0"></head><body><div class="body_container"><div class="hidden_on_post_page" id="header"><div class="site-name"><h1 class="hidden">如何从命令行获取电脑的序列号</h1><a id="logo" href="/.">Win Notes</a><p class="description">闻道录</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">如何从命令行获取电脑的序列号</h1><div class="post-meta">2018-09-20<span> | </span><span class="category"><a href="/categories/Microsoft/">Microsoft</a><a href="/categories/Microsoft/Windows/">Windows</a></span><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><a class="disqus-comment-count" href="/how-to-retrieve-computer-serial-number-from-command-line/#vcomment"><span class="valine-comment-count" data-xid="/how-to-retrieve-computer-serial-number-from-command-line/"></span><span> 条评论</span></a><div class="post-content"><html><head></head><body><p>序列号获取的方式有很多种，最直接的当然是直接在电脑的外观标签上查找，也可以在 BIOS 中查询，或者利用品牌机官方的工具来查询。不过，在某些特殊的场景下，也许你也想使用命令行来获得机器的序列号信息。</p>
+<p>那么，以下这些也许可以帮到你：</p>
+<h4 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h4><p><code>wmic bios get serialnumber</code></p>
+<h4 id="Mac-OS-X"><a href="#Mac-OS-X" class="headerlink" title="Mac OS X"></a>Mac OS X</h4><p><code>ioreg -l | grep IOPlatformSerialNumber</code></p>
+<h4 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h4><p><code>sudo dmidecode -t system | grep Serial</code></p>
+<h5 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h5><p>这条命令可以查到电脑的型号：<br><code>wmic csproduct get name</code></p>
+<p>或者你也可以这样来查询电脑型号以及序列号<br><code>wmic csproduct get identifyingnumber,name</code></p>
+<p>以上命令并不适用于所有的电脑，有时你也可见到这样的返回值：</p>
+<ul>
+<li><p>SerialNumber<br>To Be Filled By O.E.M.</p>
+</li>
+<li><p>SerialNumber<br>0</p>
+</li>
+</ul>
+<p>这些都是因为制造商没有将信息录入正确造成的。</p>
+<h5 id="一些有用的-WMIC-查询"><a href="#一些有用的-WMIC-查询" class="headerlink" title="一些有用的 WMIC 查询"></a>一些有用的 WMIC 查询</h5><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Queries</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>baseboard</td>
+<td>get Manufacturer, Model, Name, PartNumber, slotlayout, serialnumber, poweredon</td>
+</tr>
+<tr>
+<td>bios</td>
+<td>get name, version, serialnumber</td>
+</tr>
+<tr>
+<td>bootconfig</td>
+<td>get BootDirectory, Caption, TempDirectory, Lastdrive</td>
+</tr>
+<tr>
+<td>cdrom</td>
+<td>get Name, Drive, Volumename</td>
+</tr>
+<tr>
+<td>computersystem</td>
+<td>get Name, domain, Manufacturer, Model, NumberofProcessors, PrimaryOwnerName,Username, Roles, totalphysicalmemory /format:list</td>
+</tr>
+<tr>
+<td>cpu</td>
+<td>get Name, Caption, MaxClockSpeed, DeviceID, Status</td>
+</tr>
+<tr>
+<td>datafile</td>
+<td>where name=’c:\boot.ini’ get Archive, FileSize, FileType, InstallDate, Readable, Writeable, System, Version</td>
+</tr>
+<tr>
+<td>dcomapp</td>
+<td>get Name, AppID /format:list</td>
+</tr>
+<tr>
+<td>desktop</td>
+<td>get Name, ScreenSaverExecutable, ScreenSaverActive, Wallpaper /format:list</td>
+</tr>
+<tr>
+<td>desktopmonitor</td>
+<td>get screenheight, screenwidth</td>
+</tr>
+<tr>
+<td>diskdrive</td>
+<td>get Name, Manufacturer, Model, InterfaceType, MediaLoaded, MediaType</td>
+</tr>
+<tr>
+<td>diskquota</td>
+<td>get User, Warninglimit, DiskSpaceUsed, QuotaVolume</td>
+</tr>
+<tr>
+<td>environment</td>
+<td>get Description, VariableValue</td>
+</tr>
+<tr>
+<td>fsdir</td>
+<td>where name=’c:\windows’ get Archive, CreationDate, LastModified, Readable, Writeable, System, Hidden, Status</td>
+</tr>
+<tr>
+<td>group</td>
+<td>get Caption, InstallDate, LocalAccount, Domain, SID, Status</td>
+</tr>
+<tr>
+<td>idecontroller</td>
+<td>get Name, Manufacturer, DeviceID, Status</td>
+</tr>
+<tr>
+<td>irq</td>
+<td>get Name, Status</td>
+</tr>
+<tr>
+<td>job</td>
+<td>get Name, Owner, DaysOfMonth, DaysOfWeek, ElapsedTime, JobStatus, StartTime, Status</td>
+</tr>
+<tr>
+<td>loadorder</td>
+<td>get Name, DriverEnabled, GroupOrder, Status</td>
+</tr>
+<tr>
+<td>logicaldisk</td>
+<td>get Name, Compressed, Description, DriveType, FileSystem, FreeSpace, SupportsDiskQuotas, VolumeDirty, VolumeName</td>
+</tr>
+<tr>
+<td>memcache</td>
+<td>get Name, BlockSize, Purpose, MaxCacheSize, Status</td>
+</tr>
+<tr>
+<td>memlogical</td>
+<td>get AvailableVirtualMemory, TotalPageFileSpace, TotalPhysicalMemory, TotalVirtualMemory</td>
+</tr>
+<tr>
+<td>memphysical</td>
+<td>get Manufacturer, Model, SerialNumber, MaxCapacity, MemoryDevices</td>
+</tr>
+<tr>
+<td>netclient</td>
+<td>get Caption, Name, Manufacturer, Status</td>
+</tr>
+<tr>
+<td>netlogin</td>
+<td>get Name, Fullname, ScriptPath, Profile, UserID, NumberOfLogons, PasswordAge, LogonServer, HomeDirectory, PrimaryGroupID</td>
+</tr>
+<tr>
+<td>netprotocol</td>
+<td>get Caption, Description, GuaranteesSequencing, SupportsBroadcasting, SupportsEncryption, Status</td>
+</tr>
+<tr>
+<td>netuse</td>
+<td>get Caption, DisplayType, LocalName, Name, ProviderName, Status</td>
+</tr>
+<tr>
+<td>nic</td>
+<td>get AdapterType, AutoSense, Name, Installed, MACAddress, PNPDeviceID,PowerManagementSupported, Speed, StatusInfo</td>
+</tr>
+<tr>
+<td>nicconfig</td>
+<td>get MACAddress, DefaultIPGateway, IPAddress, IPSubnet, DNSHostName, DNSDomain</td>
+</tr>
+<tr>
+<td>nicconfig</td>
+<td>get MACAddress, IPAddress, DHCPEnabled, DHCPLeaseExpires, DHCPLeaseObtained, DHCPServer</td>
+</tr>
+<tr>
+<td>nicconfig</td>
+<td>get MACAddress, IPAddress, DNSHostName, DNSDomain, DNSDomainSuffixSearchOrder, DNSEnabledForWINSResolution, DNSServerSearchOrder</td>
+</tr>
+<tr>
+<td>nicconfig</td>
+<td>get MACAddress, IPAddress, WINSPrimaryServer, WINSSecondaryServer, WINSEnableLMHostsLookup, WINSHostLookupFile</td>
+</tr>
+<tr>
+<td>ntdomain</td>
+<td>get Caption, ClientSiteName, DomainControllerAddress, DomainControllerName, Roles, Status</td>
+</tr>
+<tr>
+<td>ntevent</td>
+<td>where (LogFile=’system’ and SourceName=’W32Time’) get Message, TimeGenerated</td>
+</tr>
+<tr>
+<td>ntevent</td>
+<td>where (LogFile=’system’ and SourceName=’W32Time’ and Message like ‘%timesource%’) get Message, TimeGenerated</td>
+</tr>
+<tr>
+<td>ntevent</td>
+<td>where (LogFile=’system’ and SourceName=’W32Time’ and EventCode!=’29’) get TimeGenerated, EventCode, Message</td>
+</tr>
+<tr>
+<td>onboarddevice</td>
+<td>get Description, DeviceType, Enabled, Status</td>
+</tr>
+<tr>
+<td>os</td>
+<td>get Version, Caption, CountryCode, CSName, Description, InstallDate, SerialNumber, ServicePackMajorVersion, WindowsDirectory /format:list</td>
+</tr>
+<tr>
+<td>os</td>
+<td>get CurrentTimeZone, FreePhysicalMemory, FreeVirtualMemory, LastBootUpTime, NumberofProcesses, NumberofUsers, Organization, RegisteredUser, Status</td>
+</tr>
+<tr>
+<td>pagefile</td>
+<td>get Caption, CurrentUsage, Status, TempPageFile</td>
+</tr>
+<tr>
+<td>pagefileset</td>
+<td>get Name, InitialSize, MaximumSize</td>
+</tr>
+<tr>
+<td>partition</td>
+<td>get Caption, Size, PrimaryPartition, Status, Type</td>
+</tr>
+<tr>
+<td>printer</td>
+<td>get DeviceID, DriverName, Hidden, Name, PortName, PowerManagementSupported, PrintJobDataType, VerticalResolution, Horizontalresolution</td>
+</tr>
+<tr>
+<td>printjob</td>
+<td>get Description, Document, ElapsedTime, HostPrintQueue, JobID, JobStatus, Name, Notify, Owner, TimeSubmitted, TotalPages</td>
+</tr>
+<tr>
+<td>process</td>
+<td>get Caption, CommandLine, Handle, HandleCount, PageFaults, PageFileUsage, PArentProcessId, ProcessId, ThreadCount</td>
+</tr>
+<tr>
+<td>product</td>
+<td>get Description, InstallDate, Name, Vendor, Version</td>
+</tr>
+<tr>
+<td>qfe</td>
+<td>get description, FixComments, HotFixID, InstalledBy, InstalledOn, ServicePackInEffect</td>
+</tr>
+<tr>
+<td>quotasetting</td>
+<td>get Caption, DefaultLimit, Description, DefaultWarningLimit, SettingID, State</td>
+</tr>
+<tr>
+<td>recoveros</td>
+<td>get AutoReboot, DebugFilePath, WriteDebugInfo, WriteToSystemLog</td>
+</tr>
+<tr>
+<td>Registry</td>
+<td>get CurrentSize, MaximumSize, ProposedSize, Status</td>
+</tr>
+<tr>
+<td>scsicontroller</td>
+<td>get Caption, DeviceID, Manufacturer, PNPDeviceID</td>
+</tr>
+<tr>
+<td>server</td>
+<td>get ErrorsAccessPermissions, ErrorsGrantedAccess, ErrorsLogon, ErrorsSystem, FilesOpen, FileDirectorySearches</td>
+</tr>
+<tr>
+<td>service</td>
+<td>get Name, Caption, State, ServiceType, StartMode, pathname</td>
+</tr>
+<tr>
+<td>share</td>
+<td>get name, path, Status</td>
+</tr>
+<tr>
+<td>sounddev</td>
+<td>get Caption, DeviceID, PNPDeviceID, Manufacturer, Status</td>
+</tr>
+<tr>
+<td>startup</td>
+<td>get Caption, Location, Command</td>
+</tr>
+<tr>
+<td>sysaccount</td>
+<td>get Caption, Domain, Name, SID, SIDType, Status</td>
+</tr>
+<tr>
+<td>sysdriver</td>
+<td>get Caption, Name, PathName, ServiceType, State, Status</td>
+</tr>
+<tr>
+<td>systemenclosure</td>
+<td>get Caption, Height, Depth, Manufacturer, Model, SMBIOSAssetTag, AudibleAlarm, SecurityStatus, SecurityBreach, PoweredOn, NumberOfPowerCords</td>
+</tr>
+<tr>
+<td>systemslot</td>
+<td>get Number, SlotDesignation, Status, SupportsHotPlug, Version, CurrentUsage, ConnectorPinout</td>
+</tr>
+<tr>
+<td>tapedrive</td>
+<td>get Name, Capabilities, Compression, Description, MediaType, NeedsCleaning, Status, StatusInfo</td>
+</tr>
+<tr>
+<td>timezone</td>
+<td>get Caption, Bias, DaylightBias, DaylightName, StandardName</td>
+</tr>
+<tr>
+<td>useraccount</td>
+<td>get AccountType, Description, Domain, Disabled, LocalAccount, Lockout, PasswordChangeable, PasswordExpires, PasswordRequired, SID</td>
+</tr>
+<tr>
+<td>memorychip</td>
+<td>get BankLabel, Capacity, Caption, CreationClassName, DataWidth, Description, Devicelocator, FormFactor, HotSwappable, InstallDate, InterleaveDataDepth, InterleavePosition, Manufacturer, MemoryType, Model, Name, OtherIdentifyingInfo, PartNumber, PositionInRow, PoweredOn, Removable, Replaceable, SerialNumber, SKU, Speed, Status, Tag, TotalWidth, TypeDetail, Version</td>
+</tr>
+</tbody></table>
+</body></html></div><script type="text/javascript" src="/js/share.js?v=1.0.2" async></script><a class="article-share-link" data-url="http://winotes.net/how-to-retrieve-computer-serial-number-from-command-line/" data-id="cl1kqom46003wx94shhoyh5sv" data-qrcode="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACnklEQVR42u3aQXJiMQwE0Nz/0sl2qhKgW7IZFo8VFQrj9xe20tLXV/z6/vX69+/Jdx+t82i12W8NX3h4eHjrrT9aOt/cHjN7TH+sgIeHh3eNlyyXvH/+aNrTO9nPCwseHh7eR/Ja0oujfFHK4+Hh4X0+L9nWvagCDw8P7//y2qChPe5PFdwXsxY8PDy8mJd3kT7n/ZX+Hh4eHt66q96Wtput7Jtwf3wLDw8P7wJvEy4kQe2+ZG/LZTw8PLzbvHzRfGRqs+n8MoiuJTw8PLxrvLz8bSPa/HC/EgHj4eHhXea1h3X76Yy3GczCw8PDeycviWXz0jl5EO0oVXSZ4eHh4V3g5cFrjmwjidlwVf2LeHh4eId4s63stzu7Nuq/4+Hh4V3jtVtsg+A2os0Hql7EHHh4eHgXeLOtnBrVqgOFeCdFSwwPDw+v5OXhQt6sai+PtmFWDITh4eHhvYU3G73KC/G2aJ5NUk27ZHh4eHgpL1+ubYPtL4bZI8PDw8N7Py8PI85+d3ZpPVwZDw8P7xovD17z2He2uXYnLy4VPDw8vAu8trm1Oe73IwhtRIKHh4d3g1c0k+KjfBMBb5AP7z08PDy8o7y8LN6Us8noVRtMPN9JXfXj4eHhlbwDTfqyNM83eiyMwMPDwzvK27SaNrFs++nwGsDDw8O7xmvvkHZodXO1JOV4MbSKh4eHd4j3/IDex6+bkdZZpIuHh4d3g/ddvjaxwiacbdMUPDw8vHu8A435dRTbNuGGADw8PLyjvM3oVXJAJ6udGlDAw8PDeyfvbLtrExAfvtnw8PDwPoA3i1/3v9KuhoeHh/c5vFn5mxTEeXFfBM14eHh413izRfNW1gyWt82imTI8PDy8Q7z9f/R5i6uNG84OY+Hh4eGteT/NkxbbcE/HpQAAAABJRU5ErkJggg==">分享</a><div class="tags"><a href="/tagsWindows"><i class="fa fa-tag">Windows</i></a><a href="/tagsWMIC"><i class="fa fa-tag">WMIC</i></a></div><div class="post-nav"><a class="pre" href="/using-cisco-router-as-dhcp-with-long-option43-in-skype-lync-deployment/">Cisco 路由器作为 DHCP 服务器在 Skyepe for Business (Lync) 部署中的注意事项</a><a class="next" href="/how-to-send-password-expiry-email-with-exchange-2010/">如何在 Exchange 2010 中给密码即将过期用户发送提醒邮件</a></div><div id="vcomment"></div><script src="//unpkg.com/leancloud-storage@4.12.1/dist/av-min.js"></script><script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'Asp5CLqfPRK7uB2yc7AIwBfy-MdYXbMMI',
+  appKey:'56eFJrQ4dhcjWAgzLkBsRKgI',
+  placeholder:'闻道有先后，术业有专攻。多多交流，互相学习。',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  serverURLs: 'https://asp5clqf.api.lncldglobal.com'
+})
+</script></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://winotes.net"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Nix/">*Nix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hackintosh/">Hackintosh</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MSCRM/">MSCRM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft/">Microsoft</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft/Exchange/">Exchange</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft/HMC/">HMC</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft/MSCRM/">MSCRM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft/MSSQL/">MSSQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft/Office/">Office</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft/SQL%E6%95%B0%E6%8D%AE%E5%BA%93/">SQL数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft/%E6%B4%BB%E5%8A%A8%E7%9B%AE%E5%BD%95/">活动目录</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Ubuntu/">Ubuntu</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/eBook/">eBook</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E7%A0%81%E5%BD%B1%E9%9F%B3/">数码影音</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B2%9F%E9%80%9A%E5%8D%8F%E4%BD%9C/">沟通协作</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%AB%99%E7%9B%B8%E5%85%B3/">网站相关</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/">虚拟化</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/Active-Directory/" style="font-size: 15px;">Active Directory</a> <a href="/tags/Tips/" style="font-size: 15px;">Tips</a> <a href="/tags/APC/" style="font-size: 15px;">APC</a> <a href="/tags/PECL/" style="font-size: 15px;">PECL</a> <a href="/tags/PHP/" style="font-size: 15px;">PHP</a> <a href="/tags/Yum/" style="font-size: 15px;">Yum</a> <a href="/tags/Vobsub/" style="font-size: 15px;">Vobsub</a> <a href="/tags/CentOS/" style="font-size: 15px;">CentOS</a> <a href="/tags/Kernel/" style="font-size: 15px;">Kernel</a> <a href="/tags/VMware/" style="font-size: 15px;">VMware</a> <a href="/tags/Windows/" style="font-size: 15px;">Windows</a> <a href="/tags/GitHub/" style="font-size: 15px;">GitHub</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/DCOM/" style="font-size: 15px;">DCOM</a> <a href="/tags/Excel/" style="font-size: 15px;">Excel</a> <a href="/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/" style="font-size: 15px;">最佳实践</a> <a href="/tags/Exchange/" style="font-size: 15px;">Exchange</a> <a href="/tags/Kerberos/" style="font-size: 15px;">Kerberos</a> <a href="/tags/Rollup/" style="font-size: 15px;">Rollup</a> <a href="/tags/Activesync/" style="font-size: 15px;">Activesync</a> <a href="/tags/Android/" style="font-size: 15px;">Android</a> <a href="/tags/Google/" style="font-size: 15px;">Google</a> <a href="/tags/Nexus/" style="font-size: 15px;">Nexus</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 15px;">日志</a> <a href="/tags/CentOS-LVM-%E6%89%A9%E5%AE%B9-%E6%A0%B9%E5%88%86%E5%8C%BA/" style="font-size: 15px;">CentOS, LVM, 扩容, 根分区</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/JRE/" style="font-size: 15px;">JRE</a> <a href="/tags/MSI/" style="font-size: 15px;">MSI</a> <a href="/tags/Virtual-Center/" style="font-size: 15px;">Virtual Center</a> <a href="/tags/BITS/" style="font-size: 15px;">BITS</a> <a href="/tags/Microsoft/" style="font-size: 15px;">Microsoft</a> <a href="/tags/WSUS/" style="font-size: 15px;">WSUS</a> <a href="/tags/Office/" style="font-size: 15px;">Office</a> <a href="/tags/HMC/" style="font-size: 15px;">HMC</a> <a href="/tags/Autodiscover/" style="font-size: 15px;">Autodiscover</a> <a href="/tags/MultiTenancy/" style="font-size: 15px;">MultiTenancy</a> <a href="/tags/GeoIP/" style="font-size: 15px;">GeoIP</a> <a href="/tags/MaxMind/" style="font-size: 15px;">MaxMind</a> <a href="/tags/XMPP/" style="font-size: 15px;">XMPP</a> <a href="/tags/Gmail/" style="font-size: 15px;">Gmail</a> <a href="/tags/Ubuntu/" style="font-size: 15px;">Ubuntu</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/Hackintosh-macOS-Mojave/" style="font-size: 15px;">Hackintosh, macOS, Mojave</a> <a href="/tags/MSSQL/" style="font-size: 15px;">MSSQL</a> <a href="/tags/SSRS/" style="font-size: 15px;">SSRS</a> <a href="/tags/TeraData/" style="font-size: 15px;">TeraData</a> <a href="/tags/WordPress/" style="font-size: 15px;">WordPress</a> <a href="/tags/Communicator/" style="font-size: 15px;">Communicator</a> <a href="/tags/SCVMM/" style="font-size: 15px;">SCVMM</a> <a href="/tags/VMHost/" style="font-size: 15px;">VMHost</a> <a href="/tags/WMIC/" style="font-size: 15px;">WMIC</a> <a href="/tags/Internet-Explorer/" style="font-size: 15px;">Internet Explorer</a> <a href="/tags/Fiddler/" style="font-size: 15px;">Fiddler</a> <a href="/tags/VBScript/" style="font-size: 15px;">VBScript</a> <a href="/tags/PowerShell/" style="font-size: 15px;">PowerShell</a> <a href="/tags/IIS/" style="font-size: 15px;">IIS</a> <a href="/tags/Rewrite/" style="font-size: 15px;">Rewrite</a> <a href="/tags/HP-EliteDesk-%E9%BB%91%E8%8B%B9%E6%9E%9C-Hackintosh/" style="font-size: 15px;">HP, EliteDesk, 黑苹果, Hackintosh</a> <a href="/tags/MSCRM/" style="font-size: 15px;">MSCRM</a> <a href="/tags/Docker/" style="font-size: 15px;">Docker</a> <a href="/tags/LEMP/" style="font-size: 15px;">LEMP</a> <a href="/tags/Nginx/" style="font-size: 15px;">Nginx</a> <a href="/tags/MariaDB/" style="font-size: 15px;">MariaDB</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/Lighttpd/" style="font-size: 15px;">Lighttpd</a> <a href="/tags/VMware-Tools/" style="font-size: 15px;">VMware Tools</a> <a href="/tags/Intel-NUC-Bean-Canyon-%E9%BB%91%E8%8B%B9%E6%9E%9C-Hackintosh-%E8%AF%BB%E5%8D%A1%E5%99%A8-%E9%AD%94%E6%94%B9/" style="font-size: 15px;">Intel, NUC, Bean Canyon, 黑苹果, Hackintosh, 读卡器, 魔改</a> <a href="/tags/Outlook/" style="font-size: 15px;">Outlook</a> <a href="/tags/Event-ID/" style="font-size: 15px;">Event ID</a> <a href="/tags/Group-Policy/" style="font-size: 15px;">Group Policy</a> <a href="/tags/Zonemapping/" style="font-size: 15px;">Zonemapping</a> <a href="/tags/Lync/" style="font-size: 15px;">Lync</a> <a href="/tags/OCS/" style="font-size: 15px;">OCS</a> <a href="/tags/Movable-Type/" style="font-size: 15px;">Movable Type</a> <a href="/tags/Hosting/" style="font-size: 15px;">Hosting</a> <a href="/tags/Packt/" style="font-size: 15px;">Packt</a> <a href="/tags/eBook/" style="font-size: 15px;">eBook</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Reporting-Service/" style="font-size: 15px;">Reporting Service</a> <a href="/tags/SPN/" style="font-size: 15px;">SPN</a> <a href="/tags/Web-404-https-%E8%85%BE%E8%AE%AF/" style="font-size: 15px;">Web, 404, https, 腾讯</a> <a href="/tags/Chrome/" style="font-size: 15px;">Chrome</a> <a href="/tags/Cookie/" style="font-size: 15px;">Cookie</a> <a href="/tags/MSDN/" style="font-size: 15px;">MSDN</a> <a href="/tags/Hexo-NPM-GitHub/" style="font-size: 15px;">Hexo, NPM, GitHub</a> <a href="/tags/Skype-for-Business/" style="font-size: 15px;">Skype for Business</a> <a href="/tags/DHCP/" style="font-size: 15px;">DHCP</a> <a href="/tags/Cisco/" style="font-size: 15px;">Cisco</a> <a href="/tags/Virtual-Server/" style="font-size: 15px;">Virtual Server</a> <a href="/tags/VirtualBox/" style="font-size: 15px;">VirtualBox</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/upgrade-hexo-to-latest-and-fix-dependency-issues/">更新了下博客的 Hexo 到最新版并修复几个依赖包的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/intel-nuc8i7beh-mod-hackintosh/">Intel NUC8i7BEH 读卡器魔改完美安装黑苹果</a></li><li class="post-list-item"><a class="post-list-link" href="/how-to-fix-mojave-application-is-damaged-and-cant-be-used-to-install-macOS-errors/">How to Fix “Mojave application is damaged, and can’t be used to install macOS” Errors</a></li><li class="post-list-item"><a class="post-list-link" href="/extending-lvm-root-partition-on-centos6-vm/">CentOS 6 虚拟机扩容 LVM 根分区</a></li><li class="post-list-item"><a class="post-list-link" href="/hp-elitedesk-800-g3-dm-hackintosh/">HP EliteDesk 800 G3 DM 安装黑苹果</a></li><li class="post-list-item"><a class="post-list-link" href="/install-php56-nginx-mariadb-mysql-lemp-stack-on-centos7-with-fastcgi/">CentOS 7 安装 LEMP - PHP5.6 + NGINX + MariaDB/MySQL</a></li><li class="post-list-item"><a class="post-list-link" href="/using-cisco-router-as-dhcp-with-long-option43-in-skype-lync-deployment/">Cisco 路由器作为 DHCP 服务器在 Skyepe for Business (Lync) 部署中的注意事项</a></li><li class="post-list-item"><a class="post-list-link" href="/how-to-retrieve-computer-serial-number-from-command-line/">如何从命令行获取电脑的序列号</a></li><li class="post-list-item"><a class="post-list-link" href="/how-to-send-password-expiry-email-with-exchange-2010/">如何在 Exchange 2010 中给密码即将过期用户发送提醒邮件</a></li><li class="post-list-item"><a class="post-list-link" href="/tencent-404-support-https-now/">腾讯公益404页面现已支持 https</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-eye"> 访问热度</i><ul class="hit_counter"><li><span id="busuanzi_container_site_pv"> 总热力值 <span id="busuanzi_value_site_pv"> <i class="fa fa-spinner fa-spin"></i></span><span> </span>次</span></li><li> <span id="busuanzi_container_site_uv"> 总热度数 <span id="busuanzi_value_site_uv"> <i class="fa fa-spinner fa-spin"></i></span><span> </span>人次</span></li></ul></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2022 <a href="/." rel="nofollow">Win Notes.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a> Theme by<a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> maupassant-hexo.</a></div></div></div><div id="floating_container"><a class="toggle_menu home" href="/"></a><a class="toggle_menu archives" href="/archives"></a><a class="toggle_menu about" href="/about"></a><a class="toggle_menu rss" href="/atom.xml"></a><div id="floating_button"><div class="menu"></div><div class="close"></div></div></div><script type="text/javascript" src="/js/toggle_menu.js?v=1.0.2" async></script><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.0.2" async></script><script type="text/javascript" src="/js/copycode.js?v=1.0.2" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css?v=1.0.2"><script type="text/javascript" src="/js/codeblock-resizer.js?v=1.0.2"></script><script type="text/javascript" src="/js/smartresize.js?v=1.0.2"></script></div></body></html>

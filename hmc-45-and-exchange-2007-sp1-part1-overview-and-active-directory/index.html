@@ -1,0 +1,213 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="winotes 闻道录"><title>HMC 4.5 and Exchange 2007 SP1 - Part 1 - Overview and Active Directory | Win Notes</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.0.2"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script src="https://www.googletagmanager.com/gtag/js?id=UA-20089256-1" async></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-20089256-1');
+</script><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement('script');
+  hm.src = 'https://hm.baidu.com/hm.js?' + 'ee1e3acc8276298e26c935bfd04eb596';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+  </script><script>(function(){var bp = document.createElement('script');
+var curProtocol = window.location.protocol.split(':')[0];
+if (curProtocol === 'https'){
+bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+}
+else{
+bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+}
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(bp, s);})();
+</script><script type="text/javascript" src="//cdn.jsdelivr.net/npm/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.css"><div class="darkmode-toggle">🌓</div><script>var prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+var toggle = document.querySelector('.darkmode-toggle');
+var html = document.querySelector('html');
+
+html.dataset.dark = localStorage.dark || prefersDarkMode.matches;
+
+toggle.addEventListener('click', () => {
+localStorage.dark = !(html.dataset.dark == 'true');
+html.dataset.dark = localStorage.dark;
+});</script><meta name="generator" content="Hexo 6.1.0"></head><body><div class="body_container"><div class="hidden_on_post_page" id="header"><div class="site-name"><h1 class="hidden">HMC 4.5 and Exchange 2007 SP1 - Part 1 - Overview and Active Directory</h1><a id="logo" href="/.">Win Notes</a><p class="description">闻道录</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">HMC 4.5 and Exchange 2007 SP1 - Part 1 - Overview and Active Directory</h1><div class="post-meta">2009-05-06<span> | </span><span class="category"><a href="/categories/Microsoft/">Microsoft</a><a href="/categories/Microsoft/HMC/">HMC</a></span><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><a class="disqus-comment-count" href="/hmc-45-and-exchange-2007-sp1-part1-overview-and-active-directory/#vcomment"><span class="valine-comment-count" data-xid="/hmc-45-and-exchange-2007-sp1-part1-overview-and-active-directory/"></span><span> 条评论</span></a><div class="post-content"><html><head></head><body><p>转自 <a target="_blank" rel="noopener" href="http://blogs.technet.com/provtest/archive/2008/12/04/hmc-4-5-and-exchange-2007-sp1-part-1.aspx">http://blogs.technet.com/provtest/archive/2008/12/04/hmc-4-5-and-exchange-2007-sp1-part-1.aspx</a> 很好的文章,贴过来收藏,hehe.</p>
+<p><strong>Introduction</strong></p>
+<p>One of the frequently asked questions about Hosted Messaging &amp; Collaboration (HMC)&nbsp;is this, “What do you do&nbsp;to Exchange&nbsp;to make&nbsp;HMC work?” So, here I will attempt to demystify this.</p>
+<p>HMC started long way back but the concept has not deviated much. I want to note that this specific&nbsp;blog focuses mainly on HMC 4.5 and Exchange 2007 SP1 and it should be noted that things discussed here probably is applicable to this specific version only unless mentioned otherwise.</p>
+<p>There are quite a few customizations that we set in Exchange 2007 for HMC and it is probably too much to do it in one blog, so, I will split this into a few parts,</p>
+<ul>
+<li>Part #1: Overview and Active Directory</li>
+<li>Part #2: Address Lists Segregation</li>
+<li>Part #3: Offline Address Book generations</li>
+<li>Part #4: Internal and External Out of Office</li>
+<li>Part #5: Autodiscover in the Multi-tenancy environment</li>
+<li>Part #6: Conclusion</li>
+</ul>
+<p><strong>What does HMC mean to Exchange 2007?</strong></p>
+<p>Let me start by asking this, what exactly is HMC?&nbsp;Yes, yes, there are quite a fair bit of things in HMC such as tools for flexible business modeling for service providers, resource management so that service providers can offer a broad range of services that go from basic e-mail up to higher-value services like providing additional storage and hosting personal domains and shared calendars and contacts. However, if I have to use one to two words to explain it, I will say HMC is about&nbsp;<strong>Multi-tenant enablement</strong>.</p>
+<p>Yes, I think there is no mystery that Exchange 2003 and Exchange 2007 were not really packaged or designed to cater for multi-tenant. Not that it is not capable to do so, just that it wasn’t designed with that as the focus.</p>
+<p>What is multi-tenancy? Multitenancy refers to a principle in software architecture where a single instance of the software runs on a software-as-a-service (SaaS) vendor’s servers, serving multiple client organizations (tenants).</p>
+<p>Think of it like a condominium with hundreds of different individual units living in it, that’s what multi-tenant is.&nbsp;Instead of having only one company&nbsp;<em>(note: I tend to use company and tenant interchangeably)</em>&nbsp;to live in one Exchange environment (1:1), multi-tenant enablement for Exchange 2007 means we want to enable the same Exchange environment to cater for multiple individual and separate companies and like a unit in the condominium, each company should have their own space and privacy (m:1)</p>
+<p>Let me continue with the condominium analogy. Now&nbsp;that we know we need to build a condominium, we also need to figure out what we need to build each unit in the condominium. We need to make sure that each floor will be partitioned nicely and that&nbsp;the tenants will have their own kitchen, doors, parking space and enjoy their home and privacy. Likewise with Exchange 2007, we need to make sure that each tenant will enjoy the full messaging features and capabilities but yet do not compromise privacy and security.</p>
+<p>So what do we need to multi-tenant enable Exchange 2007? Here is what needed to be done,</p>
+<ol>
+<li><p><strong>Active Directory Partitioning and Permission</strong>&nbsp;- think of it like partitioning each floor to different unit. Every company will have their own separate ‘space’ and the users in that company should only have access to what they are allowed to. I will discuss more on this later on how we can achieve that.</p>
+</li>
+<li><p><strong>Address List Segregation</strong>&nbsp;- access to the contact information in each company should only be limited to users in that company. Other tenants shouldn’t know have access to that information.</p>
+</li>
+<li><p>**Outlook Experience&nbsp;**- Outlook experience should not be compromised. The users in each company should enjoy all the features available in Outlook,&nbsp;such as&nbsp;Outlook Anywhere with cached mode and Offline Address Book, Calendaring and resource management, using Free/busy feature, Internal and External Out of Office feature in Exchange 2007, Autodiscover, Outlook rules, mailbox delegation, mailbox quota&nbsp;and etc. Some of the above mentioned features will required to be tweaked for multi-tenancy and some do not. I will walk through them as we go.</p>
+</li>
+<li><p><strong>Shared Components</strong>&nbsp;- as much as we try to make sure everything is segregated, there will be some information and shared components here. Just like living in a condominium, everyone will share the same garage and elevator.</p>
+</li>
+</ol>
+<p>Now that we have listed them down, it doesn’t look that bad, does it? In fact, once we walk through how we do this in HMC, you may realize that we aren’t doing that much customization to Exchange at all. HMC, however, is more than just doing these customizations, of course. It is also a tool that allows you to better manage your resource and also allow you to automate a number of things, but that discussion will be for a separate blog. I will briefly touch on this at the end of this series.</p>
+<p>Those who has been dealing with Exchange 2007 probably realize that we have a white paper&nbsp;that talks about the similar thing, which is&nbsp;<a target="_blank" rel="noopener" href="http://technet.microsoft.com/en-us/exchange/bb936719.aspx" title="White Paper: Configuring Virtual Organizations and Address List Segregation in Exchange 2007 ">White Paper: Configuring Virtual Organizations and Address List Segregation in Exchange 2007&nbsp;</a>. I strongly recommend anyone who wants to know more about the Exchange 2007 HMC customization to also read this white paper and try setting it up in your test environment for your own learning.</p>
+<p>The above white paper explained how you can come up with your homebrew version of&nbsp;hosted solution by making a whole list of manual tweaking. It also provides good explanations on some of those customizations executed. HMC, for most parts are doing the same thing but there are a few things that we did quite differently and&nbsp;also we have a Deployment Tool to help you to make those customization instead of having you manually go through those permission setting of various OU containers, removal of address lists and etc.</p>
+<p><strong>Active Directory Partitioning and Permission</strong></p>
+<p>Firstly, let me start with how we do the Active Directory partitioning and permission in HMC for Exchange. The process of deploying a HMC is quite straightforward. Everything is done through the&nbsp;Provisioning Deployment Tool that comes with the HMC Solution ISO file.</p>
+<p>(1) List Object Mode (<strong>dsHeuristics</strong>)</p>
+<p>This is the first thing that the Deployment Tool will do. This is about controlling the object visibility.&nbsp;By default in Active Directory,&nbsp;we control an object using List Contents permissions on the parent object. The concept is quite simple; it means an object that will only be visible to a user if the user has been granted List Contents permissions on the parent object. When a user has List Contents permission on a parent node, he or she can see and browse all objects that are children of that node without any further selectivity.</p>
+<p>Obviously this can be a problem in a Hosted Environment, for example, if in my Active Directory, I have the following structure,</p>
+<ul>
+<li>Fabrikam.com (Windows Domain)<ul>
+<li>Hosting (Hosting Container)<ul>
+<li>ConsolidatedMessenger (Reseller)<ul>
+<li>Company1<ul>
+<li>[User1@Company1]</li>
+<li>[User2@Company1</li>
+<li>[User3@Company1]</li>
+</ul>
+</li>
+<li>Company2<ul>
+<li>[User1@Company2]</li>
+<li>[User2@Company2]</li>
+<li>[User3@Company2]</li>
+</ul>
+</li>
+<li>[User1@ConsolidatedMessenger]</li>
+<li>[User2@ConsolidatedMessenger]</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>If I grant&nbsp;<a href="mailto:User1@Company1">User1@Company1</a>&nbsp;List Contents permission say on Compmany1 OU, I will also have to do it on all the parent OUs above it. Without that, it&nbsp;stops someone looking at what lives under the object or container. However, granting&nbsp;it lets whoever has the permission the ability to go through the content, including Company2 OU, which is obviously a bad thing.&nbsp;This is where&nbsp;“List Object” mode comes in.</p>
+<p>In this special mode, even if the user has not explicitly been granted or explicitly been denied List Contents permission on the parent object, the object will still be visible to the user if the user is granted List Object permission on both the parent object and the object itself.</p>
+<p>The availability and setting of this mode is very important to multi-tenant enablement and this is deployed as part of Core Platform in the Deployment Tool. Essentially, this form the basis of security control and Active Directory partitioning in HMC.</p>
+<p>(2) Active Directory Partitioning&nbsp;- Hosting Container</p>
+<p>Now, I want to briefly walk through the structure that HMC will be creating in Active Directory. Here are a few things that you should know,</p>
+<ul>
+<li>HMC does not support deployment&nbsp;in a child domain. While it is technically possible, it hasn’t be&nbsp;well tested and hence it is not a supported model.</li>
+<li>By default in HMC, it will create an OU called Hosting right under the Domain. This can be changed by setting the procedure parameter in&nbsp;<em>Hosting Platform - Initialize Default Services - Initialize Active Directory</em>&nbsp;for Hosting in the Deployment Tool.</li>
+</ul>
+<p>That is only the creation of the master hosting container. You will then need to follow the&nbsp;Deployment Walkthrough in the Help File to create&nbsp;the Reseller container and also the&nbsp;Tenant container. From the Exchange perspective, you only need to know the following,</p>
+<ul>
+<li><p><strong>HMC Resellers</strong>&nbsp;- Each Reseller is fully contained within&nbsp;its own Organizational Unit (OU) in Active Directory. The administrator from this OU will have permission to manage the HMC Tenants in it. Example in the Deployment Walkthrough is_ConsolidatedMessenger.com_. The Reseller OU will usually contain the following objects</p>
+<ul>
+<li>HMC Tenants</li>
+<li>HMC Users</li>
+<li>A _Private OU //you should for the most part ignore the contents of this OU its contents are primarily in place to support provisioning actions.</li>
+<li>An Admins@&lt;Reseller&gt; group</li>
+</ul>
+</li>
+<li><p><strong>HMC Tenants</strong>&nbsp;- Each Tenant is fully contain within its own Organizational Unit (OU) in Active Directory, this Organizational Unit is a child of an HMC Reseller. Example in the Deployment Walkthrough is&nbsp;<em>AlpineSkiHouse.com</em>. The Tenant OU will usually contain the following objects,</p>
+<ul>
+<li>HMC&nbsp;Users</li>
+<li>A _Private OU //you should for the most part ignore the contents of this OU its contents are primarily in place to support provisioning actions.</li>
+<li>An Admins@&lt;TenantOrg&gt; group // This group contains all of the Tenant Admin</li>
+<li>Custom or service specific groups (such as FolderAdmins, FolderUsers for Public Folder service)</li>
+</ul>
+</li>
+<li><p><strong>HMC Users</strong>&nbsp;- Users objects within AD are the security principal.</p>
+</li>
+<li><p><strong>HMC Mailboxes</strong>&nbsp;- An HMC mailbox is a user object that has been Exchange Mailbox Enabled.<br>Here is an example of the Active Directory Hosting Container structure in HMC</p>
+</li>
+<li><p>Fabrikam.com (Domain)</p>
+<ul>
+<li><p>Hosting (Hosting OU)</p>
+<pre><code>*   _Private
+</code></pre>
+<ul>
+<li><p>ConsolidatedMessenger.com (HMC Reseller)</p>
+<pre><code>    *   _Private
+</code></pre>
+<ul>
+<li><p><a href="mailto:admins@ConsolidatedMessenger.com">admins@ConsolidatedMessenger.com</a>&nbsp;(Admins group for HMC Reseller)</p>
+</li>
+<li><p><a href="mailto:administrator@ConsolidatedMessenger.com">administrator@ConsolidatedMessenger.com</a>&nbsp;(Administrator for the HMC Reseller)</p>
+</li>
+<li><p>AlpineSkiHouse.com (HMC Tenant)</p>
+<pre><code>        *   _Private
+</code></pre>
+<ul>
+<li><a href="mailto:admins@alpineskihouse.com">admins@alpineskihouse.com</a>&nbsp;(Admins group for HMC Tenant)</li>
+<li><a href="mailto:johnc@alpineskihouse.com">johnc@alpineskihouse.com</a>&nbsp;(HMC Users/Mailboxes)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Obviously, I have simplified quite a few things here, for example, in this whole Active Directory Partitioning process; the HMC Deployment Tool will also create a number of groups (such as AllUsers, AllCustomers, AllCustomers, AdminsGroups and etc.)&nbsp;and properly assign the appropriate membership and permissions in different containers.</p>
+<p>Permission Inheritance is not blocked specifically. For example,<a href="mailto:admins@ConsolidatedMessenger.com">admins@ConsolidatedMessenger.com</a>&nbsp;group is granted with Write, Create and Delete Child Objects to ConsolidatedMessenger.com OU. And that permission is also inherited downward to AlpineSkiHouse.com. This allows users in the<a href="mailto:admins@ConsolidatedMessenger.com">admins@ConsolidatedMessenger.com</a>&nbsp;group the capability to manage all the HMC Tenants in the ConsolidatedMessenger.com OU.</p>
+<p>For the purpose of this blog, I think that’s all you need to know about the Active Directory partitioning in HMC for Exchange. If not, this blog may end up to be a novel. :)</p>
+<p>(3)&nbsp;User Logon</p>
+<p>I want to touch a little bit about&nbsp;User Logon here.&nbsp;Most of you who are familiar with Active Directory will know&nbsp;what a&nbsp;_samAccountName&nbsp;_is. This is the logon name we carried forward from the old NT world. It has to be unique in a Windows domain. Even though we have revolved to allow longer logon name in later version of Windows, we still need to specify a samAccountName, a mandatory attribute. It usually follow the logon name. If my logon name is John, then my samAccountName is also John.</p>
+<p>I can login to the environment using&nbsp;either username@domain or DOMAIN&amp;lt;samAccountName&gt;. This is not a big problem in a normal corporate environment. When it comes to a multi-tenant environment, this maybe a bit of a problem because we may have John in AlpineSkiHouse.com and we may also have John in Contoso.com.</p>
+<p>In order to achieve the uniqueness, HMC recommends users to logon using the UPN as a start, which is&nbsp;<a href="mailto:username@domain">username@domain</a>&nbsp;such as&nbsp;<a href="mailto:johnc@alpineskihouse.com">johnc@alpineskihouse.com</a>. You will notice in HMC allows that by modifying the&nbsp;**upnSuffixes attribute&nbsp;**of the Tenant OU. Now, all these things are done automatically when you create a HMC Tenant through the Microsoft Provisioning System.</p>
+<p>With that, it solves the user logon uniqueness problem. However, it does not resolve the samAccountName uniqueness. To ensure that the samAccountName is also unique, HMC appends the domain of the Tenant to the logon name but because samAccountName can’t have more than 20 characters, it will get truncated if it is more than 20 characters. For example,</p>
+<ul>
+<li>Logon Name:&nbsp;<a href="mailto:johnc@alpineskihouse.com">johnc@alpineskihouse.com</a>&nbsp;will have the samAccountName of johnc_AlpineSkiHouse</li>
+<li>Logon Name:&nbsp;<a href="mailto:bob@alpineskihouse.com">bob@alpineskihouse.com</a>&nbsp;will have the samAccountName of bob_AlpineSkiHouse.c<br>So, hopefully that will help to explain the naming convention of the user object.</li>
+</ul>
+<p>(4) Active Directory Attributes</p>
+<p>HMC did not introduce any schema change to Active Directory. Sometimes, I wish it does because it would have made things little bit easier but it didn’t. Instead, it uses what I would call the poor man’s schema extension, the&nbsp;<strong>otherWellknownObjects</strong>&nbsp;attribute.</p>
+<p>From the Exchange standpoint, this attribute is not used but for the provisioning process (MPS)&nbsp;to work properly, understanding this attribute is essential. And at times, I also think it is important to know this because it can tell you the Global Address List, Address List, Offline Address List that the specific HMC Tenant is using.</p>
+<p>Here is a LDP dump of the otherWellKnownObjects attribute of one of the HMC Tenant.</p>
+<p>12&gt; otherWellKnownObjects: B:32:3841BDA6D81C4095B9BBB838808F5A55:CN=Services,CN=_Private,OU=AlpineSkiHouse,OU=ConsolidatedMessenger,OU=Hosting,DC=hmc45,DC=com;<strong>B:32:D22DFCC5B73645E99E16C9AD3D61F34F</strong>:CN=AlpineSkiHouse OAL,CN=Offline Address Lists,CN=Address Lists Container,CN=HMC45,CN=Microsoft Exchange,CN=Services,CN=Configuration,DC=hmc45,DC=com;<strong>B:32:9E444526CB6F4D5C9A59C9A84E26B627</strong>:CN=AlpineSkiHouse AL,CN=All Address Lists,CN=Address Lists Container,CN=HMC45,CN=Microsoft Exchange,CN=Services,CN=Configuration,DC=hmc45,DC=com;<strong>B:32:89FB25B7DF784FC198A493E2E8A0EE7E</strong>:CN=AlpineSkiHouse GAL,CN=All Global Address Lists,CN=Address Lists Container,CN=HMC45,CN=Microsoft Exchange,CN=Services,CN=Configuration,DC=hmc45,DC=com; B:32:7DEF010C6019A1458068D74AD1A3C1FA:CN=FolderUsers@AlpineSkiHouse,OU=AlpineSkiHouse,OU=ConsolidatedMessenger,OU=Hosting,DC=hmc45,DC=com; B:32:4619BE598BF441DB8C9DB0482E62E386:CN=_Private,OU=AlpineSkiHouse,OU=ConsolidatedMessenger,OU=Hosting,DC=hmc45,DC=com; B:32:EA755D448CE64157A20E82B7CCBE14B0:CN=customer,CN=WatOrgTypes,CN=_Private,OU=Hosting,DC=hmc45,DC=com; B:32:3B6FF4FA8AA248039AD8F9493A43B704:CN=CSRAdmins@AlpineSkiHouse,OU=AlpineSkiHouse,OU=ConsolidatedMessenger,OU=Hosting,DC=hmc45,DC=com; B:32:65F37ECB46704F0E9300E1FB48E1096E:CN=Admins@AlpineSkiHouse,OU=AlpineSkiHouse,OU=ConsolidatedMessenger,OU=Hosting,DC=hmc45,DC=com; B:32:58888CFC8F7F430C8183102CD5758D81:OU=ConsolidatedMessenger,OU=Hosting,DC=hmc45,DC=com; B:32:CC016CF08DEF4EA4A05C9C54B198785A:OU=AlpineSkiHouse,OU=ConsolidatedMessenger,OU=Hosting,DC=hmc45,DC=com; B:32:A276E3A170F0C24699770F593818501E:CN=FolderAdmins@AlpineSkiHouse,OU=AlpineSkiHouse,OU=ConsolidatedMessenger,OU=Hosting,DC=hmc45,DC=com;</p>
+<p>As you can see from above, we have a unique GUID number to identify a specific category of relationship.</p>
+<p>&lt;GUID name=”GlobalAddressList”&gt;<strong>89FB25B7DF784FC198A493E2E8A0EE7E</strong>&lt;/GUID&gt;<br>&lt;GUID name=”AddressList”&gt;<strong>9E444526CB6F4D5C9A59C9A84E26B627</strong>&lt;/GUID&gt;<br>&lt;GUID name=”OfflineAddressList”&gt;<strong>D22DFCC5B73645E99E16C9AD3D61F34F</strong>&lt;/GUID&gt;</p>
+<p>In addition, here are some of the&nbsp;<em>Key attributes to Exchange:</em></p>
+<ul>
+<li><p><strong>homeMDB</strong>: DN of the users mailbox store - no customizations for HMC.</p>
+</li>
+<li><p><strong>mailNickname</strong>: This is the HMC Users mailbox alias.&nbsp;- no customizations for HMC.</p>
+</li>
+<li><p><strong>msExchMailboxFolderSet</strong>: Defines the folders available to the user through OWA, this attribute is controlled by the HMC User Plans.&nbsp;**&nbsp;**</p>
+</li>
+<li><p><strong>msExchQueryBaseDN</strong>: Provides a baseDN from which LDAP Searches are performed, in HMC this attribute is set to the DN of the Tenant effectively limiting LDAP searches in OWA, ActiveSynch etc to the Tenant OU.</p>
+</li>
+<li><p><strong>protocolSettings</strong>: Defines which protocols a user can use to access Exchange, this attribute is controlled by the HMC user Plans</p>
+</li>
+<li><p><strong>showInAddressBook</strong>: Multi-valued attribute includes the DNs for the Tenant specific GAL and AL as well as the Default GAL, this attribute must be set correctly and the GALs ACL’d correctly in order for a user to logon to Outlook as well as for them to be restricted to the appropriate address list.&nbsp;**&nbsp;**</p>
+</li>
+<li><p><strong>msExchUseOAB</strong>: DN of the Tenant specific OAL object, this attribute directs Outlook to the appropriate OAB to download for this user.<br>Let’s briefly&nbsp;talk about the e-mail address stamping here too. In Exchange 2003, we have this&nbsp;process called&nbsp;Recipient Update Services. In Exchange 2007, this whole process has been embedded into&nbsp;the cmdlets and Email Address Policy is being used to determine the e-mail address of those users during the creation. It should be noted that, in HMC, right after it created an email user, a distribution group or an Exchange resource, HMC immediately performs another task to set the&nbsp;<strong>EmailAddressPolicyEnabled</strong>&nbsp;attribute to&nbsp;<strong>False</strong>. This means,</p>
+</li>
+<li><p>It does not rely on the Email Address Policy at all. That’s why you will see that HMC will not create any Email Address Policy at all.</p>
+</li>
+<li><p>HMC will use its own mechanism to stamp the SMTP addresses.<br>So, that’s it. It is straightforward so far, eh? We will talk more about other customizations introduced by HMC for Exchange in the new few parts.</p>
+</li>
+</ul>
+</body></html></div><script type="text/javascript" src="/js/share.js?v=1.0.2" async></script><a class="article-share-link" data-url="http://winotes.net/hmc-45-and-exchange-2007-sp1-part1-overview-and-active-directory/" data-id="cl1kqom3n001mx94s5h5g2mni" data-qrcode="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACoUlEQVR42u3a0WojMQwF0Pz/T6ewr7s1V9f2JAvHTyU0MzouWKrk1yte7z/r7092Vve0142Fh4eHV4W+ftxvj86DXn8+5Q22AA8PD+8ab50M8qM8Z69/c73FScx4eHh438Dr0sD6Lckb8fDw8P5fXp4Suo1L3ouHh4f3Pby8RE7auzuH+84W4+Hh4T3Dmw7AvuHni/M9PDw8vI2pejeU2vl5DRhHhYeHh3eBlz+6O427pnBSlA8SBh4eHt6DvDzQ7tpBUr53T4sSAx4eHt4Gb3/MvxP6NFHlSQUPDw/vBq8rfPNE0hXH3WXWMsPg4eHhDXndEZ+M6ne2Y3pNIboZgYeHh3eIl7w4CaJLBjvsqGGBh4eHd4GXlM55MkiO726sNW7U5jcO8PDw8Ia87jpUdwFr+pytvxgeHh7eg7wpeCed5Ed/0vL4xyd4eHh4l3nTIVby3Wk7eLpNeHh4eJ/l5QOnaWm+3rKuqREN7fDw8PAe53XH/Y0UMr0JgIeHh3ePtxNWvvKhV1LW580RPDw8vCd504Cmx/2gLK7awXh4eHif5XXthv0NmjYsoosFeHh4eEd53fhq2mA9u32DxICHh4d3iHeqcbBTCnfNiKgNgYeHh3eBdzbEbkDVFeiDNi4eHh7eBd400OmVrHzjpu/N2xZ4eHh4Z3ndv/rdVYD1d/O2RdLIwMPDw7vNOzykj0vh7jzP0w8eHh7eWd57uLpiOg8rTzxRusLDw8O7wOsO3LycHRS+ccl+ZYvx8PDwhrydZNAN/vPLCt0ADA8PD+8Z3n4ymBbE+QZNi3I8PDy8b+NNi+/pEZ/HFkWIh4eH91Fefl2gG2h16eRYSY2Hh4d3oRnRvTg/9KejuCuzNTw8PLxDq2u57jQ7ks06hsfDw8NLeT+9DF/0pmJ2nQAAAABJRU5ErkJggg==">分享</a><div class="tags"><a href="/tagsExchange"><i class="fa fa-tag">Exchange</i></a><a href="/tagsHMC"><i class="fa fa-tag">HMC</i></a></div><div class="post-nav"><a class="pre" href="/virtual-server-undo-disks-merge-parent-disk-part-of-saved-state/">Virtual Server Undo Disks - I am never going to use you again (Can't Merge Disks - Parent Disk is a part of a Saved State)</a><a class="next" href="/sql2005-sp3-exch2007-ru6-has-been-validated-for-hmc45/">SQL 2005 SP3 &amp; Exchange 2007 SP1 RU6 has been validated for HMC 4.0 and HMC 4.5</a></div><div id="vcomment"></div><script src="//unpkg.com/leancloud-storage@4.12.1/dist/av-min.js"></script><script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'Asp5CLqfPRK7uB2yc7AIwBfy-MdYXbMMI',
+  appKey:'56eFJrQ4dhcjWAgzLkBsRKgI',
+  placeholder:'闻道有先后，术业有专攻。多多交流，互相学习。',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  serverURLs: 'https://asp5clqf.api.lncldglobal.com'
+})
+</script></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://winotes.net"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Nix/">*Nix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hackintosh/">Hackintosh</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MSCRM/">MSCRM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft/">Microsoft</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft/Exchange/">Exchange</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft/HMC/">HMC</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft/MSCRM/">MSCRM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft/MSSQL/">MSSQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft/Office/">Office</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft/SQL%E6%95%B0%E6%8D%AE%E5%BA%93/">SQL数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft/%E6%B4%BB%E5%8A%A8%E7%9B%AE%E5%BD%95/">活动目录</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Ubuntu/">Ubuntu</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/eBook/">eBook</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E7%A0%81%E5%BD%B1%E9%9F%B3/">数码影音</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B2%9F%E9%80%9A%E5%8D%8F%E4%BD%9C/">沟通协作</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%AB%99%E7%9B%B8%E5%85%B3/">网站相关</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/">虚拟化</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/Active-Directory/" style="font-size: 15px;">Active Directory</a> <a href="/tags/Tips/" style="font-size: 15px;">Tips</a> <a href="/tags/APC/" style="font-size: 15px;">APC</a> <a href="/tags/PECL/" style="font-size: 15px;">PECL</a> <a href="/tags/PHP/" style="font-size: 15px;">PHP</a> <a href="/tags/Yum/" style="font-size: 15px;">Yum</a> <a href="/tags/Vobsub/" style="font-size: 15px;">Vobsub</a> <a href="/tags/CentOS/" style="font-size: 15px;">CentOS</a> <a href="/tags/Kernel/" style="font-size: 15px;">Kernel</a> <a href="/tags/VMware/" style="font-size: 15px;">VMware</a> <a href="/tags/Windows/" style="font-size: 15px;">Windows</a> <a href="/tags/GitHub/" style="font-size: 15px;">GitHub</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/DCOM/" style="font-size: 15px;">DCOM</a> <a href="/tags/Excel/" style="font-size: 15px;">Excel</a> <a href="/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/" style="font-size: 15px;">最佳实践</a> <a href="/tags/Exchange/" style="font-size: 15px;">Exchange</a> <a href="/tags/Kerberos/" style="font-size: 15px;">Kerberos</a> <a href="/tags/Rollup/" style="font-size: 15px;">Rollup</a> <a href="/tags/Activesync/" style="font-size: 15px;">Activesync</a> <a href="/tags/Android/" style="font-size: 15px;">Android</a> <a href="/tags/Google/" style="font-size: 15px;">Google</a> <a href="/tags/Nexus/" style="font-size: 15px;">Nexus</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 15px;">日志</a> <a href="/tags/CentOS-LVM-%E6%89%A9%E5%AE%B9-%E6%A0%B9%E5%88%86%E5%8C%BA/" style="font-size: 15px;">CentOS, LVM, 扩容, 根分区</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/JRE/" style="font-size: 15px;">JRE</a> <a href="/tags/MSI/" style="font-size: 15px;">MSI</a> <a href="/tags/Virtual-Center/" style="font-size: 15px;">Virtual Center</a> <a href="/tags/BITS/" style="font-size: 15px;">BITS</a> <a href="/tags/Microsoft/" style="font-size: 15px;">Microsoft</a> <a href="/tags/WSUS/" style="font-size: 15px;">WSUS</a> <a href="/tags/Office/" style="font-size: 15px;">Office</a> <a href="/tags/HMC/" style="font-size: 15px;">HMC</a> <a href="/tags/Autodiscover/" style="font-size: 15px;">Autodiscover</a> <a href="/tags/MultiTenancy/" style="font-size: 15px;">MultiTenancy</a> <a href="/tags/GeoIP/" style="font-size: 15px;">GeoIP</a> <a href="/tags/MaxMind/" style="font-size: 15px;">MaxMind</a> <a href="/tags/XMPP/" style="font-size: 15px;">XMPP</a> <a href="/tags/Gmail/" style="font-size: 15px;">Gmail</a> <a href="/tags/Ubuntu/" style="font-size: 15px;">Ubuntu</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/Hackintosh-macOS-Mojave/" style="font-size: 15px;">Hackintosh, macOS, Mojave</a> <a href="/tags/MSSQL/" style="font-size: 15px;">MSSQL</a> <a href="/tags/SSRS/" style="font-size: 15px;">SSRS</a> <a href="/tags/TeraData/" style="font-size: 15px;">TeraData</a> <a href="/tags/WordPress/" style="font-size: 15px;">WordPress</a> <a href="/tags/Communicator/" style="font-size: 15px;">Communicator</a> <a href="/tags/SCVMM/" style="font-size: 15px;">SCVMM</a> <a href="/tags/VMHost/" style="font-size: 15px;">VMHost</a> <a href="/tags/WMIC/" style="font-size: 15px;">WMIC</a> <a href="/tags/Internet-Explorer/" style="font-size: 15px;">Internet Explorer</a> <a href="/tags/Fiddler/" style="font-size: 15px;">Fiddler</a> <a href="/tags/VBScript/" style="font-size: 15px;">VBScript</a> <a href="/tags/PowerShell/" style="font-size: 15px;">PowerShell</a> <a href="/tags/IIS/" style="font-size: 15px;">IIS</a> <a href="/tags/Rewrite/" style="font-size: 15px;">Rewrite</a> <a href="/tags/HP-EliteDesk-%E9%BB%91%E8%8B%B9%E6%9E%9C-Hackintosh/" style="font-size: 15px;">HP, EliteDesk, 黑苹果, Hackintosh</a> <a href="/tags/MSCRM/" style="font-size: 15px;">MSCRM</a> <a href="/tags/Docker/" style="font-size: 15px;">Docker</a> <a href="/tags/LEMP/" style="font-size: 15px;">LEMP</a> <a href="/tags/Nginx/" style="font-size: 15px;">Nginx</a> <a href="/tags/MariaDB/" style="font-size: 15px;">MariaDB</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/Lighttpd/" style="font-size: 15px;">Lighttpd</a> <a href="/tags/VMware-Tools/" style="font-size: 15px;">VMware Tools</a> <a href="/tags/Intel-NUC-Bean-Canyon-%E9%BB%91%E8%8B%B9%E6%9E%9C-Hackintosh-%E8%AF%BB%E5%8D%A1%E5%99%A8-%E9%AD%94%E6%94%B9/" style="font-size: 15px;">Intel, NUC, Bean Canyon, 黑苹果, Hackintosh, 读卡器, 魔改</a> <a href="/tags/Outlook/" style="font-size: 15px;">Outlook</a> <a href="/tags/Event-ID/" style="font-size: 15px;">Event ID</a> <a href="/tags/Group-Policy/" style="font-size: 15px;">Group Policy</a> <a href="/tags/Zonemapping/" style="font-size: 15px;">Zonemapping</a> <a href="/tags/Lync/" style="font-size: 15px;">Lync</a> <a href="/tags/OCS/" style="font-size: 15px;">OCS</a> <a href="/tags/Movable-Type/" style="font-size: 15px;">Movable Type</a> <a href="/tags/Hosting/" style="font-size: 15px;">Hosting</a> <a href="/tags/Packt/" style="font-size: 15px;">Packt</a> <a href="/tags/eBook/" style="font-size: 15px;">eBook</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Reporting-Service/" style="font-size: 15px;">Reporting Service</a> <a href="/tags/SPN/" style="font-size: 15px;">SPN</a> <a href="/tags/Web-404-https-%E8%85%BE%E8%AE%AF/" style="font-size: 15px;">Web, 404, https, 腾讯</a> <a href="/tags/Chrome/" style="font-size: 15px;">Chrome</a> <a href="/tags/Cookie/" style="font-size: 15px;">Cookie</a> <a href="/tags/MSDN/" style="font-size: 15px;">MSDN</a> <a href="/tags/Hexo-NPM-GitHub/" style="font-size: 15px;">Hexo, NPM, GitHub</a> <a href="/tags/Skype-for-Business/" style="font-size: 15px;">Skype for Business</a> <a href="/tags/DHCP/" style="font-size: 15px;">DHCP</a> <a href="/tags/Cisco/" style="font-size: 15px;">Cisco</a> <a href="/tags/Virtual-Server/" style="font-size: 15px;">Virtual Server</a> <a href="/tags/VirtualBox/" style="font-size: 15px;">VirtualBox</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/upgrade-hexo-to-latest-and-fix-dependency-issues/">更新了下博客的 Hexo 到最新版并修复几个依赖包的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/intel-nuc8i7beh-mod-hackintosh/">Intel NUC8i7BEH 读卡器魔改完美安装黑苹果</a></li><li class="post-list-item"><a class="post-list-link" href="/how-to-fix-mojave-application-is-damaged-and-cant-be-used-to-install-macOS-errors/">How to Fix “Mojave application is damaged, and can’t be used to install macOS” Errors</a></li><li class="post-list-item"><a class="post-list-link" href="/extending-lvm-root-partition-on-centos6-vm/">CentOS 6 虚拟机扩容 LVM 根分区</a></li><li class="post-list-item"><a class="post-list-link" href="/hp-elitedesk-800-g3-dm-hackintosh/">HP EliteDesk 800 G3 DM 安装黑苹果</a></li><li class="post-list-item"><a class="post-list-link" href="/install-php56-nginx-mariadb-mysql-lemp-stack-on-centos7-with-fastcgi/">CentOS 7 安装 LEMP - PHP5.6 + NGINX + MariaDB/MySQL</a></li><li class="post-list-item"><a class="post-list-link" href="/using-cisco-router-as-dhcp-with-long-option43-in-skype-lync-deployment/">Cisco 路由器作为 DHCP 服务器在 Skyepe for Business (Lync) 部署中的注意事项</a></li><li class="post-list-item"><a class="post-list-link" href="/how-to-retrieve-computer-serial-number-from-command-line/">如何从命令行获取电脑的序列号</a></li><li class="post-list-item"><a class="post-list-link" href="/how-to-send-password-expiry-email-with-exchange-2010/">如何在 Exchange 2010 中给密码即将过期用户发送提醒邮件</a></li><li class="post-list-item"><a class="post-list-link" href="/tencent-404-support-https-now/">腾讯公益404页面现已支持 https</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-eye"> 访问热度</i><ul class="hit_counter"><li><span id="busuanzi_container_site_pv"> 总热力值 <span id="busuanzi_value_site_pv"> <i class="fa fa-spinner fa-spin"></i></span><span> </span>次</span></li><li> <span id="busuanzi_container_site_uv"> 总热度数 <span id="busuanzi_value_site_uv"> <i class="fa fa-spinner fa-spin"></i></span><span> </span>人次</span></li></ul></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2022 <a href="/." rel="nofollow">Win Notes.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a> Theme by<a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> maupassant-hexo.</a></div></div></div><div id="floating_container"><a class="toggle_menu home" href="/"></a><a class="toggle_menu archives" href="/archives"></a><a class="toggle_menu about" href="/about"></a><a class="toggle_menu rss" href="/atom.xml"></a><div id="floating_button"><div class="menu"></div><div class="close"></div></div></div><script type="text/javascript" src="/js/toggle_menu.js?v=1.0.2" async></script><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.0.2" async></script><script type="text/javascript" src="/js/copycode.js?v=1.0.2" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css?v=1.0.2"><script type="text/javascript" src="/js/codeblock-resizer.js?v=1.0.2"></script><script type="text/javascript" src="/js/smartresize.js?v=1.0.2"></script></div></body></html>

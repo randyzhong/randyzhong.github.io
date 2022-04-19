@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://winotes.net/tencent-404-support-https-now/</loc>
+    
+    <lastmod>2022-04-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/hp-elitedesk-800-g3-dm-hackintosh/</loc>
+    
+    <lastmod>2022-04-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://winotes.net/extending-lvm-root-partition-on-centos6-vm/</loc>
     
     <lastmod>2022-04-19</lastmod>
@@ -84,15 +102,6 @@
   
   <url>
     <loc>http://winotes.net/sql2005-sp3-exch2007-ru6-has-been-validated-for-hmc45/</loc>
-    
-    <lastmod>2020-01-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://winotes.net/tencent-404-support-https-now/</loc>
     
     <lastmod>2020-01-05</lastmod>
     
@@ -776,15 +785,6 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/hp-elitedesk-800-g3-dm-hackintosh/</loc>
-    
-    <lastmod>2019-02-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://winotes.net/install-php56-nginx-mariadb-mysql-lemp-stack-on-centos7-with-fastcgi/</loc>
     
     <lastmod>2019-01-02</lastmod>
@@ -1236,13 +1236,6 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/tags/HP-EliteDesk-%E9%BB%91%E8%8B%B9%E6%9E%9C-Hackintosh/</loc>
-    <lastmod>2022-04-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://winotes.net/tags/Docker/</loc>
     <lastmod>2022-04-19</lastmod>
     <changefreq>weekly</changefreq>
@@ -1432,13 +1425,6 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/tags/Web-404-https-%E8%85%BE%E8%AE%AF/</loc>
-    <lastmod>2022-04-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://winotes.net/tags/Chrome/</loc>
     <lastmod>2022-04-19</lastmod>
     <changefreq>weekly</changefreq>
@@ -1524,6 +1510,48 @@
   
   <url>
     <loc>http://winotes.net/tags/%E6%A0%B9%E5%88%86%E5%8C%BA/</loc>
+    <lastmod>2022-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/tags/HP/</loc>
+    <lastmod>2022-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/tags/EliteDesk/</loc>
+    <lastmod>2022-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/tags/Web/</loc>
+    <lastmod>2022-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/tags/404/</loc>
+    <lastmod>2022-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/tags/https/</loc>
+    <lastmod>2022-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/tags/%E8%85%BE%E8%AE%AF/</loc>
     <lastmod>2022-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

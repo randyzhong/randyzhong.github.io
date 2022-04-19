@@ -6,7 +6,7 @@
   <link href="http://winotes.net/atom.xml" rel="self"/>
   
   <link href="http://winotes.net/"/>
-  <updated>2022-04-04T13:17:55.603Z</updated>
+  <updated>2022-04-19T16:09:29.730Z</updated>
   <id>http://winotes.net/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://winotes.net/upgrade-hexo-to-latest-and-fix-dependency-issues/"/>
     <id>http://winotes.net/upgrade-hexo-to-latest-and-fix-dependency-issues/</id>
     <published>2022-04-03T15:28:23.000Z</published>
-    <updated>2022-04-04T13:17:55.603Z</updated>
+    <updated>2022-04-19T16:09:29.730Z</updated>
     
     <content type="html"><![CDATA[<html><head></head><body><h3 id="更新-Hexo"><a href="#更新-Hexo" class="headerlink" title="更新 Hexo"></a>更新 Hexo</h3><p>鉴于这个搭建于多年前的博客系统长久未更新， Hexo 还停留在 3.x 版本，趁着假期有空，随手更新到了目前最新的 Hexo 6.1 版本，期间也不出所料的遇到了几个坑。</p><h3 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h3><p>升级到 Hexo 6.1 之后，有几个坑需要填：</p><ol><li><strong>_config.yml</strong> 里面有些不再支持的配置，需要修改，比如 external_link；</li><li>主题使用的 hexo-asset-image 插件和 Hexo 6 不兼容，我替换成了 hexo-assets-image-new；</li><li>hexo-renderer-sass 已经停更多年，替换为 “hexo-renderer-sass”: “github:robincafolla/hexo-renderer-sass” 来解决版本兼容性问题，参见<a href="https://github.com/knksmith57/hexo-renderer-sass/pull/46">这个帖子</a>。</li></ol><h3 id="Valine-评论"><a href="#Valine-评论" class="headerlink" title="Valine 评论"></a>Valine 评论</h3><p>之前使用的 leancloud 国内版因为未备案原因已经被停用， 数据也无法导出，重新部署到 leancloud 国际版。</p><h3 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h3><p>同步更新了 tufu9441 的 <a href="https://github.com/tufu9441/maupassant-hexo">maupassant 主题</a>。</p><h3 id="托管"><a href="#托管" class="headerlink" title="托管"></a>托管</h3><p>又从 Coding 迁移回了 GitHub Pages，还是 Pages 用着更舒适些。</p></body></html>]]></content>
     
@@ -33,7 +33,13 @@
     <category term="网站相关" scheme="http://winotes.net/categories/%E7%BD%91%E7%AB%99%E7%9B%B8%E5%85%B3/"/>
     
     
-    <category term="Hexo, NPM, GitHub" scheme="http://winotes.net/tags/Hexo-NPM-GitHub/"/>
+    <category term="GitHub" scheme="http://winotes.net/tags/GitHub/"/>
+    
+    <category term="Hexo" scheme="http://winotes.net/tags/Hexo/"/>
+    
+    <category term="NPM" scheme="http://winotes.net/tags/NPM/"/>
+    
+    <category term="Valine" scheme="http://winotes.net/tags/Valine/"/>
     
   </entry>
   
@@ -42,7 +48,7 @@
     <link href="http://winotes.net/intel-nuc8i7beh-mod-hackintosh/"/>
     <id>http://winotes.net/intel-nuc8i7beh-mod-hackintosh/</id>
     <published>2020-01-06T08:48:35.000Z</published>
-    <updated>2020-01-07T15:46:58.592Z</updated>
+    <updated>2022-04-19T16:08:53.950Z</updated>
     
     <content type="html"><![CDATA[<html><head></head><body><h2 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h2><p>本文引用自我的 GitHub:<br><a href="https://github.com/randyzhong/OS-X-NUC8i7BEH-Clover">OS-X-NUC8i7BEH-Clover</a></p><h2 id="OS-X-NUC8i7BEH-Clover"><a href="#OS-X-NUC8i7BEH-Clover" class="headerlink" title="OS-X-NUC8i7BEH-Clover"></a>OS-X-NUC8i7BEH-Clover</h2><p>This repository contains the files and scripts to install macOS on a <strong>modded</strong> Intel NUC8i7BEH (Bean Canyon).</p><p><img src="https://i.loli.net/2020/01/05/cpzUulMALTbi21F.jpg" alt="Catalina-10.15.2.jpg"></p><h2 id="Hardware"><a href="#Hardware" class="headerlink" title="Hardware"></a>Hardware</h2><h3 id="Specs"><a href="#Specs" class="headerlink" title="Specs:"></a>Specs:</h3><ul><li>CPU: Intel i7-8559U, 4c/8t, base 2.7Ghz, turbo 4.5Ghz, 28w TDP.</li><li>Graphic: intel Iris plus 655 with 128 eDRAM.</li><li>RAM: Two sockets 260-pin 1.2 V DDR4 SDRAM SO-DIMM (up to 32Gb, and 2400Mhz)</li><li>LAN: Intel I219V Gigabit Ethernet Controller (10/100/1000 Mbps)</li><li>Wi-Fi/BT: Intel Dual Band Wireless-AC 9560 (soldered)</li><li>1 * Thunderbolt 3 Four lanes 40Gbps, support DisplayPort 1.2 (17Gbps, up to 4096x2304@60Hz), support USB data (10Gbps)</li><li>1 * HDMI 2.0a (MegaChips MCDP2800 LSPCon DisplayPort1.2-to-HDMI 2.0 up to 4096x2160@60Hz)</li><li>1 * SATA 6 Gbps, 2.5” (540 Mbps)</li><li>1 * M.2 connector (key type M and B+M) for 2242 and 2280 modules. Four lanes (4 Gbps)</li><li>4 * USB-A 3.1 (gen2 10Gbps). One port can deliver 1.5A</li><li>1 * Micro SDXC Card Reader</li><li>1 * Jack 3.5mm Realtek HD Audio</li></ul><h3 id="My-specification"><a href="#My-specification" class="headerlink" title="My specification"></a>My specification</h3><ul><li>2 * Hynix HMA81GS6AFR8N-UH 8GB DDR4-2400 SODIMM</li><li>WD Black SN750 NVMe 512G</li><li><strong>BCM94360CS2</strong> Wi-Fi/Bluetooth with adapter (will explain how)</li></ul><h2 id="Mod"><a href="#Mod" class="headerlink" title="Mod"></a>Mod</h2><p>NUC8i7BEH uses RTS5227S (use pcie x1) chipset for SD card which can be desoldered/replaced with a BCM94360CS2(or BCM942602CS) to get native AirDrop/Handoff support.</p><p>Two possible Mods:</p><ul><li><p><a href="https://www.chiphell.com/thread-2004976-1-1.html">https://www.chiphell.com/thread-2004976-1-1.html</a> (Chinese) - My NUC8 Mod<br><img src="https://www.tonymacx86.com/attachments/193557c1jhu2heyxjjl8w8-jpg.422678/" alt="1"><br><img src="https://www.tonymacx86.com/attachments/200739bhrnx7stnmnxej9z-jpg.422679/" alt="2"><br><img src="https://www.tonymacx86.com/attachments/204632xl75bq1uwbil2i8g-jpg.422686/" alt="3"></p></li><li><p><a href="https://www.mydigit.cn/forum.php?mod=viewthread&amp;tid=34830&amp;extra=&amp;page=1">https://www.mydigit.cn/forum.php?mod=viewthread&amp;tid=34830&amp;extra=&amp;page=1</a> (Chinese) - also looks great!</p></li></ul><h2 id="Configure-BIOS-Settings"><a href="#Configure-BIOS-Settings" class="headerlink" title="Configure BIOS Settings"></a>Configure BIOS Settings</h2><p>On my NUC8i7BEH, BIOS version updated to <strong>0071</strong>.</p><p>The boot menu and BIOS setup can be accessed by mashing the F2 key during BIOS startup. After the main screen comes up choose “Advanced”. That gets you to the main BIOS setup screens.</p><p>To start, choose “Load Defaults” (choose from the menu or press F9 in the BIOS setup).</p><p>Then change:</p><ul><li>Boot-&gt;Boot Configuration, disable “Network Boot”</li><li>Power-&gt;Secondary Power Settings, “Wake on LAN from S4/S5”, set to “Stay Off”</li></ul><p>These settings are important but are already set as needed by “Load Defaults”</p><ul><li>Devices-&gt;Video, “IGD Minimum Memory” set to 64mb or 128mb</li><li>Devices-&gt;Video, “IGD Aperture Size” set to 256mb</li><li>Boot-&gt;Secure Boot, “Secure Boot” is disabled</li><li>Boot-&gt;Boot Priority-&gt;Legacy Boot Priority, enable “Legacy Boot” (continue to boot UEFI, but enable legacy for CSM)<br>(you will have KP/reboot without it).</li></ul><p>The following settings are important for <strong>Mod</strong> users</p><ul><li>Devices-&gt;Onboard Devices, disable <strong>WLAN</strong> and <strong>Bluetooth</strong></li><li>Devices-&gt;Onboard Devices, enable <strong>SD Card</strong> to Read/Write as we desoldered/replaced with a BCM94360CS2(or BCM942602CS).</li></ul><p>Press <strong>F10</strong> to save changes.</p><h2 id="Power-Management"><a href="#Power-Management" class="headerlink" title="Power Management"></a>Power Management</h2><p>Everything required for CPU/IGPU power management is already installed with the steps above.<br>There is no longer any need to use the ssdtPRgen.sh script.</p><p>Be aware that hibernation (suspend to disk or S4 sleep) is not well supported on hackintosh.</p><p>You should disable it:</p><figure class="highlight awk"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo pmset -a hibernatemode <span class="number">0</span></span><br><span class="line">sudo rm <span class="regexp">/var/</span>vm/sleepimage</span><br><span class="line">sudo mkdir <span class="regexp">/var/</span>vm/sleepimage</span><br></pre></td></tr></tbody></table></figure><p>Always check your hibernatemode after updates and disable it. System updates tend to re-enable it, although the trick above (making sleepimage a directory) tends to help.</p><h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><ul><li>To be updated</li></ul><h3 id="Tested-OS"><a href="#Tested-OS" class="headerlink" title="Tested OS"></a>Tested OS</h3><ul><li>macOS Mojave 10.14.6</li><li>macOS Catalina 10.15.2</li></ul><h3 id="Clover"><a href="#Clover" class="headerlink" title="Clover"></a>Clover</h3><ul><li>Clover r5102</li></ul><h3 id="Kexts"><a href="#Kexts" class="headerlink" title="Kexts"></a>Kexts</h3><ul><li>CPUFriend.kext (1.1.9)</li><li>VirtualSMC.kext (1.0.9)<ul><li>SMCProcessor.kext (1.0.9)</li><li>SMCSuperIO.kext (1.0.9)</li></ul></li><li>IntelMausi.kext (1.0.2)</li><li>USBPorts.kext (1.0)</li><li>SATA-unsupported (0.9.2)</li><li>Lilu.kext (1.4.0)</li><li>AppleALC (1.4.4)</li><li>WhateverGreen.kext (1.3.5)</li></ul><h2 id="Works"><a href="#Works" class="headerlink" title="Works"></a>Works</h2><ul><li>UEFI booting via Clover</li><li><strong>AirDrop, Handoff</strong> </li><li>DP/HDMI video/audio</li><li>AirPlay mirroring to AppleTV</li><li>Native USB3/USB2</li><li>Native audio with AppleHDA</li><li>Native power management</li><li>GPU Hardware Acceleration</li><li>Wired Ethernet</li><li>Mac App Store working</li><li>Sleep (hibernation disabled, not tested)</li><li><strong>Dual Displays</strong> (1 HDMI, 1 USB-C to DP)</li></ul><h2 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h2><ul><li>Remove USB Port:HS10 (Built-in Bluetooth)</li></ul></body></html>]]></content>
     
@@ -54,7 +60,19 @@
     <category term="Hackintosh" scheme="http://winotes.net/categories/Hackintosh/"/>
     
     
-    <category term="Intel, NUC, Bean Canyon, 黑苹果, Hackintosh, 读卡器, 魔改" scheme="http://winotes.net/tags/Intel-NUC-Bean-Canyon-%E9%BB%91%E8%8B%B9%E6%9E%9C-Hackintosh-%E8%AF%BB%E5%8D%A1%E5%99%A8-%E9%AD%94%E6%94%B9/"/>
+    <category term="Hackintosh" scheme="http://winotes.net/tags/Hackintosh/"/>
+    
+    <category term="Intel" scheme="http://winotes.net/tags/Intel/"/>
+    
+    <category term="NUC" scheme="http://winotes.net/tags/NUC/"/>
+    
+    <category term="Bean Canyon" scheme="http://winotes.net/tags/Bean-Canyon/"/>
+    
+    <category term="黑苹果" scheme="http://winotes.net/tags/%E9%BB%91%E8%8B%B9%E6%9E%9C/"/>
+    
+    <category term="读卡器" scheme="http://winotes.net/tags/%E8%AF%BB%E5%8D%A1%E5%99%A8/"/>
+    
+    <category term="魔改" scheme="http://winotes.net/tags/%E9%AD%94%E6%94%B9/"/>
     
   </entry>
   
@@ -63,7 +81,7 @@
     <link href="http://winotes.net/how-to-fix-mojave-application-is-damaged-and-cant-be-used-to-install-macOS-errors/"/>
     <id>http://winotes.net/how-to-fix-mojave-application-is-damaged-and-cant-be-used-to-install-macOS-errors/</id>
     <published>2019-11-28T07:28:23.000Z</published>
-    <updated>2020-01-07T16:45:37.589Z</updated>
+    <updated>2022-04-19T16:09:57.154Z</updated>
     
     <content type="html"><![CDATA[<html><head></head><body><h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>如果你还保留旧的 macOS 安装镜像， 那么很遗憾的告诉你这些镜像会在 2019-10-25 之后停止工作。这主要是由于大多数安装镜像中的证书会过期，从而导致这些镜像无法使用。<br>错误提示如下：<br><img src="/how-to-fix-mojave-application-is-damaged-and-cant-be-used-to-install-macOS-errors/damaged-copy.png" alt="damaged-copy"></p><p>通过检查 Mojave 的安装镜像，你会发现里面包含的证书已经过期;<br><img src="/how-to-fix-mojave-application-is-damaged-and-cant-be-used-to-install-macOS-errors/expired-cert.png" alt="expired-cert"></p><h3 id="Fix："><a href="#Fix：" class="headerlink" title="Fix："></a>Fix：</h3><p>两个解决方法，任选其一：</p><p>第一种，重新从苹果官方下载更新过的 Mojave 安装镜像，里面的证书已经更新：<br><img src="/how-to-fix-mojave-application-is-damaged-and-cant-be-used-to-install-macOS-errors/valid-cert.png" alt="validcert"></p><p>第二种，修改当前系统的时间去到 <strong>2019-10-24</strong> 日之前，使安装镜像的证书还在有效期内：</p><ul><li>断开网络。</li><li>打开 <strong>Terminal</strong> 终端工具，输入 <code>sudo date -u 0924150019</code>，修改时间为 2019年9月24日15时，再进行安装即可。</li></ul></body></html>]]></content>
     
@@ -75,7 +93,11 @@
     <category term="Hackintosh" scheme="http://winotes.net/categories/Hackintosh/"/>
     
     
-    <category term="Hackintosh, macOS, Mojave" scheme="http://winotes.net/tags/Hackintosh-macOS-Mojave/"/>
+    <category term="Hackintosh" scheme="http://winotes.net/tags/Hackintosh/"/>
+    
+    <category term="macOS" scheme="http://winotes.net/tags/macOS/"/>
+    
+    <category term="Mojave" scheme="http://winotes.net/tags/Mojave/"/>
     
   </entry>
   

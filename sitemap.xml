@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://winotes.net/extending-lvm-root-partition-on-centos6-vm/</loc>
+    
+    <lastmod>2022-04-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://winotes.net/how-to-fix-mojave-application-is-damaged-and-cant-be-used-to-install-macOS-errors/</loc>
     
     <lastmod>2022-04-19</lastmod>
@@ -767,15 +776,6 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/extending-lvm-root-partition-on-centos6-vm/</loc>
-    
-    <lastmod>2019-03-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://winotes.net/hp-elitedesk-800-g3-dm-hackintosh/</loc>
     
     <lastmod>2019-02-02</lastmod>
@@ -992,13 +992,6 @@
   
   <url>
     <loc>http://winotes.net/tags/%E6%97%A5%E5%BF%97/</loc>
-    <lastmod>2022-04-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://winotes.net/tags/CentOS-LVM-%E6%89%A9%E5%AE%B9-%E6%A0%B9%E5%88%86%E5%8C%BA/</loc>
     <lastmod>2022-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1510,6 +1503,27 @@
   
   <url>
     <loc>http://winotes.net/tags/VirtualBox/</loc>
+    <lastmod>2022-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/tags/LVM/</loc>
+    <lastmod>2022-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/tags/%E6%89%A9%E5%AE%B9/</loc>
+    <lastmod>2022-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/tags/%E6%A0%B9%E5%88%86%E5%8C%BA/</loc>
     <lastmod>2022-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

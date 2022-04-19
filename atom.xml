@@ -62,13 +62,13 @@
     
     <category term="Hackintosh" scheme="http://winotes.net/tags/Hackintosh/"/>
     
+    <category term="黑苹果" scheme="http://winotes.net/tags/%E9%BB%91%E8%8B%B9%E6%9E%9C/"/>
+    
     <category term="Intel" scheme="http://winotes.net/tags/Intel/"/>
     
     <category term="NUC" scheme="http://winotes.net/tags/NUC/"/>
     
     <category term="Bean Canyon" scheme="http://winotes.net/tags/Bean-Canyon/"/>
-    
-    <category term="黑苹果" scheme="http://winotes.net/tags/%E9%BB%91%E8%8B%B9%E6%9E%9C/"/>
     
     <category term="读卡器" scheme="http://winotes.net/tags/%E8%AF%BB%E5%8D%A1%E5%99%A8/"/>
     
@@ -147,11 +147,11 @@
     
     <category term="Hackintosh" scheme="http://winotes.net/tags/Hackintosh/"/>
     
-    <category term="黑苹果" scheme="http://winotes.net/tags/%E9%BB%91%E8%8B%B9%E6%9E%9C/"/>
-    
     <category term="HP" scheme="http://winotes.net/tags/HP/"/>
     
     <category term="EliteDesk" scheme="http://winotes.net/tags/EliteDesk/"/>
+    
+    <category term="黑苹果" scheme="http://winotes.net/tags/%E9%BB%91%E8%8B%B9%E6%9E%9C/"/>
     
   </entry>
   
@@ -172,9 +172,9 @@
     <category term="*Nix" scheme="http://winotes.net/categories/Nix/"/>
     
     
-    <category term="PHP" scheme="http://winotes.net/tags/PHP/"/>
-    
     <category term="CentOS" scheme="http://winotes.net/tags/CentOS/"/>
+    
+    <category term="PHP" scheme="http://winotes.net/tags/PHP/"/>
     
     <category term="LEMP" scheme="http://winotes.net/tags/LEMP/"/>
     

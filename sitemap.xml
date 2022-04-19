@@ -128,7 +128,7 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/solved-the-security-database-on-the-server-does-not-have-a-computer-account-for-this-workstation-trust-relationship-part1/</loc>
+    <loc>http://winotes.net/reporting-service-cant-start-event-id-107/</loc>
     
     <lastmod>2020-01-05</lastmod>
     
@@ -137,7 +137,7 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/reporting-service-cant-start-event-id-107/</loc>
+    <loc>http://winotes.net/solved-the-security-database-on-the-server-does-not-have-a-computer-account-for-this-workstation-trust-relationship-part1/</loc>
     
     <lastmod>2020-01-05</lastmod>
     
@@ -272,7 +272,7 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/kb974571-crypto-api-update-may-break-office-communications-server-2007-r2-installations/</loc>
+    <loc>http://winotes.net/lync-server-2010-publish-topology-error/</loc>
     
     <lastmod>2020-01-05</lastmod>
     
@@ -281,7 +281,7 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/lync-server-2010-publish-topology-error/</loc>
+    <loc>http://winotes.net/kb974571-crypto-api-update-may-break-office-communications-server-2007-r2-installations/</loc>
     
     <lastmod>2020-01-05</lastmod>
     
@@ -488,7 +488,7 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/hmc-resource-management-part2-hmc-resource-management-and-active-directory/</loc>
+    <loc>http://winotes.net/hmc-resource-management-part1-planmanager-and-resourcemanager-overall-concept/</loc>
     
     <lastmod>2020-01-05</lastmod>
     
@@ -497,7 +497,7 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/hmc-resource-management-part1-planmanager-and-resourcemanager-overall-concept/</loc>
+    <loc>http://winotes.net/hmc-resource-management-part2-hmc-resource-management-and-active-directory/</loc>
     
     <lastmod>2020-01-05</lastmod>
     
@@ -533,7 +533,7 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/hmc-45-rollup-1/</loc>
+    <loc>http://winotes.net/hmc-45-update-rollup-3-has-been-released/</loc>
     
     <lastmod>2020-01-05</lastmod>
     
@@ -542,7 +542,7 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/hmc-45-update-rollup-3-has-been-released/</loc>
+    <loc>http://winotes.net/hmc-45-rollup-1/</loc>
     
     <lastmod>2020-01-05</lastmod>
     
@@ -569,6 +569,15 @@
   </url>
   
   <url>
+    <loc>http://winotes.net/hmc-45-and-exchange-2007-sp1-part4-internal-and-external-out-of-office/</loc>
+    
+    <lastmod>2020-01-05</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://winotes.net/hmc-45-and-exchange-2007-sp1-part3-offline-address-book-generations/</loc>
     
     <lastmod>2020-01-05</lastmod>
@@ -578,7 +587,7 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/hmc-45-and-exchange-2007-sp1-part4-internal-and-external-out-of-office/</loc>
+    <loc>http://winotes.net/hmc-45-and-exchange-2007-sp1-part1-overview-and-active-directory/</loc>
     
     <lastmod>2020-01-05</lastmod>
     
@@ -605,15 +614,6 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/hmc-45-and-exchange-2007-sp1-part1-overview-and-active-directory/</loc>
-    
-    <lastmod>2020-01-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://winotes.net/fixing-piix4-host-smbus-controller-not-enabled-error-for-centos-on-vmware/</loc>
     
     <lastmod>2020-01-05</lastmod>
@@ -623,7 +623,7 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/fix-wsus-slow-download-problem/</loc>
+    <loc>http://winotes.net/fix-vmware-esxi-40-vc-hardware-status-error/</loc>
     
     <lastmod>2020-01-05</lastmod>
     
@@ -632,7 +632,7 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/fix-vmware-esxi-40-vc-hardware-status-error/</loc>
+    <loc>http://winotes.net/fix-wsus-slow-download-problem/</loc>
     
     <lastmod>2020-01-05</lastmod>
     
@@ -668,15 +668,6 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/exception-from-hresult-0x800a03ec/</loc>
-    
-    <lastmod>2020-01-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://winotes.net/exchange-2010-best-practice-01-cas-array/</loc>
     
     <lastmod>2020-01-05</lastmod>
@@ -687,6 +678,15 @@
   
   <url>
     <loc>http://winotes.net/exchange-2010-update-rollup-2/</loc>
+    
+    <lastmod>2020-01-05</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/exception-from-hresult-0x800a03ec/</loc>
     
     <lastmod>2020-01-05</lastmod>
     
@@ -713,6 +713,15 @@
   </url>
   
   <url>
+    <loc>http://winotes.net/centos-64-upgrade-to-kernel-3x/</loc>
+    
+    <lastmod>2020-01-05</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://winotes.net/apc-undefined-symbol-pcre-exec-in-unknown-on-line-0/</loc>
     
     <lastmod>2020-01-05</lastmod>
@@ -723,15 +732,6 @@
   
   <url>
     <loc>http://winotes.net/change-idx-sub-order/</loc>
-    
-    <lastmod>2020-01-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://winotes.net/centos-64-upgrade-to-kernel-3x/</loc>
     
     <lastmod>2020-01-05</lastmod>
     
@@ -830,6 +830,27 @@
 
   
   <url>
+    <loc>http://winotes.net/tags/CentOS/</loc>
+    <lastmod>2022-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/tags/Kernel/</loc>
+    <lastmod>2022-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/tags/VMware/</loc>
+    <lastmod>2022-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://winotes.net/tags/APC/</loc>
     <lastmod>2022-04-19</lastmod>
     <changefreq>weekly</changefreq>
@@ -858,6 +879,13 @@
   </url>
   
   <url>
+    <loc>http://winotes.net/tags/Vobsub/</loc>
+    <lastmod>2022-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://winotes.net/tags/Active-Directory/</loc>
     <lastmod>2022-04-19</lastmod>
     <changefreq>weekly</changefreq>
@@ -866,34 +894,6 @@
   
   <url>
     <loc>http://winotes.net/tags/Tips/</loc>
-    <lastmod>2022-04-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://winotes.net/tags/Vobsub/</loc>
-    <lastmod>2022-04-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://winotes.net/tags/CentOS/</loc>
-    <lastmod>2022-04-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://winotes.net/tags/Kernel/</loc>
-    <lastmod>2022-04-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://winotes.net/tags/VMware/</loc>
     <lastmod>2022-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -915,20 +915,6 @@
   
   <url>
     <loc>http://winotes.net/tags/Hexo/</loc>
-    <lastmod>2022-04-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://winotes.net/tags/DCOM/</loc>
-    <lastmod>2022-04-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://winotes.net/tags/Excel/</loc>
     <lastmod>2022-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -957,6 +943,20 @@
   
   <url>
     <loc>http://winotes.net/tags/Rollup/</loc>
+    <lastmod>2022-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/tags/DCOM/</loc>
+    <lastmod>2022-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/tags/Excel/</loc>
     <lastmod>2022-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -998,6 +998,27 @@
   </url>
   
   <url>
+    <loc>http://winotes.net/tags/LVM/</loc>
+    <lastmod>2022-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/tags/%E6%89%A9%E5%AE%B9/</loc>
+    <lastmod>2022-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/tags/%E6%A0%B9%E5%88%86%E5%8C%BA/</loc>
+    <lastmod>2022-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://winotes.net/tags/Java/</loc>
     <lastmod>2022-04-19</lastmod>
     <changefreq>weekly</changefreq>
@@ -1019,6 +1040,13 @@
   </url>
   
   <url>
+    <loc>http://winotes.net/tags/Virtual-Center/</loc>
+    <lastmod>2022-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://winotes.net/tags/BITS/</loc>
     <lastmod>2022-04-19</lastmod>
     <changefreq>weekly</changefreq>
@@ -1034,13 +1062,6 @@
   
   <url>
     <loc>http://winotes.net/tags/WSUS/</loc>
-    <lastmod>2022-04-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://winotes.net/tags/Virtual-Center/</loc>
     <lastmod>2022-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1236,6 +1257,27 @@
   </url>
   
   <url>
+    <loc>http://winotes.net/tags/HP/</loc>
+    <lastmod>2022-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/tags/EliteDesk/</loc>
+    <lastmod>2022-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/tags/%E9%BB%91%E8%8B%B9%E6%9E%9C/</loc>
+    <lastmod>2022-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://winotes.net/tags/Docker/</loc>
     <lastmod>2022-04-19</lastmod>
     <changefreq>weekly</changefreq>
@@ -1307,13 +1349,6 @@
   
   <url>
     <loc>http://winotes.net/tags/Bean-Canyon/</loc>
-    <lastmod>2022-04-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://winotes.net/tags/%E9%BB%91%E8%8B%B9%E6%9E%9C/</loc>
     <lastmod>2022-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1411,6 +1446,13 @@
   </url>
   
   <url>
+    <loc>http://winotes.net/tags/Reporting-Service/</loc>
+    <lastmod>2022-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://winotes.net/tags/SPN/</loc>
     <lastmod>2022-04-19</lastmod>
     <changefreq>weekly</changefreq>
@@ -1418,7 +1460,28 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/tags/Reporting-Service/</loc>
+    <loc>http://winotes.net/tags/Web/</loc>
+    <lastmod>2022-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/tags/404/</loc>
+    <lastmod>2022-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/tags/https/</loc>
+    <lastmod>2022-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/tags/%E8%85%BE%E8%AE%AF/</loc>
     <lastmod>2022-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1494,69 +1557,6 @@
     <priority>0.2</priority>
   </url>
   
-  <url>
-    <loc>http://winotes.net/tags/LVM/</loc>
-    <lastmod>2022-04-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://winotes.net/tags/%E6%89%A9%E5%AE%B9/</loc>
-    <lastmod>2022-04-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://winotes.net/tags/%E6%A0%B9%E5%88%86%E5%8C%BA/</loc>
-    <lastmod>2022-04-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://winotes.net/tags/HP/</loc>
-    <lastmod>2022-04-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://winotes.net/tags/EliteDesk/</loc>
-    <lastmod>2022-04-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://winotes.net/tags/Web/</loc>
-    <lastmod>2022-04-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://winotes.net/tags/404/</loc>
-    <lastmod>2022-04-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://winotes.net/tags/https/</loc>
-    <lastmod>2022-04-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://winotes.net/tags/%E8%85%BE%E8%AE%AF/</loc>
-    <lastmod>2022-04-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
 
   
   <url>
@@ -1567,14 +1567,14 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/categories/Microsoft/</loc>
+    <loc>http://winotes.net/categories/%E6%95%B0%E7%A0%81%E5%BD%B1%E9%9F%B3/</loc>
     <lastmod>2022-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://winotes.net/categories/%E6%95%B0%E7%A0%81%E5%BD%B1%E9%9F%B3/</loc>
+    <loc>http://winotes.net/categories/Microsoft/</loc>
     <lastmod>2022-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1595,13 +1595,6 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/categories/Microsoft/%E6%B4%BB%E5%8A%A8%E7%9B%AE%E5%BD%95/</loc>
-    <lastmod>2022-04-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://winotes.net/categories/%E7%BD%91%E7%AB%99%E7%9B%B8%E5%85%B3/</loc>
     <lastmod>2022-04-19</lastmod>
     <changefreq>weekly</changefreq>
@@ -1609,14 +1602,21 @@
   </url>
   
   <url>
-    <loc>http://winotes.net/categories/Microsoft/Office/</loc>
+    <loc>http://winotes.net/categories/Microsoft/Exchange/</loc>
     <lastmod>2022-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://winotes.net/categories/Microsoft/Exchange/</loc>
+    <loc>http://winotes.net/categories/Microsoft/%E6%B4%BB%E5%8A%A8%E7%9B%AE%E5%BD%95/</loc>
+    <lastmod>2022-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://winotes.net/categories/Microsoft/Office/</loc>
     <lastmod>2022-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
